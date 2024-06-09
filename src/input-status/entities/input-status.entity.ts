@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-@Entity({name:'i006t_estado_entrada'})
+@Entity({ name: 'i006t_estado_entrada' })
 export class InputStatus {
-    @PrimaryGeneratedColumn()
-    i006i_estado_entrada: number;
+  @PrimaryGeneratedColumn()
+  i006i_estado_entrada: number;
 
   @Column({ length: 255 })
   in_nombre_estado: string;

@@ -1,13 +1,11 @@
+import { Project } from "src/projects/entities/project.entity";
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 
 
-@Entity({name:'i007t_historia_usuario'})
+@Entity({ name: 'i007t_historia_usuario' })
 export class UserHistory {
-    @PrimaryGeneratedColumn()
-    i007i_historia_usuario: number;
-
-  /* @ManyToOne(() => Entry, (entry) => entry.userStory)
-  i007f_i003t_entrada: Entry; */
+  @PrimaryGeneratedColumn()
+  i007i_historia_usuario: number;
 
   @Column({ unique: true })
   co_historia: string;
@@ -26,4 +24,8 @@ export class UserHistory {
 
   @Column({ length: 255 })
   tx_criterio: string;
+
+  @ManyToOne(() => Project, (project) => project.i003i_entrada)
+  i003i_entrada: Project;
+
 }
