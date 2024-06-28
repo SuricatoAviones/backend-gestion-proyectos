@@ -1,5 +1,5 @@
 import { Project } from "src/projects/entities/project.entity";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 
 
 @Entity({ name: 'i016t_costo' })

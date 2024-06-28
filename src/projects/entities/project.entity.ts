@@ -4,8 +4,7 @@ import { ProjectsPhase } from "src/projects-phase/entities/projects-phase.entity
 import { Team } from "src/teams/entities/team.entity";
 import { TechnicalArea } from "src/technical-areas/entities/technical-area.entity";
 import { TypeProject } from "src/type-projects/entities/type-project.entity";
-import { UserHistory } from "src/user-histories/entities/user-history.entity";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn, OneToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne } from "typeorm";
 
 
 @Entity({ name: 'i003t_entrada' })

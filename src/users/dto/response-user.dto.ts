@@ -9,6 +9,7 @@ export class ResponseUserDto {
     in_role: string;
     password: string;
     foto: string;
+    deletedAt: Date;
 
     constructor (data: User) {
       this.i001i_usuario = data.i001i_usuario;
@@ -19,6 +20,7 @@ export class ResponseUserDto {
       this.in_role = data.in_role;
       this.password = data.password;
       this.foto = data.foto;
+      this.deletedAt = data.deletedAt;
 
     }
 }

@@ -1,7 +1,7 @@
 
 import { Project } from "src/projects/entities/project.entity";
 import { User } from "src/users/entities/user.entity";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 
 
 @Entity({ name: 'i013t_tarea' })

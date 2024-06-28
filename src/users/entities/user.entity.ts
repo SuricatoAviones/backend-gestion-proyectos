@@ -31,5 +31,5 @@ export class User {
   in_role: string;
 
   @DeleteDateColumn()
-  deleteAt: Date;
+  deletedAt: Date;
 }

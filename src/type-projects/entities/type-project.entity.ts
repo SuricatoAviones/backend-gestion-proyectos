@@ -1,5 +1,5 @@
 import { ProjectsPhase } from "src/projects-phase/entities/projects-phase.entity";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 
 @Entity({ name: 'i011t_tipo_proyecto' })
 export class TypeProject {
