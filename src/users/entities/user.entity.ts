@@ -1,4 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, DeleteDateColumn } from "typeorm";
+import { Roles } from "../enums/roles.enum";
+import { Exclude } from "class-transformer";
 
 @Entity({name:'i001t_usuario'})
 
@@ -21,11 +23,12 @@ export class User {
   @Column({ unique: true, nullable: false })
   in_correo: string;
 
-  @Column({  nullable:false })
+  @Exclude()
+  @Column({  nullable: false })
   password: string;
 
-  @Column({ nullable: true, /* default: 'user' */ })
-  i001f_i002t_rol: string;
+  @Column({ nullable: true, default: Roles.Rol_Trabajador  })
+  in_role: string;
 
   @DeleteDateColumn()
   deleteAt: Date;
