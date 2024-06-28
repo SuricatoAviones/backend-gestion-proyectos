@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ManagementsService } from './managements.service';
 import { CreateManagementDto } from './dto/create-management.dto';
 import { UpdateManagementDto } from './dto/update-management.dto';
-
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+@ApiTags('Gerencias')
+@ApiBearerAuth()
 @Controller('managements')
 export class ManagementsController {
   constructor(private readonly managementsService: ManagementsService) {}

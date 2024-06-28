@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { TechnicalAreasService } from './technical-areas.service';
 import { CreateTechnicalAreaDto } from './dto/create-technical-area.dto';
 import { UpdateTechnicalAreaDto } from './dto/update-technical-area.dto';
-
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+@ApiTags('Areas Tecnicas')
+@ApiBearerAuth()
 @Controller('technical-areas')
 export class TechnicalAreasController {
   constructor(private readonly technicalAreasService: TechnicalAreasService) {}

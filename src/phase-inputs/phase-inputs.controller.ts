@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { PhaseInputsService } from './phase-inputs.service';
 import { CreatePhaseInputDto } from './dto/create-phase-input.dto';
 import { UpdatePhaseInputDto } from './dto/update-phase-input.dto';
-
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+@ApiTags('Fase de Entradas')
+@ApiBearerAuth()
 @Controller('phase-inputs')
 export class PhaseInputsController {
   constructor(private readonly phaseInputsService: PhaseInputsService) {}

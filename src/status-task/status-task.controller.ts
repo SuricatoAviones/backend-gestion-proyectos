@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { StatusTaskService } from './status-task.service';
 import { CreateStatusTaskDto } from './dto/create-status-task.dto';
 import { UpdateStatusTaskDto } from './dto/update-status-task.dto';
-
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+@ApiTags('Estatus Tarea')
+@ApiBearerAuth()
 @Controller('status-task')
 export class StatusTaskController {
   constructor(private readonly statusTaskService: StatusTaskService) {}

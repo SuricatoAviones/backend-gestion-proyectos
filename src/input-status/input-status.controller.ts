@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { InputStatusService } from './input-status.service';
 import { CreateInputStatusDto } from './dto/create-input-status.dto';
 import { UpdateInputStatusDto } from './dto/update-input-status.dto';
-
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+@ApiTags('Estado Entrada')
+@ApiBearerAuth()
 @Controller('input-status')
 export class InputStatusController {
   constructor(private readonly inputStatusService: InputStatusService) {}

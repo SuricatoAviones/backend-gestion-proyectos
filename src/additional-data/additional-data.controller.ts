@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { AdditionalDataService } from './additional-data.service';
 import { CreateAdditionalDatumDto } from './dto/create-additional-datum.dto';
 import { UpdateAdditionalDatumDto } from './dto/update-additional-datum.dto';
-
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+@ApiTags('Datos Adicionales')
+@ApiBearerAuth()
 @Controller('additional-data')
 export class AdditionalDataController {
   constructor(private readonly additionalDataService: AdditionalDataService) {}

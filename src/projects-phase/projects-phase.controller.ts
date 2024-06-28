@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ProjectsPhaseService } from './projects-phase.service';
 import { CreateProjectsPhaseDto } from './dto/create-projects-phase.dto';
 import { UpdateProjectsPhaseDto } from './dto/update-projects-phase.dto';
-
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+@ApiTags('Fase de Proyectos')
+@ApiBearerAuth()
 @Controller('projects-phase')
 export class ProjectsPhaseController {
   constructor(private readonly projectsPhaseService: ProjectsPhaseService) {}

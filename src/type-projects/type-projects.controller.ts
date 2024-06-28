@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { TypeProjectsService } from './type-projects.service';
 import { CreateTypeProjectDto } from './dto/create-type-project.dto';
 import { UpdateTypeProjectDto } from './dto/update-type-project.dto';
-
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+@ApiTags('Tipo de Proyecto')
+@ApiBearerAuth()
 @Controller('type-projects')
 export class TypeProjectsController {
   constructor(private readonly typeProjectsService: TypeProjectsService) {}

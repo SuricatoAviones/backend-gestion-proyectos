@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UserHistoriesService } from './user-histories.service';
 import { CreateUserHistoryDto } from './dto/create-user-history.dto';
 import { UpdateUserHistoryDto } from './dto/update-user-history.dto';
-
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+@ApiTags('Historias de Usuario')
+@ApiBearerAuth()
 @Controller('user-histories')
 export class UserHistoriesController {
   constructor(private readonly userHistoriesService: UserHistoriesService) {}
