@@ -33,9 +33,17 @@ import { TrackingsModule } from './trackings/trackings.module';
     password: process.env.DATABASE_PASSWORD,
     database: 'gestionador',
     autoLoadEntities: true,
-    synchronize: false,
-    ssl: true
-  }),
+    synchronize: true,
+    ssl: process.env.POSTGRES_SSL === "true",
+      extra: {
+        ssl:
+          process.env.POSTGRES_SSL === "true"
+            ? {
+                rejectUnauthorized: false,
+              }
+            : null,
+      },
+    }),
     WorkersModule,
     TeamsModule,
     AdditionalDataModule,
