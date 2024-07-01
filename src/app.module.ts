@@ -33,7 +33,7 @@ import { TrackingsModule } from './trackings/trackings.module';
     password: process.env.DATABASE_PASSWORD,
     database: 'gestionador',
     autoLoadEntities: true,
-    synchronize: true,
+    synchronize: false,
     ssl: true
   }),
     WorkersModule,
