@@ -1,3 +1,4 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { Message } from "src/messages/entity/message.entity";
 import { Project } from "src/projects/entities/project.entity";
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn, OneToOne } from "typeorm";
@@ -5,9 +6,11 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColum
 
 @Entity({ name: 'i018t_foro' })
 export class Forum {
+    @ApiProperty()
     @PrimaryGeneratedColumn()
     i018t_foro: number;
 
+    @ApiProperty()
     @OneToOne(() => Project, (project) => project.i003i_entrada)
     @JoinColumn()
     i018f_i003t_entrada: Project;
@@ -16,6 +19,7 @@ export class Forum {
         nullable: false,
         cascade: true,
     })
+    @ApiProperty()
     @JoinColumn()
     i018f_i019t_mensaje!: Message[];
 }
