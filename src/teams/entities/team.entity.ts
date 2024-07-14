@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Management } from 'src/managements/entities/management.entity';
-import { Worker } from 'src/workers/entities/worker.entity';
+import { User } from 'src/users/entities/user.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -27,21 +27,21 @@ export class Team {
   @JoinColumn({ name: 'c008f_i009t_gerencia_galba' })
   c008f_i009t_gerencia_galba: Management;
   @ApiProperty()
-  @ManyToOne(() => Worker, (worker) => worker.i017i_trabajador)
+  @ManyToOne(() => User, (user) => user.i001i_usuario)
   @JoinColumn({ name: 'c008f_i001t_lider_funcional' })
-  c008f_i001t_lider_funcional: Worker;
+  c008f_i001t_lider_funcional: User;
   @ApiProperty()
-  @ManyToOne(() => Worker, (worker) => worker.i017i_trabajador)
+  @ManyToOne(() => User, (user) => user.i001i_usuario)
   @JoinColumn({ name: 'c008f_i001t_lider_negocio' })
-  c008f_i001t_lider_negocio: Worker;
+  c008f_i001t_lider_negocio: User;
   @ApiProperty()
-  @ManyToOne(() => Worker, (worker) => worker.i017i_trabajador)
+  @ManyToOne(() => User, (user) => user.i001i_usuario)
   @JoinColumn({ name: 'c008f_i001t_lider_tecnico' })
-  c008f_i001t_lider_tecnico: Worker;
+  c008f_i001t_lider_tecnico: User;
   @ApiProperty()
-  @ManyToOne(() => Worker, (worker) => worker.i017i_trabajador)
+  @ManyToOne(() => User, (user) => user.i001i_usuario)
   @JoinColumn({ name: 'c008f_i001t_trabajador' })
-  c008f_i001t_trabajador: Worker;
+  c008f_i001t_trabajador: User;
   @ApiProperty()
   @Column({ length: 255 })
   in_cargo: string;

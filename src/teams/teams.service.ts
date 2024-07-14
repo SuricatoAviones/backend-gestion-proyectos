@@ -95,7 +95,7 @@ export class TeamsService {
     try {
       const team = await this.findOne(c008i_equipo_trabajo);
       await this.repository.delete(c008i_equipo_trabajo);
-      return new ResponseTeamDto(team)
+      return team
     } catch (error) {
       throw new BadRequestException()
     }
