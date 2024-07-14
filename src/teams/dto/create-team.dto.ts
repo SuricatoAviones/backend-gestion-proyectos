@@ -1,7 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { Type } from "class-transformer";
 import { IsNumber, IsString } from "class-validator";
 import { Management } from "src/managements/entities/management.entity";
-import { Worker } from "src/workers/entities/worker.entity";
+import { User } from "src/users/entities/user.entity";
+
 
 export class CreateTeamDto {
     @ApiProperty()
@@ -9,23 +11,30 @@ export class CreateTeamDto {
     in_cargo: string;
     @ApiProperty()
     @IsNumber()
+    @Type( () => Management)
     c008f_i009t_gerencia_funcional: Management;
     @ApiProperty()
     @IsNumber()
+    @Type( () => Management)
     c008f_i009t_gerencia_tecnica: Management;
     @ApiProperty()
     @IsNumber()
+    @Type( () => Management)
     c008f_i009t_gerencia_galba: Management;
     @ApiProperty()
     @IsNumber()
-    c008f_i001t_lider_funcional: Worker;
+    @Type( () => User)
+    c008f_i001t_lider_funcional: User;
     @ApiProperty()
     @IsNumber()
-    c008f_i001t_lider_negocio: Worker;
+    @Type( () => User)
+    c008f_i001t_lider_negocio: User;
     @ApiProperty()
     @IsNumber()
-    c008f_i001t_lider_tecnico: Worker;
+    @Type( () => User)
+    c008f_i001t_lider_tecnico: User;
     @ApiProperty()
     @IsNumber()
-    c008f_i001t_trabajador: Worker;
+    @Type( () => User)
+    c008f_i001t_trabajador: User;
 }
