@@ -11,6 +11,7 @@ export class CreateCostDto {
     @IsString()
     in_titulo : string;
     @ApiProperty()
+    @IsNumber()
     @Type( () => Project)
     i016f_i003t_entrada : Project;
 }

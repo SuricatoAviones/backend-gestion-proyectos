@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
-import { IsString } from "class-validator";
+import { IsNumber, IsString } from "class-validator";
 import { Project } from "src/projects/entities/project.entity";
 
 export class CreateUserHistoryDto {
@@ -23,6 +23,7 @@ export class CreateUserHistoryDto {
   @IsString()
   tx_criterio: string;
   @ApiProperty()
+  @IsNumber()
   @Type( () => Project)
   i003i_entrada: Project;
 
