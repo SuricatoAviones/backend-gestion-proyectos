@@ -6,6 +6,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { Roles } from './enums/roles.enum';
 import { ResponseUserDto } from './dto/response-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import * as bcryptjs from 'bcryptjs'
 
 @Injectable()
 export class UsersService {
@@ -31,7 +32,7 @@ export class UsersService {
         foto: createUserDto.foto,
         in_correo: createUserDto.in_correo,
         in_role: createUserDto.in_role,
-        password: createUserDto.password,
+        password: await bcryptjs.hash(createUserDto.password, 10),
       });
 
 

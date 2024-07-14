@@ -1,9 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IsString } from "class-validator";
 import { Management } from "src/managements/entities/management.entity";
 import { Worker } from "src/workers/entities/worker.entity";
 
 export class CreateTeamDto {
     @ApiProperty()
+    @IsString()
     in_cargo: string;
     @ApiProperty()
     c008f_i009t_gerencia_funcional: Management;
