@@ -17,6 +17,7 @@ export class InputStatusService {
     try {
       const inputStatus = this.repository.create({
         in_nombre_estado: createInputStatusDto.in_nombre_estado,
+        tx_descripcion_estado: createInputStatusDto.tx_descripcion_estado
       })
 
       return new ResponseInputStatusDto(await this.repository.save(inputStatus))
