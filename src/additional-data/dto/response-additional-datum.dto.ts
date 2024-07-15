@@ -7,7 +7,7 @@ export class ResponseAdditionalDatumDto {
     i004f_i003t_entradas : Project;
     tx_interfaz : string;
     tx_interconexion : string;
-    tx_datamodelo: Buffer;
+    tx_datamodelo: string;
     tx_seguridad : string;
     tx_comentario: string;
 

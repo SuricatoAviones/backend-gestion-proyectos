@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsNumber } from "class-validator";
+import { Type } from "class-transformer";
+import { IsDate, IsNotEmpty, IsNumber } from "class-validator";
 import { StatusTask } from "src/status-task/entities/status-task.entity";
 import { Task } from "src/tasks/entities/task.entity";
 
@@ -20,9 +21,11 @@ export class CreateTrackingDto {
   @IsDate()
   fe_real_fin: Date;
   @ApiProperty()
-  @IsNumber()
+  @IsNotEmpty()
+  @Type( () => Task)
   i014f_i013t_tarea: Task;
   @ApiProperty()
-  @IsNumber()
+  @IsNotEmpty()
+  @Type( () => StatusTask)
   i014f_i015t_estado_tarea: StatusTask;
 }

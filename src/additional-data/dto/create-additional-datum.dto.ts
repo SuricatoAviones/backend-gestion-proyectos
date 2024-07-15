@@ -11,7 +11,7 @@ export class CreateAdditionalDatumDto {
     @IsString()
     tx_interconexion : string;
     @ApiProperty()
-    tx_datamodelo: Buffer;
+    tx_datamodelo: string;
     @ApiProperty()
     @IsNotEmpty()
     @IsString()

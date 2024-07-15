@@ -18,7 +18,7 @@ export class AdditionalDatum {
 
     @ApiProperty()
     @Column({ type: "bytea" })
-    tx_datamodelo: Buffer;
+    tx_datamodelo: string;
 
     @ApiProperty()
     @Column({ length: 255 })
