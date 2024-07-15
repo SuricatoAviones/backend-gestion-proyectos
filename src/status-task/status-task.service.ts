@@ -21,7 +21,8 @@ export class StatusTaskService {
       })
       return new ResponseStatusTaskDto(await this.repository.save(statusTask))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -30,7 +31,8 @@ export class StatusTaskService {
       const data = await this.repository.find();
       return data.map(statTast => new ResponseStatusTaskDto(statTast))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -44,7 +46,8 @@ export class StatusTaskService {
       if (!statusTask) throw new NotFoundException();
       return new ResponseStatusTaskDto(statusTask)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -56,7 +59,8 @@ export class StatusTaskService {
       })
       return new UpdateStatusTaskDto(statusTask);
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -66,7 +70,8 @@ export class StatusTaskService {
       await this.repository.delete(i015i_estado_tarea);
       return new ResponseStatusTaskDto(statusTask)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 }

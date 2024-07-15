@@ -23,7 +23,8 @@ export class MessagesService {
             })
             return new ResponseMessageDto(await this.repository.save(message))
         } catch (error) {
-            throw new BadRequestException()
+                 throw new BadRequestException(error)
+
         }
 
     }
@@ -38,7 +39,8 @@ export class MessagesService {
             })
             return messages.map(message => new ResponseMessageDto(message))
         } catch (error) {
-            throw new BadRequestException()
+                 throw new BadRequestException(error)
+
         }
 
     }
@@ -73,7 +75,8 @@ export class MessagesService {
             });
             return new UpdateMessageDto(message);
         } catch (error) {
-            throw new BadRequestException()
+                 throw new BadRequestException(error)
+
         }
 
     }
@@ -84,7 +87,8 @@ export class MessagesService {
             await this.repository.delete(i016i_message)
             return new ResponseMessageDto(message)
         } catch (error) {
-            throw new BadRequestException();
+                 throw new BadRequestException(error)
+;
         }
 
     }

@@ -21,7 +21,8 @@ export class ManagementsService {
       })
       return new ResponseManagementDto(await this.repository.save(management))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -30,7 +31,8 @@ export class ManagementsService {
       const data = await this.repository.find();
       return data.map(mgmt => new ResponseManagementDto(mgmt));
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -42,7 +44,8 @@ export class ManagementsService {
       if (!management) throw new NotFoundException()
         return new ResponseManagementDto(management)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -54,7 +57,8 @@ export class ManagementsService {
       })
       return new UpdateManagementDto(management)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -64,7 +68,8 @@ export class ManagementsService {
       await this.repository.delete(i009i_gerencia);
       return management
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 }

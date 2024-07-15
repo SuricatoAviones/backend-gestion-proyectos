@@ -29,7 +29,8 @@ export class ProjectsService {
       })
       return new ResponseProjectDto(await this.repository.save(project))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -47,7 +48,8 @@ export class ProjectsService {
       });
       return data.map(project => new ResponseProjectDto(project))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -69,7 +71,8 @@ export class ProjectsService {
       if (!Project) throw new NotFoundException();
       return new ResponseProjectDto(project)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -90,7 +93,8 @@ export class ProjectsService {
       })
       return new UpdateProjectDto(project);
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -100,7 +104,8 @@ export class ProjectsService {
       await this.repository.delete(i003i_entrada);
       return new ResponseProjectDto(project)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 }

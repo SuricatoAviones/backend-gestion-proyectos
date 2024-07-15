@@ -40,7 +40,8 @@ export class UsersService {
         await this.userReporsitory.save(user)
       );
     } catch (error) {
-      throw new BadRequestException();
+           throw new BadRequestException(error)
+;
     }
   }
 
@@ -57,7 +58,8 @@ export class UsersService {
       const data = await this.userReporsitory.find();
       return data.map(user => new ResponseUserDto(user));
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
 
   }
@@ -72,7 +74,8 @@ export class UsersService {
       if (!user) throw new NotFoundException()
         return new ResponseUserDto(user)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   } 
 
@@ -92,7 +95,8 @@ export class UsersService {
       });
       return new UpdateUserDto(userHistory);
     } catch (error) {
-      throw new BadRequestException();
+           throw new BadRequestException(error)
+;
     }
   }
 
@@ -104,7 +108,8 @@ export class UsersService {
       await this.userReporsitory.delete(i007i_historia_usuario);
       return user
     } catch (error) {
-      throw new BadRequestException();
+           throw new BadRequestException(error)
+;
     }
   }
 }

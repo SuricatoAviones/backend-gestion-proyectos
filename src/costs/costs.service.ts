@@ -22,7 +22,8 @@ export class CostsService {
       })
       return new ResponseCostDto(await this.repository.save(cost))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   
   }
@@ -36,7 +37,8 @@ export class CostsService {
       })
       return costs.map(cost => new ResponseCostDto(cost))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   
   }
@@ -70,7 +72,8 @@ export class CostsService {
       });
       return new UpdateCostDto(cost);
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
 
   }
@@ -81,7 +84,8 @@ export class CostsService {
       await this.repository.delete(i016i_costo)
       return new ResponseCostDto(cost)
     } catch (error) {
-      throw new BadRequestException();
+           throw new BadRequestException(error)
+;
     }
 
   }

@@ -21,7 +21,8 @@ export class TechnicalAreasService {
       })
       return new ResponseTechnicalAreaDto(await this.repository.save(technicalArea))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -30,7 +31,8 @@ export class TechnicalAreasService {
       const data = await this.repository.find();
       return data.map(tArea => new ResponseTechnicalAreaDto(tArea))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -44,7 +46,8 @@ export class TechnicalAreasService {
       if (!technicalArea) throw new NotFoundException();
       return new ResponseTechnicalAreaDto(technicalArea)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -56,7 +59,8 @@ export class TechnicalAreasService {
       })
       return new UpdateTechnicalAreaDto(technicalArea);
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -66,7 +70,8 @@ export class TechnicalAreasService {
       await this.repository.delete(i010i_area_tecnica);
       return new ResponseTechnicalAreaDto(technicalArea)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 }

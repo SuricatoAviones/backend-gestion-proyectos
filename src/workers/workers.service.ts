@@ -23,7 +23,8 @@ export class WorkersService {
       })
       return new ResponseWorkerDto(await this.repository.save(worker))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -36,7 +37,8 @@ export class WorkersService {
       });
       return data.map(worker => new ResponseWorkerDto(worker))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -50,7 +52,8 @@ export class WorkersService {
       if (!worker) throw new NotFoundException();
       return new ResponseWorkerDto(worker)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -64,7 +67,8 @@ export class WorkersService {
       })
       return new UpdateWorkerDto(worker);
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -74,7 +78,8 @@ export class WorkersService {
       await this.repository.delete(i017i_trabajador);
       return new ResponseWorkerDto(worker)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 }

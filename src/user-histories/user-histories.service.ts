@@ -27,7 +27,8 @@ export class UserHistoriesService {
       })
       return new ResponseUserHistoryDto(await this.repository.save(userHistory))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -40,7 +41,8 @@ export class UserHistoriesService {
       });
       return data.map(uHistory => new ResponseUserHistoryDto(uHistory))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -57,7 +59,8 @@ export class UserHistoriesService {
       if (!userHistory) throw new NotFoundException();
       return new ResponseUserHistoryDto(userHistory)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -75,7 +78,8 @@ export class UserHistoriesService {
       })
       return new UpdateUserHistoryDto(userHistory);
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -85,7 +89,8 @@ export class UserHistoriesService {
       await this.repository.delete(i007i_historia_usuario);
       return new ResponseUserHistoryDto(userHistory)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 }

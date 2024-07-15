@@ -24,7 +24,8 @@ export class TasksService {
       })
       return new ResponseTaskDto(await this.repository.save(task))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -37,7 +38,8 @@ export class TasksService {
       });
       return data.map(projectP => new ResponseTaskDto(projectP))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -54,7 +56,8 @@ export class TasksService {
       if (!task) throw new NotFoundException();
       return new ResponseTaskDto(task)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -68,7 +71,8 @@ export class TasksService {
       })
       return new UpdateTaskDto(task);
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -78,7 +82,8 @@ export class TasksService {
       await this.repository.delete(i013i_tarea);
       return new ResponseTaskDto(task)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 }

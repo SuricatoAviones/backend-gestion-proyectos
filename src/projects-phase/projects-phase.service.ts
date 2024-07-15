@@ -21,7 +21,8 @@ export class ProjectsPhaseService {
       })
       return new ResponseProjectsPhaseDto(await this.repository.save(projectsPhase))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -30,7 +31,8 @@ export class ProjectsPhaseService {
       const data = await this.repository.find();
       return data.map(projectP => new ResponseProjectsPhaseDto(projectP))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -44,7 +46,8 @@ export class ProjectsPhaseService {
       if (!projectsPhase) throw new NotFoundException();
       return new ResponseProjectsPhaseDto(projectsPhase)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -56,7 +59,8 @@ export class ProjectsPhaseService {
       })
       return new UpdateProjectsPhaseDto(projectsPhase);
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -66,7 +70,8 @@ export class ProjectsPhaseService {
       await this.repository.delete(i012i_fase_proyecto);
       return new ResponseProjectsPhaseDto(projectsPhase)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 }

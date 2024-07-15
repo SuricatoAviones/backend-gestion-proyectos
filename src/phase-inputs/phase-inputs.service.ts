@@ -22,7 +22,8 @@ export class PhaseInputsService {
       })
       return new ResponsePhaseInputDto(await this.repository.save(phaseInput))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -31,7 +32,8 @@ export class PhaseInputsService {
       const data = await this.repository.find();
       return data.map(phaseI => new ResponsePhaseInputDto(phaseI))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -45,7 +47,8 @@ export class PhaseInputsService {
       if (!phaseInput) throw new NotFoundException();
       return new ResponsePhaseInputDto(phaseInput)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -57,7 +60,8 @@ export class PhaseInputsService {
       })
       return new UpdatePhaseInputDto(phaseInput);
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -67,7 +71,8 @@ export class PhaseInputsService {
       await this.repository.delete(i0005i_fase_entrada);
       return new ResponsePhaseInputDto(phaseInput)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 }

@@ -21,7 +21,8 @@ export class InputStatusService {
 
       return new ResponseInputStatusDto(await this.repository.save(inputStatus))
     } catch (error) {
-      throw new BadRequestException();
+           throw new BadRequestException(error)
+;
     }
   }
 
@@ -30,7 +31,8 @@ export class InputStatusService {
       const inputStatus = await this.repository.find();
       return inputStatus.map(is => new ResponseInputStatusDto(is))
     } catch (error) {
-      throw new BadRequestException();
+           throw new BadRequestException(error)
+;
     }
   }
 
@@ -42,7 +44,8 @@ export class InputStatusService {
       if (!inputStatus) throw new NotFoundException();
       return new ResponseInputStatusDto(inputStatus);
     } catch (error) {
-      throw new BadRequestException();
+           throw new BadRequestException(error)
+;
     }
   }
 
@@ -54,7 +57,8 @@ export class InputStatusService {
       })
       return new UpdateInputStatusDto(inputStatus)
     } catch (error) {
-      throw new BadRequestException();
+           throw new BadRequestException(error)
+;
     }
   }
 
@@ -64,7 +68,8 @@ export class InputStatusService {
       await this.repository.delete(i006i_estado_entrada);
       return inputStatus
     } catch (error) {
-      throw new BadRequestException();
+           throw new BadRequestException(error)
+;
     }
   }
 }

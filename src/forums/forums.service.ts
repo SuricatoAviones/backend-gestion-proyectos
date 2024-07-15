@@ -21,7 +21,8 @@ export class ForumService {
       })
       return new ResponseForumDto(await this.repository.save(forum))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   
   }
@@ -35,7 +36,8 @@ export class ForumService {
       })
       return forums.map(forum => new ResponseForumDto(forum))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   
   }
@@ -67,7 +69,8 @@ export class ForumService {
       });
       return new UpdateForumDto(forum);
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
 
   }
@@ -78,7 +81,8 @@ export class ForumService {
       await this.repository.delete(i016i_foro)
       return new ResponseForumDto(forum)
     } catch (error) {
-      throw new BadRequestException();
+           throw new BadRequestException(error)
+;
     }
 
   }

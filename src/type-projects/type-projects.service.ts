@@ -23,7 +23,8 @@ export class TypeProjectsService {
       })
       return new ResponseTypeProjectDto(await this.repository.save(typeProject))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -36,7 +37,8 @@ export class TypeProjectsService {
       });
       return data.map(tProject => new ResponseTypeProjectDto(tProject))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -53,7 +55,8 @@ export class TypeProjectsService {
       if (!typeProject) throw new NotFoundException();
       return new ResponseTypeProjectDto(typeProject)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -66,7 +69,8 @@ export class TypeProjectsService {
       })
       return new UpdateTypeProjectDto(typeProject);
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -76,7 +80,8 @@ export class TypeProjectsService {
       await this.repository.delete(i011i_tipo_proyecto);
       return new ResponseTypeProjectDto(typeProject)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 }

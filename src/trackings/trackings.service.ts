@@ -27,7 +27,8 @@ export class TrackingsService {
       })
       return new ResponseTrackingDto(await this.repository.save(tracking))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -41,7 +42,8 @@ export class TrackingsService {
       });
       return data.map(tracking => new ResponseTrackingDto(tracking))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -59,7 +61,8 @@ export class TrackingsService {
       if (!tracking) throw new NotFoundException();
       return new ResponseTrackingDto(tracking)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -76,7 +79,8 @@ export class TrackingsService {
       })
       return new UpdateTrackingDto(tracking);
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -86,7 +90,8 @@ export class TrackingsService {
       await this.repository.delete(i014i_seguimiento);
       return new ResponseTrackingDto(tracking)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 }

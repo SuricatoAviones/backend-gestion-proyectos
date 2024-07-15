@@ -27,7 +27,8 @@ export class TeamsService {
       })
       return new ResponseTeamDto(await this.repository.save(team))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -46,7 +47,8 @@ export class TeamsService {
       });
       return data.map(team => new ResponseTeamDto(team))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -69,7 +71,8 @@ export class TeamsService {
       if (!team) throw new NotFoundException();
       return new ResponseTeamDto(team)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -87,7 +90,8 @@ export class TeamsService {
       })
       return new UpdateTeamDto(team);
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -97,7 +101,8 @@ export class TeamsService {
       await this.repository.delete(c008i_equipo_trabajo);
       return team
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 }

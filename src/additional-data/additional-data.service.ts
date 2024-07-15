@@ -24,7 +24,8 @@ export class AdditionalDataService {
       })
       return new ResponseAdditionalDatumDto(await this.repository.save(additionalDatum))
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -33,7 +34,7 @@ export class AdditionalDataService {
       const data = await this.repository.find();
       return data.map(aDatum => new ResponseAdditionalDatumDto(aDatum))
     } catch (error) {
-      throw new BadRequestException()
+      throw new BadRequestException(error)
     }
   }
 
@@ -47,7 +48,8 @@ export class AdditionalDataService {
       if (!additionalDatum) throw new NotFoundException();
       return new ResponseAdditionalDatumDto(additionalDatum)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -62,7 +64,8 @@ export class AdditionalDataService {
       })
       return new UpdateAdditionalDatumDto(additionalDatum);
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 
@@ -72,7 +75,8 @@ export class AdditionalDataService {
       await this.repository.delete(i004i_datos_adi);
       return new ResponseAdditionalDatumDto(additionalDatum)
     } catch (error) {
-      throw new BadRequestException()
+           throw new BadRequestException(error)
+
     }
   }
 }
