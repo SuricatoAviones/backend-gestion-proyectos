@@ -18,6 +18,7 @@ import { TechnicalAreasModule } from './technical-areas/technical-areas.module';
 import { TypeProjectsModule } from './type-projects/type-projects.module';
 import { ProjectsPhaseModule } from './projects-phase/projects-phase.module';
 import { TrackingsModule } from './trackings/trackings.module';
+import { ReportsModule } from './reports/reports.module';
 
 @Module({
   imports: [AuthModule, UsersModule, ProjectsModule, ManagementsModule, TasksModule,
@@ -58,7 +59,8 @@ import { TrackingsModule } from './trackings/trackings.module';
     TechnicalAreasModule,
     TypeProjectsModule,
     ProjectsPhaseModule,
-    TrackingsModule],
+    TrackingsModule,
+    ReportsModule],
   controllers: [],
   providers:[],
 })

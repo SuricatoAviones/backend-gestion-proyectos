@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException, Query } from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -34,7 +34,7 @@ export class ProjectsService {
     }
   }
 
-  async findAll(): Promise<Array<ResponseProjectDto>> {
+  async findAll(/* @Query() query */): Promise<Array<ResponseProjectDto>> {
     try {
       const data = await this.repository.find({
         relations: {
@@ -56,7 +56,7 @@ export class ProjectsService {
     }
   }
 
-  async findOne(i003i_entrada: number): Promise<ResponseProjectDto> {
+  async findOne(i003i_entrada: number, /* @Query() query */): Promise<ResponseProjectDto> {
     try {
       const project = await this.repository.findOne({
         where: {
