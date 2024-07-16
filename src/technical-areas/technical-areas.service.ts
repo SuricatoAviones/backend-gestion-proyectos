@@ -57,7 +57,7 @@ export class TechnicalAreasService {
         in_nombre: updateTechnicalAreaDto.in_nombre,
         tx_descripcion: updateTechnicalAreaDto.tx_descripcion
       })
-      return new UpdateTechnicalAreaDto(technicalArea);
+      return this.findOne(i010i_area_tecnica)
     } catch (error) {
            throw new BadRequestException(error)
 

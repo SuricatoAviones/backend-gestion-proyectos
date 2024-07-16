@@ -9,7 +9,7 @@ import { Repository } from 'typeorm';
 export class ManagementsService {
 
   constructor(@InjectRepository(Management)
-  private repository: Repository<Management>){
+  private repository: Repository<Management>) {
 
   }
 
@@ -21,7 +21,7 @@ export class ManagementsService {
       })
       return new ResponseManagementDto(await this.repository.save(management))
     } catch (error) {
-           throw new BadRequestException(error)
+      throw new BadRequestException(error)
 
     }
   }
@@ -31,20 +31,22 @@ export class ManagementsService {
       const data = await this.repository.find();
       return data.map(mgmt => new ResponseManagementDto(mgmt));
     } catch (error) {
-           throw new BadRequestException(error)
+      throw new BadRequestException(error)
 
     }
   }
 
   async findOne(i009i_gerencia: number): Promise<ResponseManagementDto> {
     try {
-      const management = await this.repository.findOne({where: {
-        i009i_gerencia
-      }})
+      const management = await this.repository.findOne({
+        where: {
+          i009i_gerencia
+        }
+      })
       if (!management) throw new NotFoundException()
-        return new ResponseManagementDto(management)
+      return new ResponseManagementDto(management)
     } catch (error) {
-           throw new BadRequestException(error)
+      throw new BadRequestException(error)
 
     }
   }
@@ -55,9 +57,11 @@ export class ManagementsService {
         in_nombre: updateManagementDto.in_nombre,
         tx_descripcion: updateManagementDto.tx_descripcion
       })
-      return new UpdateManagementDto(management)
+      console.log(management)
+      return this.findOne(i009i_gerencia)
     } catch (error) {
-           throw new BadRequestException(error)
+      console.log(error)
+      throw new BadRequestException(error)
 
     }
   }
@@ -68,7 +72,7 @@ export class ManagementsService {
       await this.repository.delete(i009i_gerencia);
       return management
     } catch (error) {
-           throw new BadRequestException(error)
+      throw new BadRequestException(error)
 
     }
   }

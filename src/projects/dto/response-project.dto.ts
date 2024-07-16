@@ -24,7 +24,7 @@ export class ResponseProjectDto {
     tx_objetivo: string;
     tx_alcance: string;
     i0003f_i008t_equipo_trabajo: Team;
-    i003f_i005t_fase_entrada: ProjectsPhase;
+    i003f_i005t_fase_entrada: any;
     i003f_i006t_estado_entrada: InputStatus;
     i004i_datos_adi: AdditionalDatum
 
@@ -37,7 +37,7 @@ export class ResponseProjectDto {
         this.tx_descripcion = data.tx_descripcion;
         this.tx_alcance = data.tx_alcance;
         this.tx_objetivo = data.tx_objetivo;
-        this.i0003f_i008t_equipo_trabajo =  new ResponseTeamDto(data.i0003f_i008t_equipo_trabajo)
+        this.i0003f_i008t_equipo_trabajo = data.i0003f_i008t_equipo_trabajo ? new ResponseTeamDto(data.i0003f_i008t_equipo_trabajo): null
         this.i003f_i005t_fase_entrada = new ResponseProjectsPhaseDto(data.i003f_i005t_fase_entrada);
         this.i003f_i006t_estado_entrada = new ResponseInputStatusDto(data.i003f_i006t_estado_entrada);
         this.i004i_datos_adi = new ResponseAdditionalDatumDto(data.i004i_datos_adi)

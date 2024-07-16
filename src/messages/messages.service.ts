@@ -73,7 +73,7 @@ export class MessagesService {
                 i018f_i001t_usuario: updateMessageDto.i018f_i001t_usuario,
                 i018f_i019t_foro: updateMessageDto.i018f_i019t_foro,
             });
-            return new UpdateMessageDto(message);
+            return this.findOne(i019i_mensaje)
         } catch (error) {
                  throw new BadRequestException(error)
 

@@ -57,7 +57,7 @@ export class StatusTaskService {
         in_titulo: updateStatusTaskDto.in_titulo,
         tx_descripcion: updateStatusTaskDto.tx_descripcion
       })
-      return new UpdateStatusTaskDto(statusTask);
+      return this.findOne(i012i_fase_proyecto)
     } catch (error) {
            throw new BadRequestException(error)
 

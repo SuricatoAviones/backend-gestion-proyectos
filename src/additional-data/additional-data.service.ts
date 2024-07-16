@@ -62,7 +62,7 @@ export class AdditionalDataService {
         tx_seguridad: updateAdditionalDatumDto.tx_seguridad,
         tx_comentario: updateAdditionalDatumDto.tx_comentario,
       })
-      return new UpdateAdditionalDatumDto(additionalDatum);
+      return this.findOne(i004i_datos_adi)
     } catch (error) {
            throw new BadRequestException(error)
 

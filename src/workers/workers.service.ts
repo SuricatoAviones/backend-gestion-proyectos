@@ -32,11 +32,21 @@ export class WorkersService {
     try {
       const data = await this.repository.find({
         relations: {
-          i017f_c008t_equipo_trabajo: true,
+          i017f_c008t_equipo_trabajo: {
+            c008f_i001t_lider_funcional: true,
+            c008f_i001t_lider_negocio: true,
+            c008f_i001t_lider_tecnico: true,
+            c008f_i009t_gerencia_funcional: true,
+            c008f_i009t_gerencia_galba: true,
+            c008f_i009t_gerencia_tecnica: true,
+            c008f_i001t_trabajador: true,
+
+          },
         }
       });
       return data.map(worker => new ResponseWorkerDto(worker))
     } catch (error) {
+           console.log(error)
            throw new BadRequestException(error)
 
     }
@@ -47,6 +57,17 @@ export class WorkersService {
       const worker = await this.repository.findOne({
         where: {
           i017i_trabajador,
+        },
+        relations: {
+          i017f_c008t_equipo_trabajo: {
+            c008f_i001t_lider_funcional: true,
+            c008f_i001t_lider_negocio: true,
+            c008f_i001t_lider_tecnico: true,
+            c008f_i009t_gerencia_funcional: true,
+            c008f_i009t_gerencia_galba: true,
+            c008f_i009t_gerencia_tecnica: true,
+            c008f_i001t_trabajador: true,
+          },
         }
       });
       if (!worker) throw new NotFoundException();
@@ -65,7 +86,7 @@ export class WorkersService {
         i017f_c008t_equipo_trabajo: updateWorkerDto.i017f_c008t_equipo_trabajo
 
       })
-      return new UpdateWorkerDto(worker);
+      return this.findOne(i017i_trabajador);
     } catch (error) {
            throw new BadRequestException(error)
 

@@ -88,7 +88,7 @@ export class TeamsService {
         c008f_i001t_lider_tecnico: updateTeamDto.c008f_i001t_lider_tecnico,
         c008f_i001t_trabajador: updateTeamDto.c008f_i001t_trabajador
       })
-      return new UpdateTeamDto(team);
+      return this.findOne(c008i_equipo_trabajo)
     } catch (error) {
            throw new BadRequestException(error)
 

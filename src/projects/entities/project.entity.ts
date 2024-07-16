@@ -14,50 +14,51 @@ export class Project {
   @PrimaryGeneratedColumn()
   i003i_entrada: number;
 
-   @ApiProperty()
+  @ApiProperty()
   @Column({ unique: true })
   co_entrada: string;
 
-   @ApiProperty()
+  @ApiProperty()
   @ManyToOne(() => TechnicalArea, (technicalArea) => technicalArea.i010i_area_tecnica)
   i003f_i010t_area_tecnica: TechnicalArea;
 
-   @ApiProperty()
+  @ApiProperty()
   @ManyToOne(() => TypeProject, (typeProject) => typeProject.i011i_tipo_proyecto)
   @JoinColumn()
   i003f_i011_tipo_proyecto: TypeProject;
 
-   @ApiProperty()
+  @ApiProperty()
   @Column({ length: 255 })
   in_titulo: string;
 
-   @ApiProperty()
+  @ApiProperty()
   @Column({ length: 255 })
   tx_descripcion: string;
 
-   @ApiProperty()
+  @ApiProperty()
   @Column({ length: 255 })
   tx_objetivo: string;
 
-   @ApiProperty()
+  @ApiProperty()
   @Column({ length: 255 })
   tx_alcance: string;
 
-   @ApiProperty()
+  @ApiProperty()
   @OneToOne(() => Team, (team) => team.c008i_equipo_trabajo, { cascade: true })
+  @JoinColumn()
   i0003f_i008t_equipo_trabajo: Team;
 
-   @ApiProperty()
+  @ApiProperty()
   @ManyToOne(() => ProjectsPhase, (projectsPhase) => projectsPhase.i012i_fase_proyecto)
   @JoinColumn()
   i003f_i005t_fase_entrada: ProjectsPhase;
 
-   @ApiProperty()
+  @ApiProperty()
   @ManyToOne(() => InputStatus, (inputStatus) => inputStatus.i006i_estado_entrada)
   @JoinColumn()
   i003f_i006t_estado_entrada: InputStatus;
 
-   @ApiProperty()
+  @ApiProperty()
   @OneToOne(() => AdditionalDatum, (additionalDatum) => additionalDatum.i004i_datos_adi, { cascade: true })
   @JoinColumn()
   i004i_datos_adi: AdditionalDatum;

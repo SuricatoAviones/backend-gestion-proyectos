@@ -67,7 +67,7 @@ export class ForumService {
       await this.repository.update(i016i_foro, {
         i018f_i003t_entrada: updateForumDto.i018f_i003t_entrada,
       });
-      return new UpdateForumDto(forum);
+      return this.findOne(i016i_foro)
     } catch (error) {
            throw new BadRequestException(error)
 

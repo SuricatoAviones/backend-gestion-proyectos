@@ -93,7 +93,8 @@ export class UsersService {
         in_role: updateUserHistoryDto.in_role,
         password: updateUserHistoryDto.password,
       });
-      return new UpdateUserDto(userHistory);
+      console.log(userHistory); 
+      return this.findOne(i007i_historia_usuario);
     } catch (error) {
            throw new BadRequestException(error)
 ;

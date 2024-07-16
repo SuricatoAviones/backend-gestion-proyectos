@@ -27,7 +27,7 @@ export class TrackingsService {
       })
       return new ResponseTrackingDto(await this.repository.save(tracking))
     } catch (error) {
-           throw new BadRequestException(error)
+      throw new BadRequestException(error)
 
     }
   }
@@ -36,13 +36,24 @@ export class TrackingsService {
     try {
       const data = await this.repository.find({
         relations: {
-          i014f_i013t_tarea: true,
+          i014f_i013t_tarea: {
+            i013f_i003t_entrada: {
+              i003f_i011_tipo_proyecto: {
+                i011f_i012t_fase_proyecto: true,
+              },
+              i003f_i005t_fase_entrada: true,
+              i003f_i010t_area_tecnica: true,
+              i003f_i006t_estado_entrada: true,
+              i004i_datos_adi: true
+            }
+          },
           i014f_i015t_estado_tarea: true,
         }
       });
       return data.map(tracking => new ResponseTrackingDto(tracking))
     } catch (error) {
-           throw new BadRequestException(error)
+      console.log(error)
+      throw new BadRequestException(error)
 
     }
   }
@@ -54,14 +65,25 @@ export class TrackingsService {
           i014i_seguimiento,
         },
         relations: {
-          i014f_i013t_tarea: true,
+          i014f_i013t_tarea: {
+            i013f_i003t_entrada: {
+              i003f_i011_tipo_proyecto: {
+                i011f_i012t_fase_proyecto: true,
+              },
+              i003f_i005t_fase_entrada: true,
+              i003f_i010t_area_tecnica: true,
+              i003f_i006t_estado_entrada: true,
+              i004i_datos_adi: true
+            }
+          },
           i014f_i015t_estado_tarea: true,
         }
       });
       if (!tracking) throw new NotFoundException();
       return new ResponseTrackingDto(tracking)
     } catch (error) {
-           throw new BadRequestException(error)
+      console.log(error)
+      throw new BadRequestException(error)
 
     }
   }
@@ -77,9 +99,9 @@ export class TrackingsService {
         i014f_i015t_estado_tarea: updateTrackingDto.i014f_i015t_estado_tarea,
         i014f_i013t_tarea: updateTrackingDto.i014f_i013t_tarea,
       })
-      return new UpdateTrackingDto(tracking);
+      return this.findOne(i014i_seguimiento)
     } catch (error) {
-           throw new BadRequestException(error)
+      throw new BadRequestException(error)
 
     }
   }
@@ -90,7 +112,7 @@ export class TrackingsService {
       await this.repository.delete(i014i_seguimiento);
       return new ResponseTrackingDto(tracking)
     } catch (error) {
-           throw new BadRequestException(error)
+      throw new BadRequestException(error)
 
     }
   }

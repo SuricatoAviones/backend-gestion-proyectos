@@ -58,7 +58,7 @@ export class PhaseInputsService {
         in_nombre_fase: updatePhaseInputDto.in_nombre_fase,
         tx_descripcion_fase: updatePhaseInputDto.tx_descripcion_fase
       })
-      return new UpdatePhaseInputDto(phaseInput);
+      return this.findOne(i0005i_fase_entrada)
     } catch (error) {
            throw new BadRequestException(error)
 

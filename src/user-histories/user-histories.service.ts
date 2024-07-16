@@ -36,11 +36,29 @@ export class UserHistoriesService {
     try {
       const data = await this.repository.find({
         relations: {
-          i003i_entrada: true,
+          i003i_entrada: {
+            i003f_i010t_area_tecnica: true,
+            i003f_i011_tipo_proyecto: {
+              i011f_i012t_fase_proyecto: true
+            },
+            i003f_i006t_estado_entrada: true,
+            i0003f_i008t_equipo_trabajo: {
+              c008f_i001t_trabajador: true,
+              c008f_i009t_gerencia_funcional: true,
+              c008f_i009t_gerencia_galba: true,
+              c008f_i009t_gerencia_tecnica: true,
+              c008f_i001t_lider_funcional: true,
+              c008f_i001t_lider_negocio: true,
+              c008f_i001t_lider_tecnico: true,
+            }, // wtf
+            i003f_i005t_fase_entrada: true,
+            i004i_datos_adi: true,
+          },
         }
       });
       return data.map(uHistory => new ResponseUserHistoryDto(uHistory))
     } catch (error) {
+           console.log(error)
            throw new BadRequestException(error)
 
     }
@@ -53,7 +71,24 @@ export class UserHistoriesService {
           i007i_historia_usuario,
         },
         relations: {
-          i003i_entrada: true,
+          i003i_entrada: {
+            i003f_i010t_area_tecnica: true,
+            i003f_i011_tipo_proyecto: {
+              i011f_i012t_fase_proyecto: true
+            },
+            i003f_i006t_estado_entrada: true,
+            i0003f_i008t_equipo_trabajo: {
+              c008f_i001t_trabajador: true,
+              c008f_i009t_gerencia_funcional: true,
+              c008f_i009t_gerencia_galba: true,
+              c008f_i009t_gerencia_tecnica: true,
+              c008f_i001t_lider_funcional: true,
+              c008f_i001t_lider_negocio: true,
+              c008f_i001t_lider_tecnico: true,
+            }, // wtf
+            i003f_i005t_fase_entrada: true,
+            i004i_datos_adi: true,
+          },
         }
       });
       if (!userHistory) throw new NotFoundException();
@@ -76,7 +111,7 @@ export class UserHistoriesService {
         i003i_entrada: updateUserHistoryDto.i003i_entrada
 
       })
-      return new UpdateUserHistoryDto(userHistory);
+      return this.findOne(i007i_historia_usuario)
     } catch (error) {
            throw new BadRequestException(error)
 

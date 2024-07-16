@@ -39,15 +39,18 @@ export class ProjectsService {
       const data = await this.repository.find({
         relations: {
           i003f_i010t_area_tecnica: true,
-          i003f_i011_tipo_proyecto: true,
+          i003f_i011_tipo_proyecto: {
+            i011f_i012t_fase_proyecto: true
+          },
           i003f_i006t_estado_entrada: true,
-          i0003f_i008t_equipo_trabajo: true,
+          i0003f_i008t_equipo_trabajo: true, // wtf
           i003f_i005t_fase_entrada: true,
           i004i_datos_adi: true,
         }
       });
       return data.map(project => new ResponseProjectDto(project))
     } catch (error) {
+           console.log(error);
            throw new BadRequestException(error)
 
     }
@@ -61,9 +64,11 @@ export class ProjectsService {
         },
         relations: {
           i003f_i010t_area_tecnica: true,
-          i003f_i011_tipo_proyecto: true,
+          i003f_i011_tipo_proyecto: {
+            i011f_i012t_fase_proyecto: true
+          },
           i003f_i006t_estado_entrada: true,
-          i0003f_i008t_equipo_trabajo: true,
+          i0003f_i008t_equipo_trabajo: true, // wtf
           i003f_i005t_fase_entrada: true,
           i004i_datos_adi: true,
         }
@@ -71,6 +76,7 @@ export class ProjectsService {
       if (!Project) throw new NotFoundException();
       return new ResponseProjectDto(project)
     } catch (error) {
+           console.log(error)
            throw new BadRequestException(error)
 
     }
@@ -91,7 +97,7 @@ export class ProjectsService {
         i0003f_i008t_equipo_trabajo: updateProjectDto.i0003f_i008t_equipo_trabajo,
         i004i_datos_adi: updateProjectDto.i004i_datos_adi,
       })
-      return new UpdateProjectDto(project);
+      return this.findOne(i003i_entrada)
     } catch (error) {
            throw new BadRequestException(error)
 

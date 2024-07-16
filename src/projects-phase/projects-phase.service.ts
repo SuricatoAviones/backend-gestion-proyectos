@@ -57,7 +57,7 @@ export class ProjectsPhaseService {
         in_nombre: updateProjectsPhaseDto.in_nombre,
         tx_descripcion: updateProjectsPhaseDto.tx_descripcion
       })
-      return new UpdateProjectsPhaseDto(projectsPhase);
+      return this.findOne(i012i_fase_proyecto)
     } catch (error) {
            throw new BadRequestException(error)
 

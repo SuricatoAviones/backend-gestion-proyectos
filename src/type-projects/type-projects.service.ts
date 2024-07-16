@@ -67,7 +67,7 @@ export class TypeProjectsService {
         tx_descripcion: updateTypeProjectDto.tx_descripcion,
         i011f_i012t_fase_proyecto: updateTypeProjectDto.i011f_i012t_fase_proyecto
       })
-      return new UpdateTypeProjectDto(typeProject);
+      return this.findOne(i011i_tipo_proyecto)
     } catch (error) {
            throw new BadRequestException(error)
 

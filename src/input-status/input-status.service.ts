@@ -56,7 +56,7 @@ export class InputStatusService {
         in_nombre_estado: updateInputStatusDto.in_nombre_estado,
         tx_descripcion_estado: updateInputStatusDto.tx_descripcion_estado
       })
-      return new UpdateInputStatusDto(inputStatus)
+      return this.findOne(i006i_estado_entrada)
     } catch (error) {
            throw new BadRequestException(error)
 ;

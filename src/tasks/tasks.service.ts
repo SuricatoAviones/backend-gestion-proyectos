@@ -33,11 +33,20 @@ export class TasksService {
     try {
       const data = await this.repository.find({
         relations: {
-          i013f_i003t_entrada: true,
+          i013f_i003t_entrada: {
+            i003f_i011_tipo_proyecto: {
+              i011f_i012t_fase_proyecto: true,
+            },
+            i003f_i005t_fase_entrada: true,
+            i003f_i010t_area_tecnica: true,
+            i003f_i006t_estado_entrada: true,
+            i004i_datos_adi: true
+          },
         }
       });
       return data.map(projectP => new ResponseTaskDto(projectP))
     } catch (error) {
+           console.log(error)
            throw new BadRequestException(error)
 
     }
@@ -50,7 +59,15 @@ export class TasksService {
           i013i_tarea,
         },
         relations: {
-          i013f_i003t_entrada: true,
+          i013f_i003t_entrada: {
+            i003f_i011_tipo_proyecto: {
+              i011f_i012t_fase_proyecto: true,
+            },
+            i003f_i005t_fase_entrada: true,
+            i003f_i010t_area_tecnica: true,
+            i003f_i006t_estado_entrada: true,
+            i004i_datos_adi: true
+          },
         }
       });
       if (!task) throw new NotFoundException();
@@ -69,7 +86,7 @@ export class TasksService {
         i013f_i001t_usuario: updateTaskDto.i013f_i001t_usuario,
         i013f_i003t_entrada: updateTaskDto.i013f_i003t_entrada,
       })
-      return new UpdateTaskDto(task);
+      return this.findOne(i013i_tarea);
     } catch (error) {
            throw new BadRequestException(error)
 
