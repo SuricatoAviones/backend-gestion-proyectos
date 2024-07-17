@@ -28,8 +28,8 @@ export class Task {
 
   @ApiProperty()
   @OneToOne(() => Tracking, (tracking) => tracking.i014f_i013t_tarea, {
-    cascade: true, eager: true,
+    cascade: true , eager: true,
   })
   @JoinColumn()
-  i013f_i014t_seguimiento: Tracking;
+  i013f_i014t_seguimiento: Tracking | null;
 }

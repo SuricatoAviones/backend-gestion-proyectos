@@ -16,7 +16,7 @@ export class ReportsService {
   }
 
   private async print(html: string) {
-
+    console.log(html)
     const filePath = `${process.cwd()}/files/report-${(new Date()).toISOString()
       .slice(0, -5)
       .replace('T', '_')
@@ -36,6 +36,7 @@ export class ReportsService {
       width: '11.7in',
       landscape: false,
       timeout: 120000,
+      printBackground: true,
       margin: {
         top: '50px',
         left: '15px',

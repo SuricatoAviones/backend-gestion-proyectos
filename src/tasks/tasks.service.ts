@@ -69,7 +69,6 @@ export class TasksService {
             i003f_i006t_estado_entrada: true,
             i004i_datos_adi: true,
           },
-          i013f_i014t_seguimiento: true,
         }
       });
       if (!task) throw new NotFoundException();

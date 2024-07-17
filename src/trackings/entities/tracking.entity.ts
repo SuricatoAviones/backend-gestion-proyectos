@@ -10,10 +10,8 @@ export class Tracking {
   i014i_seguimiento: number;
 
   @ApiProperty()
-  @OneToOne(() => Task, (task) => task.i013f_i014t_seguimiento, { onUpdate: 'CASCADE', onDelete: 'CASCADE' })
-  @JoinColumn()
+  @OneToOne(() => Task, (task) => task.i013f_i014t_seguimiento)
   i014f_i013t_tarea: Task;
-
   @ApiProperty()
   @Column({ type: "integer" })
   nu_completado: number;

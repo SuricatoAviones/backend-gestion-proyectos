@@ -23,7 +23,8 @@ export const manyProjects = (args) => {
       border-bottom: 1px solid #ddd;
     }
     th {
-      background-color: #f2f2f2;
+      background-color: #201642;
+      color: white;
     }
   </style>
 </head>
@@ -110,7 +111,6 @@ export const singleProject = (data: Project) => {
         end_dates.push(s.fe_real_fin)
       }
     })
-    console.log(trackings)
     start = start_dates.reduce(function (a, b) { return a < b ? a : b; });
     end = end_dates.reduce(function (a, b) { return a > b ? a : b; });
   }
@@ -150,7 +150,7 @@ export const singleProject = (data: Project) => {
       border: 1px solid black;
     }
     th {
-      background-color: #2e184a;
+      background-color: #201642;
       color: white
     }
     .info {
@@ -166,15 +166,31 @@ export const singleProject = (data: Project) => {
     	text-align: center;
     }
     .make-bold {
-      font-weight: 400;
+      font-weight: 600;
+    }
+    .logo-simulate {
+    width: 300px;
+    height: 80px;
+    background-color: red;
+    }
+    .header-text {
+    font-size: 16px;
     }
   </style>
 </head>
 <body>
 
   <img src="${ /*Subir la imagen de pdvsa*/ true}./PDVSA-logo.png">
-  <h2>PDVSA - Sistema de Gestión de Portafolio de Proyectos</h2>
-  <p>Ubicación: Maturin, Monagas</p>
+  <div class="info">
+  <div class="logo-simulate"></div>
+  <div>
+  <p class="header-text">${(new Date().toLocaleDateString())}</p>
+    <p class="header-text">Ubicación: Maturin, Monagas</p>
+  </div>
+  </div>
+  
+  <p class="header-text">SGPP - Sistema de Gestión <br> de Protafolio de Proyectos</p>
+
 
   <h2 class='text-center'>Reporte: ${data.in_titulo}</h2>
   <div class='info'>

@@ -92,11 +92,11 @@ export class ProjectsService {
           },
           i003f_i005t_fase_entrada: true,
           i004i_datos_adi: true,
-          i003f_i013t_tareas: true // {
-          //   i013f_i014t_seguimiento: {
-          //     i014f_i015t_estado_tarea: true
-          //   },
-          // },
+          i003f_i013t_tareas:  {
+            i013f_i014t_seguimiento: {
+              i014f_i015t_estado_tarea: true
+            },
+          },
         },
       });
       if (!Project) throw new NotFoundException();
