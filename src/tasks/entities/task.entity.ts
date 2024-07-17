@@ -1,8 +1,9 @@
 
 import { ApiProperty } from "@nestjs/swagger";
 import { Project } from "src/projects/entities/project.entity";
+import { Tracking } from "src/trackings/entities/tracking.entity";
 import { User } from "src/users/entities/user.entity";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany, OneToOne } from "typeorm";
 
 
 @Entity({ name: 'i013t_tarea' })
@@ -24,4 +25,11 @@ export class Task {
   @ApiProperty()
   @Column({ length: 255 })
   description: string;
+
+  @ApiProperty()
+  @OneToOne(() => Tracking, (tracking) => tracking.i014f_i013t_tarea, {
+    cascade: true, eager: true,
+  })
+  @JoinColumn()
+  i013f_i014t_seguimiento: Tracking;
 }

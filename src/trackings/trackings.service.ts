@@ -25,8 +25,9 @@ export class TrackingsService {
         i014f_i015t_estado_tarea: createTrackingDto.i014f_i015t_estado_tarea,
         i014f_i013t_tarea: createTrackingDto.i014f_i013t_tarea,
       })
-      return new ResponseTrackingDto(await this.repository.save(tracking))
+      return this.findOne(tracking.i014i_seguimiento)
     } catch (error) {
+      console.log(error)
       throw new BadRequestException(error)
 
     }

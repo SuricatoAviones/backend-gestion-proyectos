@@ -5,10 +5,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ResponseProjectDto } from './dto/response-project.dto';
 import { Project } from './entities/project.entity';
+import { ReportsService } from 'src/reports/reports.service';
 @Injectable()
 export class ProjectsService {
   constructor(@InjectRepository(Project)
-  private repository: Repository<Project>) {
+  private repository: Repository<Project>,
+    private reportsService: ReportsService) {
 
   }
 
@@ -29,7 +31,7 @@ export class ProjectsService {
       })
       return new ResponseProjectDto(await this.repository.save(project))
     } catch (error) {
-           throw new BadRequestException(error)
+      throw new BadRequestException(error)
 
     }
   }
@@ -43,15 +45,26 @@ export class ProjectsService {
             i011f_i012t_fase_proyecto: true
           },
           i003f_i006t_estado_entrada: true,
-          i0003f_i008t_equipo_trabajo: true, // wtf
+          i0003f_i008t_equipo_trabajo: {
+            c008f_i001t_trabajador: true,
+            c008f_i009t_gerencia_funcional: true,
+            c008f_i009t_gerencia_galba: true,
+            c008f_i009t_gerencia_tecnica: true,
+            c008f_i001t_lider_funcional: true,
+            c008f_i001t_lider_negocio: true,
+            c008f_i001t_lider_tecnico: true,
+          },
           i003f_i005t_fase_entrada: true,
           i004i_datos_adi: true,
+          i003f_i013t_tareas: {
+            i013f_i014t_seguimiento: true,
+          }
         }
       });
       return data.map(project => new ResponseProjectDto(project))
     } catch (error) {
-           console.log(error);
-           throw new BadRequestException(error)
+      console.log(error);
+      throw new BadRequestException(error)
 
     }
   }
@@ -68,16 +81,29 @@ export class ProjectsService {
             i011f_i012t_fase_proyecto: true
           },
           i003f_i006t_estado_entrada: true,
-          i0003f_i008t_equipo_trabajo: true, // wtf
+          i0003f_i008t_equipo_trabajo: {
+            c008f_i001t_trabajador: true,
+            c008f_i009t_gerencia_funcional: true,
+            c008f_i009t_gerencia_galba: true,
+            c008f_i009t_gerencia_tecnica: true,
+            c008f_i001t_lider_funcional: true,
+            c008f_i001t_lider_negocio: true,
+            c008f_i001t_lider_tecnico: true,
+          },
           i003f_i005t_fase_entrada: true,
           i004i_datos_adi: true,
-        }
+          i003f_i013t_tareas: true // {
+          //   i013f_i014t_seguimiento: {
+          //     i014f_i015t_estado_tarea: true
+          //   },
+          // },
+        },
       });
       if (!Project) throw new NotFoundException();
       return new ResponseProjectDto(project)
     } catch (error) {
-           console.log(error)
-           throw new BadRequestException(error)
+      console.log(error)
+      throw new BadRequestException(error)
 
     }
   }
@@ -99,7 +125,7 @@ export class ProjectsService {
       })
       return this.findOne(i003i_entrada)
     } catch (error) {
-           throw new BadRequestException(error)
+      throw new BadRequestException(error)
 
     }
   }
@@ -110,8 +136,41 @@ export class ProjectsService {
       await this.repository.delete(i003i_entrada);
       return new ResponseProjectDto(project)
     } catch (error) {
-           throw new BadRequestException(error)
+      throw new BadRequestException(error)
 
     }
+  }
+
+  async printOne(project_id: number): Promise<any> {
+    const project = await this.findOne(project_id);
+    return await this.reportsService.singleProject(project)
+  }
+
+  async printMany(user_id: number): Promise<any> {
+    console.log('tetet')
+    const projects = await this.repository.find({
+      where: {
+        i0003f_i008t_equipo_trabajo: [
+          {
+            c008f_i001t_lider_funcional: {
+              i001i_usuario: user_id
+            }
+          },
+        {
+          c008f_i001t_lider_negocio: {
+            i001i_usuario: user_id,
+          }
+        },
+        {
+          c008f_i001t_lider_tecnico: {
+            i001i_usuario: user_id
+          },
+        }
+      ]
+      }
+    })
+    console.log(projects)
+    return 'test'
+    //return await this.reportsService.manyProjects(projects)
   }
 }

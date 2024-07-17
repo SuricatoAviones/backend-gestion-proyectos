@@ -2,10 +2,11 @@ import { ApiProperty } from "@nestjs/swagger";
 import { AdditionalDatum } from "src/additional-data/entities/additional-datum.entity";
 import { InputStatus } from "src/input-status/entities/input-status.entity";
 import { ProjectsPhase } from "src/projects-phase/entities/projects-phase.entity";
+import { Task } from "src/tasks/entities/task.entity";
 import { Team } from "src/teams/entities/team.entity";
 import { TechnicalArea } from "src/technical-areas/entities/technical-area.entity";
 import { TypeProject } from "src/type-projects/entities/type-project.entity";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne, OneToMany } from "typeorm";
 
 
 @Entity({ name: 'i003t_entrada' })
@@ -62,5 +63,9 @@ export class Project {
   @OneToOne(() => AdditionalDatum, (additionalDatum) => additionalDatum.i004i_datos_adi, { cascade: true })
   @JoinColumn()
   i004i_datos_adi: AdditionalDatum;
+
+  @ApiProperty()
+  @OneToMany(() => Task, (task) => task.i013f_i003t_entrada)
+  i003f_i013t_tareas: Task[];
 
 }

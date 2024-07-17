@@ -9,12 +9,12 @@ import { Task } from './entities/task.entity';
 @Injectable()
 export class TasksService {
   constructor(@InjectRepository(Task)
-  private repository: Repository<Task>){
+  private repository: Repository<Task>) {
 
   }
 
   async create(createTaskDto: CreateTaskDto): Promise<CreateTaskDto> {
-    
+
     try {
       const task = this.repository.create({
         description: createTaskDto.description,
@@ -24,7 +24,7 @@ export class TasksService {
       })
       return new ResponseTaskDto(await this.repository.save(task))
     } catch (error) {
-           throw new BadRequestException(error)
+      throw new BadRequestException(error)
 
     }
   }
@@ -40,14 +40,15 @@ export class TasksService {
             i003f_i005t_fase_entrada: true,
             i003f_i010t_area_tecnica: true,
             i003f_i006t_estado_entrada: true,
-            i004i_datos_adi: true
+            i004i_datos_adi: true,
           },
+          i013f_i014t_seguimiento: true,
         }
       });
       return data.map(projectP => new ResponseTaskDto(projectP))
     } catch (error) {
-           console.log(error)
-           throw new BadRequestException(error)
+      console.log(error)
+      throw new BadRequestException(error)
 
     }
   }
@@ -66,14 +67,16 @@ export class TasksService {
             i003f_i005t_fase_entrada: true,
             i003f_i010t_area_tecnica: true,
             i003f_i006t_estado_entrada: true,
-            i004i_datos_adi: true
+            i004i_datos_adi: true,
           },
+          i013f_i014t_seguimiento: true,
         }
       });
       if (!task) throw new NotFoundException();
       return new ResponseTaskDto(task)
     } catch (error) {
-           throw new BadRequestException(error)
+      console.log(error)
+      throw new BadRequestException(error)
 
     }
   }
@@ -88,7 +91,7 @@ export class TasksService {
       })
       return this.findOne(i013i_tarea);
     } catch (error) {
-           throw new BadRequestException(error)
+      throw new BadRequestException(error)
 
     }
   }
@@ -99,7 +102,7 @@ export class TasksService {
       await this.repository.delete(i013i_tarea);
       return new ResponseTaskDto(task)
     } catch (error) {
-           throw new BadRequestException(error)
+      throw new BadRequestException(error)
 
     }
   }

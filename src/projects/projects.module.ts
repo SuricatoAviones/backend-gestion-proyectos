@@ -9,9 +9,10 @@ import { Team } from 'src/teams/entities/team.entity';
 import { ProjectsPhase } from 'src/projects-phase/entities/projects-phase.entity';
 import { InputStatus } from 'src/input-status/entities/input-status.entity';
 import { AdditionalDatum } from 'src/additional-data/entities/additional-datum.entity';
+import { ReportsModule } from 'src/reports/reports.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Project, TechnicalArea, TypeProject, Team, ProjectsPhase, InputStatus, AdditionalDatum])],
+  imports: [TypeOrmModule.forFeature([Project, TechnicalArea, TypeProject, Team, ProjectsPhase, InputStatus, AdditionalDatum]), ReportsModule],
   controllers: [ProjectsController],
   providers: [ProjectsService],
 })

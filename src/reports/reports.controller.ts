@@ -5,13 +5,13 @@ import { ReportsService } from './reports.service';
 export class ReportsController {
   constructor(private readonly reportsService: ReportsService) {}
 
-  @Get()
-  getProjects() {
-    return this.reportsService.getProjects();
-  }
+  // @Get()
+  // getProjects() {
+  //   return this.reportsService.getProjects();
+  // }
 
-  @Get()
-  getProject() {
-    return this.reportsService.getProject();
-  }
+  // @Get()
+  // getProject() {
+  //   return this.reportsService.getProject();
+  // }
 }
