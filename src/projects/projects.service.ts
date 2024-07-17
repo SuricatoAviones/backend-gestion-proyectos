@@ -147,7 +147,6 @@ export class ProjectsService {
   }
 
   async printMany(user_id: number): Promise<any> {
-    console.log('tetet')
     const projects = await this.repository.find({
       where: {
         i0003f_i008t_equipo_trabajo: [
@@ -167,10 +166,31 @@ export class ProjectsService {
           },
         }
       ]
-      }
+      },
+      relations: {
+        i003f_i010t_area_tecnica: true,
+        i003f_i011_tipo_proyecto: {
+          i011f_i012t_fase_proyecto: true
+        },
+        i003f_i006t_estado_entrada: true,
+        i0003f_i008t_equipo_trabajo: {
+          c008f_i001t_trabajador: true,
+          c008f_i009t_gerencia_funcional: true,
+          c008f_i009t_gerencia_galba: true,
+          c008f_i009t_gerencia_tecnica: true,
+          c008f_i001t_lider_funcional: true,
+          c008f_i001t_lider_negocio: true,
+          c008f_i001t_lider_tecnico: true,
+        },
+        i003f_i005t_fase_entrada: true,
+        i004i_datos_adi: true,
+        i003f_i013t_tareas:  {
+          i013f_i014t_seguimiento: {
+            i014f_i015t_estado_tarea: true
+          },
+        },
+      },
     })
-    console.log(projects)
-    return 'test'
-    //return await this.reportsService.manyProjects(projects)
+    return this.reportsService.manyProjects(projects)
   }
 }

@@ -12,11 +12,10 @@ export class ReportsService {
   };
 
   async manyProjects(projects: Project[]) {
-
+   return this.print(manyTemplate(projects))
   }
 
   private async print(html: string) {
-    console.log(html)
     const filePath = `${process.cwd()}/files/report-${(new Date()).toISOString()
       .slice(0, -5)
       .replace('T', '_')

@@ -1,6 +1,37 @@
 import { Project } from "src/projects/entities/project.entity"
 
-export const manyProjects = (args) => {
+export const manyProjects = (data: Project[]) => {
+
+  let project_rows = ''
+  data.forEach(project => {
+    const tasks = project.i003f_i013t_tareas
+    const trackings = tasks.map(t => t.i013f_i014t_seguimiento).flat(1)
+    let start: Date, end: Date
+    if (trackings) {
+      const start_dates = []
+      const end_dates = []
+      trackings.forEach(s => {
+        if (s != null) {
+          start_dates.push(s.fe_plan_inicio)
+          end_dates.push(s.fe_plan_fin)
+        }
+      })
+      start = start_dates.reduce(function (a, b) { return a < b ? a : b; });
+      end = end_dates.reduce(function (a, b) { return a > b ? a : b; });
+    }
+      if (project != null) {
+      
+        project_rows += `<tr>
+          <td>${project.in_titulo}</td>
+          <td>${project.i003f_i006t_estado_entrada.in_nombre_estado}</td>
+          <td>${project.i003f_i010t_area_tecnica.in_nombre}</td>
+          <td>${project.i003f_i011_tipo_proyecto.i011i_tipo_proyecto}</td>
+          <td>${start}</td>
+        </tr>`
+      }
+ 
+  })
+  
   return `<!DOCTYPE html>
 <html>
 <head>
@@ -20,78 +51,68 @@ export const manyProjects = (args) => {
     }
     th, td {
       padding: 10px;
-      border-bottom: 1px solid #ddd;
+      border: 1px solid black;
     }
     th {
       background-color: #201642;
-      color: white;
+      color: white
+    }
+    .info {
+      display: flex;
+      justify-content: space-between
+    }
+    .margin-text {
+    	margin-left: 45px;
+    	text-align: justify;
+    	
+    }
+    .text-center {
+    	text-align: center;
+    }
+    .make-bold {
+      font-weight: 600;
+    }
+    .logo-simulate {
+    width: 300px;
+    height: 80px;
+    background-color: red;
+    }
+    .header-text {
+    font-size: 16px;
     }
   </style>
 </head>
 <body>
-  <h1>PDVSA - Sistema de Gestión de Portafolio de Proyectos</h1>
-  <p>Ubicación: Maturin, Monagas</p>
-  <h2>Reporte: TituloProyect0</h2>
-  <h3>Fase: Entrada</h3>
-  <p>Fechas:</p>
-  <ul>
-    <li>Inicio: XX/XX/xxxx</li>
-    <li>Fin: XWXWXXXX</li>
-  </ul>
-  <p>Descripción:</p>
-  <p>Lorem ipsum dolor sit amet cmsectetur elit_ Molestiae consequuntur asperiores vel
-  modi eum earum ratjuw eaque aut unam dignissimos quam faque, aspernatur quia</p>
+
+  <img src="${ /*Subir la imagen de pdvsa*/ true}./PDVSA-logo.png">
+  <div class="info">
+  <div class="logo-simulate"></div>
+  <div>
+  <p class="header-text">${(new Date().toLocaleDateString())}</p>
+    <p class="header-text">Ubicación: Maturin, Monagas</p>
+  </div>
+  </div>
   
-  
-  <p>Alcance:</p>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit Molestiae consequuntur asperiores vel
-  modi eum earum ratione eaque aut provident, ullam quarn taque, quia</p>
-  <p>Objetivo:</p>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit Molestiae consequuntur asperiores vel
-  modi eum earum ratione aut provident, ullam quam taque. aspernatur quia</p>
-  <h3>Tareas</h3>
+  <p class="header-text">SGPP - Sistema de Gestión <br> de Protafolio de Proyectos</p>
+
+
+  <h2 class='text-center'>Reporte General de Gestion</h2>
+
+  <h3>Proyectos: </h3>
   <table>
-    <tr>
+  <thead>
+  <tr>
       <th>Título</th>
       <th>Estado</th>
-      <th>Porcentaje de Cumplimiento</th>
-      <th>Área</th>
-      <th>Fecha de Inicio</th>
+      <th>Area Técnica</th>
+      <th>Tipo de Proyecto</th>
       <th>Fecha de Entrada</th>
-    </tr>
-    <tr>
-      <td>Tarea # I</td>
-      <td>Estado Id</td>
-      <td>Porcentaje de cumplimiento</td>
-      <td>Área Id</td>
-      <td>xxyxwxxxx</td>
-      <td>xx,rxxxxxx</td>
-    </tr>
-    <tr>
-      <td>Tarea #2</td>
-      <td>Estado Id</td>
-      <td>Porcentaje de cumplimiento</td>
-      <td>Área Id</td>
-      <td>xx»wxxxx</td>
-      <td>xx,rxwxxxx</td>
-    </tr>
-    <tr>
-      <td>Tarea</td>
-      <td>Estado Id</td>
-      <td>Porcentaje de cumplimiento</td>
-      <td>Área Id</td>
-      <td>xwxwxxxx</td>
-      <td>xwx.wxxxx</td>
-    </tr>
-    <tr>
-      <td>Tarea #4</td>
-      <td>Estado Id</td>
-      <td>Porcentaje de cumplimiento</td>
-      <td>Área Id</td>
-      <td>xwx.wxxxx</td>
-      <td>xwx.wxxxx</td>
-    </tr>
-  </table>
+  </tr>
+  </thead>
+  <tbody>
+  ${project_rows}
+  </tbody>
+    </table>
 </body>
 </html>
 `
@@ -108,7 +129,7 @@ export const singleProject = (data: Project) => {
     trackings.forEach(s => {
       if (s != null) {
         start_dates.push(s.fe_plan_inicio)
-        end_dates.push(s.fe_real_fin)
+        end_dates.push(s.fe_plan_fin)
       }
     })
     start = start_dates.reduce(function (a, b) { return a < b ? a : b; });
