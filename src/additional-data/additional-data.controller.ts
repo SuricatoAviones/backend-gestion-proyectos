@@ -9,44 +9,41 @@ import { diskStorage } from 'multer';
 @ApiBearerAuth()
 @Controller('additional-data')
 export class AdditionalDataController {
-  constructor(private readonly additionalDataService: AdditionalDataService) {}
+  constructor(private readonly additionalDataService: AdditionalDataService) { }
 
 
+
+  @ApiConsumes('multipart/form-data')
+  // @ApiBody({
+  // type: 'object',
+  // properties: {
+  //   tx_interfaz: { type: 'string' },
+  //   tx_interconexion: { type: 'string' },
+  //   tx_comentario: { type: 'string' },
+  //   tx_seguridad: { type: 'string' },
+  //   tx_datamodelo: {
+  //     type: 'string',
+  //     format: 'binary',
+  //   },
+  // },
+  //   },
+  // })
   @Post()
-   @ApiConsumes('multipart/form-data')
-  @ApiBody({
-    schema: {
-      type: 'string',
-      format: 'binary',
-      // type: 'object',
-      // properties: {
-      //   tx_interfaz: { type: 'string' },
-      //   tx_interconexion: { type: 'string' },
-      //   tx_comentario: { type: 'string' },
-      //   tx_seguridad: { type: 'string' },
-      //   tx_datamodelo: {
-      //     type: 'string',
-      //     format: 'binary',
-      //   },
-      // },
-    },
-  })
-  // @UseInterceptors(
-  //   FileInterceptor('file', {
-  //     storage: diskStorage({
-  //       destination: () => {const path =  `${process.cwd() + '/uploads'}` ;
-  //       console.log(path)
-  //       return path},
-  //       filename: function (req, file, cb) {
-  //         cb(null, file.originalname + '_' + Date.now());
-  //       },
-  //     }),
-  //   }),
-  // )
-  @UseInterceptors(@FileInterceptor('file'))
-  create(@UploadedFile() file: any) {
-    console.log(file)
-    // return this.additionalDataService.create(createAdditionalDatumDto);
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: './uploads/',
+        filename: function (req, file, cb) {
+          cb(null, Date.now() + '_' + file.originalname);
+        },
+      }),
+    }),
+  )
+
+  // @UseInterceptors(FileInterceptor('file'))
+  create(@Body() createAdditionalDatumDto: CreateAdditionalDatumDto, @UploadedFile() file?: any) {
+    createAdditionalDatumDto.tx_datamodelo = file.path
+    return this.additionalDataService.create(createAdditionalDatumDto);
   }
 
   @Get()

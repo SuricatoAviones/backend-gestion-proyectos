@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { Type } from "class-transformer";
 import { IsNotEmpty, IsString } from "class-validator";
 
 export class CreateAdditionalDatumDto {
@@ -11,7 +12,7 @@ export class CreateAdditionalDatumDto {
     @IsString()
     tx_interconexion : string;
     @ApiProperty()
-    @IsString()
+    @Type(()=> Buffer)
     tx_datamodelo: string;
     @ApiProperty()
     @IsNotEmpty()
