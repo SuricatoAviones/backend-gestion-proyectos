@@ -35,9 +35,9 @@ import { ReportsModule } from './reports/reports.module';
     database: 'gestionador',
     autoLoadEntities: true,
     synchronize: true,
-    // ssl:{
-    //   rejectUnauthorized: false
-    // }
+     ssl:{
+       rejectUnauthorized: false
+     }
     /* ssl: process.env.POSTGRES_SSL === "true",
       extra: {
         ssl:
