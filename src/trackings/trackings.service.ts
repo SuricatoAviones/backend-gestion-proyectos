@@ -14,7 +14,6 @@ export class TrackingsService {
   }
 
   async create(createTrackingDto: CreateTrackingDto): Promise<CreateTrackingDto> {
-
     try {
       const tracking = this.repository.create({
         nu_completado: createTrackingDto.nu_completado,
@@ -23,10 +22,12 @@ export class TrackingsService {
         fe_real_inicio: createTrackingDto.fe_real_inicio,
         fe_real_fin: createTrackingDto.fe_plan_fin,
         i014f_i015t_estado_tarea: createTrackingDto.i014f_i015t_estado_tarea,
-        i014f_i013t_tarea: createTrackingDto.i014f_i013t_tarea,
+        i014f_i013t_tarea: createTrackingDto.i014f_i013t_tarea
       })
-      return new ResponseTrackingDto(await this.repository.save(tracking))
+      const result = await this.repository.save(tracking)
+      return this.findOne(result.i014i_seguimiento)
     } catch (error) {
+      console.log(error)
       throw new BadRequestException(error)
 
     }
@@ -97,7 +98,6 @@ export class TrackingsService {
         fe_real_inicio: updateTrackingDto.fe_real_inicio,
         fe_real_fin: updateTrackingDto.fe_plan_fin,
         i014f_i015t_estado_tarea: updateTrackingDto.i014f_i015t_estado_tarea,
-        i014f_i013t_tarea: updateTrackingDto.i014f_i013t_tarea,
       })
       return this.findOne(i014i_seguimiento)
     } catch (error) {
