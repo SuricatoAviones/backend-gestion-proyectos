@@ -14,23 +14,9 @@ export class AdditionalDataController {
 
 
   @ApiConsumes('multipart/form-data')
-  // @ApiBody({
-  // type: 'object',
-  // properties: {
-  //   tx_interfaz: { type: 'string' },
-  //   tx_interconexion: { type: 'string' },
-  //   tx_comentario: { type: 'string' },
-  //   tx_seguridad: { type: 'string' },
-  //   tx_datamodelo: {
-  //     type: 'string',
-  //     format: 'binary',
-  //   },
-  // },
-  //   },
-  // })
   @Post()
   @UseInterceptors(
-    FileInterceptor('file', {
+    FileInterceptor('tx_datamodelo', {
       storage: diskStorage({
         destination: './uploads/',
         filename: function (req, file, cb) {
@@ -40,9 +26,8 @@ export class AdditionalDataController {
     }),
   )
 
-  // @UseInterceptors(FileInterceptor('file'))
-  create(@Body() createAdditionalDatumDto: CreateAdditionalDatumDto, @UploadedFile() file?: any) {
-    createAdditionalDatumDto.tx_datamodelo = file.path
+  create(@Body() createAdditionalDatumDto: CreateAdditionalDatumDto, @UploadedFile() tx_datamodelo?: any) {
+    createAdditionalDatumDto.tx_datamodelo = tx_datamodelo.path
     return this.additionalDataService.create(createAdditionalDatumDto);
   }
 

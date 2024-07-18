@@ -123,7 +123,7 @@ export const singleProject = (data: Project) => {
   const tasks = data.i003f_i013t_tareas
   const trackings = tasks.map(t => t.i013f_i014t_seguimiento).flat(1)
   let start: Date, end: Date
-  if (trackings) {
+  if (trackings.length) {
     const start_dates = []
     const end_dates = []
     trackings.forEach(s => {
