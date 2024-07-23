@@ -7,7 +7,7 @@ import { ProjectsPhase } from "src/projects-phase/entities/projects-phase.entity
 import { InputStatus } from "src/input-status/entities/input-status.entity";
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreateProjectDto {
     @ApiProperty()
@@ -27,26 +27,32 @@ export class CreateProjectDto {
     tx_alcance: string;
     @ApiProperty()
     @IsNotEmpty()
+    @IsOptional()
     @Type( () => ProjectsPhase)
     i003f_i005t_fase_entrada: ProjectsPhase;
     @ApiProperty()
     @IsNotEmpty()
+    @IsOptional()
     @Type( () => TechnicalArea)
     i003f_i010t_area_tecnica: TechnicalArea;
     @ApiProperty()
     @IsNotEmpty()
+    @IsOptional()
     @Type( () => TypeProject)
     i003f_i011_tipo_proyecto: TypeProject;
     @ApiProperty()
     @IsNotEmpty()
+    @IsOptional()
     @Type( () => InputStatus)
     i003f_i006t_estado_entrada: InputStatus;
     @ApiProperty()
     @IsNotEmpty()
+    @IsOptional()
     @Type( () => Team)
     i0003f_i008t_equipo_trabajo: Team;
     @ApiProperty()
     @IsNotEmpty()
+    @IsOptional()
     @Type( () => AdditionalDatum)
     i004i_datos_adi: AdditionalDatum;
 }
