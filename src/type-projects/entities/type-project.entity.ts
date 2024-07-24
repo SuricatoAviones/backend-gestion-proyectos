@@ -8,7 +8,7 @@ export class TypeProject {
   @PrimaryGeneratedColumn()
   i011i_tipo_proyecto: number;
    @ApiProperty()
-  @ManyToOne(() => ProjectsPhase, (projectsPhase) => projectsPhase.i012i_fase_proyecto)
+  @ManyToOne(() => ProjectsPhase, (projectsPhase) => projectsPhase.i012i_fase_proyecto, {cascade: true})
   i011f_i012t_fase_proyecto: ProjectsPhase;
    @ApiProperty()
   @Column({ length: 255 })

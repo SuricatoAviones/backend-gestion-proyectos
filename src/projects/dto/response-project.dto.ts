@@ -30,10 +30,10 @@ export class ResponseProjectDto {
     i003f_i006t_estado_entrada: InputStatus;
     i004i_datos_adi: AdditionalDatum
     i003f_i013t_tareas: Task[]
-
     constructor(data: Project) {
         this.i003i_entrada = data.i003i_entrada;
         this.co_entrada = data.co_entrada;
+        console.log(data.i003f_i011_tipo_proyecto)
         this.i003f_i011_tipo_proyecto = new ResponseTypeProjectDto(data.i003f_i011_tipo_proyecto);
         this.i003f_i010t_area_tecnica = new ResponseTechnicalAreaDto(data.i003f_i010t_area_tecnica)
         this.in_titulo = data.in_titulo

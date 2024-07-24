@@ -20,11 +20,11 @@ export class Project {
   co_entrada: string;
 
   @ApiProperty()
-  @ManyToOne(() => TechnicalArea, (technicalArea) => technicalArea.i010i_area_tecnica)
+  @ManyToOne(() => TechnicalArea, (technicalArea) => technicalArea.i010i_area_tecnica, {cascade: true})
   i003f_i010t_area_tecnica: TechnicalArea;
 
   @ApiProperty()
-  @ManyToOne(() => TypeProject, (typeProject) => typeProject.i011i_tipo_proyecto)
+  @ManyToOne(() => TypeProject, (typeProject) => typeProject.i011i_tipo_proyecto, {cascade: true})
   @JoinColumn()
   i003f_i011_tipo_proyecto: TypeProject;
 
@@ -50,12 +50,12 @@ export class Project {
   i0003f_i008t_equipo_trabajo: Team;
 
   @ApiProperty()
-  @ManyToOne(() => ProjectsPhase, (projectsPhase) => projectsPhase.i012i_fase_proyecto)
+  @ManyToOne(() => ProjectsPhase, (projectsPhase) => projectsPhase.i012i_fase_proyecto,{cascade: true})
   @JoinColumn()
   i003f_i005t_fase_entrada: ProjectsPhase;
 
   @ApiProperty()
-  @ManyToOne(() => InputStatus, (inputStatus) => inputStatus.i006i_estado_entrada)
+  @ManyToOne(() => InputStatus, (inputStatus) => inputStatus.i006i_estado_entrada,{cascade: true})
   @JoinColumn()
   i003f_i006t_estado_entrada: InputStatus;
 

@@ -19,7 +19,7 @@ export class User {
   @Column({ nullable: true })
   in_apellido: string;
  @ApiProperty()
-  @Column({ nullable: true })
+  @Column({ nullable: true,type: "bytea" })
   foto: string;
  @ApiProperty()
   @Column({ unique: true, nullable: false })
