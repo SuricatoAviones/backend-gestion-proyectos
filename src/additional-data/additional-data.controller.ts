@@ -14,6 +14,21 @@ export class AdditionalDataController {
 
   
   @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        tx_interfaz: { type: 'string' },
+        tx_interconexion: { type: 'string' },
+        tx_seguridad: { type: 'string' },
+        tx_comentario: { type: 'string' },
+        tx_datamodelo: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
   @Post()
   @UseInterceptors(
     FileInterceptor('tx_datamodelo', {
