@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { UsersService } from 'src/users/users.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
-import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 @ApiTags('Auth Module')
@@ -14,7 +14,24 @@ export class AuthController {
         private readonly userService: UsersService,
     ){}
 
-    @ApiConsumes('multipart/form-data')
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        in_usuario: { type: 'string' },
+        in_nombre: { type: 'string' },
+        in_apellido: { type: 'string' },
+        in_correo: { type: 'string' },
+        in_role: { type: 'string' },
+        password: { type: 'string' },
+        foto: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
   @Post('register')
   @UseInterceptors(
     FileInterceptor('foto', {
