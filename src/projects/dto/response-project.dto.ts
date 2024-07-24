@@ -33,7 +33,6 @@ export class ResponseProjectDto {
     constructor(data: Project) {
         this.i003i_entrada = data.i003i_entrada;
         this.co_entrada = data.co_entrada;
-        console.log(data.i003f_i011_tipo_proyecto)
         this.i003f_i011_tipo_proyecto = new ResponseTypeProjectDto(data.i003f_i011_tipo_proyecto);
         this.i003f_i010t_area_tecnica = new ResponseTechnicalAreaDto(data.i003f_i010t_area_tecnica)
         this.in_titulo = data.in_titulo
@@ -43,7 +42,7 @@ export class ResponseProjectDto {
         this.i0003f_i008t_equipo_trabajo = data.i0003f_i008t_equipo_trabajo ? new ResponseTeamDto(data.i0003f_i008t_equipo_trabajo): null
         this.i003f_i005t_fase_entrada = new ResponseProjectsPhaseDto(data.i003f_i005t_fase_entrada);
         this.i003f_i006t_estado_entrada = new ResponseInputStatusDto(data.i003f_i006t_estado_entrada);
-        this.i004i_datos_adi = new ResponseAdditionalDatumDto(data.i004i_datos_adi)
+        this.i004i_datos_adi = data.i004i_datos_adi ? new ResponseAdditionalDatumDto(data.i004i_datos_adi) : null
         this.i003f_i013t_tareas = data.i003f_i013t_tareas
     }
 
