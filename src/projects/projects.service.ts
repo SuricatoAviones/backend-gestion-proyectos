@@ -31,6 +31,7 @@ export class ProjectsService {
       })
       return new ResponseProjectDto(await this.repository.save(project))
     } catch (error) {
+      console.log(error)
       throw new BadRequestException(error)
 
     }

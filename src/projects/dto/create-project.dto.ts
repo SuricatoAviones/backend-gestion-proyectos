@@ -11,6 +11,7 @@ import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 import { Task } from "src/tasks/entities/task.entity";
 import { UserHistory } from "src/user-histories/entities/user-history.entity";
 import { Cost } from "src/costs/entities/cost.entity";
+import { PhaseInput } from "src/phase-inputs/entities/phase-input.entity";
 
 export class CreateProjectDto {
     @ApiProperty()
@@ -31,8 +32,8 @@ export class CreateProjectDto {
     @ApiProperty()
     @IsNotEmpty()
     @IsOptional()
-    @Type( () => ProjectsPhase)
-    i003f_i005t_fase_entrada: ProjectsPhase;
+    @Type( () => PhaseInput)
+    i003f_i005t_fase_entrada: PhaseInput;
     @ApiProperty()
     @IsNotEmpty()
     @IsOptional()

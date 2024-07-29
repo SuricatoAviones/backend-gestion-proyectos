@@ -2,6 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { AdditionalDatum } from "src/additional-data/entities/additional-datum.entity";
 import { Cost } from "src/costs/entities/cost.entity";
 import { InputStatus } from "src/input-status/entities/input-status.entity";
+import { PhaseInput } from "src/phase-inputs/entities/phase-input.entity";
 import { ProjectsPhase } from "src/projects-phase/entities/projects-phase.entity";
 import { Task } from "src/tasks/entities/task.entity";
 import { Team } from "src/teams/entities/team.entity";
@@ -52,9 +53,9 @@ export class Project {
   i0003f_i008t_equipo_trabajo: Team;
 
   @ApiProperty()
-  @ManyToOne(() => ProjectsPhase, (projectsPhase) => projectsPhase.i012i_fase_proyecto,{cascade: true, nullable: false})
+  @ManyToOne(() => PhaseInput, (projectsPhase) => projectsPhase.i0005i_fase_entrada,{cascade: true, nullable: false})
   @JoinColumn()
-  i003f_i005t_fase_entrada: ProjectsPhase;
+  i003f_i005t_fase_entrada: PhaseInput;
 
   @ApiProperty()
   @ManyToOne(() => InputStatus, (inputStatus) => inputStatus.i006i_estado_entrada,{cascade: true, nullable: false})

@@ -216,7 +216,7 @@ export const singleProject = (data: Project) => {
   <h2 class='text-center'>Reporte: ${data.in_titulo}</h2>
   <div class='info'>
     <div>
-  <p>Fase: ${data.i003f_i005t_fase_entrada.in_nombre}</p>
+  <p>Fase: ${data.i003f_i005t_fase_entrada.in_nombre_fase}</p>
   <p>Entrada: ${data.i003f_i006t_estado_entrada.in_nombre_estado}</p>
     </div>
     <div class="make-bold">

@@ -7,6 +7,7 @@ import { ResponseTeamDto } from "src/teams/dto/response-team.dto";
 import { ResponseProjectsPhaseDto } from "src/projects-phase/dto/response-project-phase.dto";
 import { ResponseInputStatusDto } from "src/input-status/dto/response-input-status.dto";
 import { ResponseUserHistoryDto } from "src/user-histories/dto/response-user-history.dto";
+import {ResponsePhaseInputDto} from "src/phase-inputs/dto/response-phase-input.dto"
 import { TechnicalArea } from "src/technical-areas/entities/technical-area.entity";
 import { TypeProject } from "src/type-projects/entities/type-project.entity";
 import { ResponseTypeProjectDto } from "src/type-projects/dto/response-type-projects.dto";
@@ -43,7 +44,7 @@ export class ResponseProjectDto {
         this.tx_alcance = data.tx_alcance;
         this.tx_objetivo = data.tx_objetivo;
         this.i0003f_i008t_equipo_trabajo = data.i0003f_i008t_equipo_trabajo ? new ResponseTeamDto(data.i0003f_i008t_equipo_trabajo): null
-        this.i003f_i005t_fase_entrada = new ResponseProjectsPhaseDto(data.i003f_i005t_fase_entrada);
+        this.i003f_i005t_fase_entrada = new ResponsePhaseInputDto(data.i003f_i005t_fase_entrada);
         this.i003f_i006t_estado_entrada = new ResponseInputStatusDto(data.i003f_i006t_estado_entrada);
         this.i004i_datos_adi = data.i004i_datos_adi ? new ResponseAdditionalDatumDto(data.i004i_datos_adi) : null
         this.i003f_i013t_tareas = data.i003f_i013t_tareas 
