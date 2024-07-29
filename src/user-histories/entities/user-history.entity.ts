@@ -29,5 +29,6 @@ export class UserHistory {
   @ApiProperty()
   @ManyToOne(() => Project, (project) => project.i003i_entrada)
   i003i_entrada: Project;
+  i013f_i003t_entrada: any;
 
 }

@@ -122,7 +122,7 @@ export class UserHistoriesService {
     try {
       const userHistory = await this.findOne(i007i_historia_usuario);
       await this.repository.delete(i007i_historia_usuario);
-      return new ResponseUserHistoryDto(userHistory)
+      return userHistory
     } catch (error) {
            throw new BadRequestException(error)
 

@@ -1,11 +1,13 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { AdditionalDatum } from "src/additional-data/entities/additional-datum.entity";
+import { Cost } from "src/costs/entities/cost.entity";
 import { InputStatus } from "src/input-status/entities/input-status.entity";
 import { ProjectsPhase } from "src/projects-phase/entities/projects-phase.entity";
 import { Task } from "src/tasks/entities/task.entity";
 import { Team } from "src/teams/entities/team.entity";
 import { TechnicalArea } from "src/technical-areas/entities/technical-area.entity";
 import { TypeProject } from "src/type-projects/entities/type-project.entity";
+import { UserHistory } from "src/user-histories/entities/user-history.entity";
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne, OneToMany } from "typeorm";
 
 
@@ -65,7 +67,16 @@ export class Project {
   i004i_datos_adi: AdditionalDatum;
 
   @ApiProperty()
-  @OneToMany(() => Task, (task) => task.i013f_i003t_entrada)
+  @OneToMany(() => Task, (task) => task.i013f_i003t_entrada, { cascade: true, nullable: true })
   i003f_i013t_tareas: Task[];
+
+  @ApiProperty()
+  @OneToMany(() => UserHistory, (user_history) => user_history.i013f_i003t_entrada, { cascade: true, nullable: true })
+  i003f_i007i_historia_usuario: UserHistory[];
+
+  @ApiProperty()
+  @OneToMany(() => Cost, (cost) => cost.i016f_i003t_entrada, { cascade: true, nullable: true })
+  i003f_i016i_costo: Cost[];
+
 
 }

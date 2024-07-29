@@ -8,6 +8,9 @@ import { InputStatus } from "src/input-status/entities/input-status.entity";
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import { Task } from "src/tasks/entities/task.entity";
+import { UserHistory } from "src/user-histories/entities/user-history.entity";
+import { Cost } from "src/costs/entities/cost.entity";
 
 export class CreateProjectDto {
     @ApiProperty()
@@ -55,4 +58,24 @@ export class CreateProjectDto {
     @IsOptional()
     @Type( () => AdditionalDatum)
     i004i_datos_adi: AdditionalDatum;
+
+    @ApiProperty()
+    @IsNotEmpty()
+    @IsOptional()
+    @Type( () => Task)
+    i003f_i013t_tareas: Task[];
+
+    @ApiProperty()
+    @IsNotEmpty()
+    @IsOptional()
+    @Type( () => UserHistory)
+    i003f_i007i_historia_usuario: UserHistory[];
+
+    @ApiProperty()
+    @IsNotEmpty()
+    @IsOptional()
+    @Type( () => Cost)
+    i003f_i016i_costo: Cost[];
+
+
 }
