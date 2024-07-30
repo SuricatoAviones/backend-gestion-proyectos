@@ -28,6 +28,9 @@ export class ProjectsService {
         i003f_i006t_estado_entrada: createProjectDto.i003f_i006t_estado_entrada,
         i0003f_i008t_equipo_trabajo: createProjectDto.i0003f_i008t_equipo_trabajo,
         i004i_datos_adi: createProjectDto.i004i_datos_adi,
+        i003f_i013t_tareas : createProjectDto.i003f_i013t_tareas,
+        i003f_i007i_historia_usuario : createProjectDto.i003f_i007i_historia_usuario ,
+        i003f_i016i_costo : createProjectDto.i003f_i016i_costo
       })
       return new ResponseProjectDto(await this.repository.save(project))
     } catch (error) {
@@ -59,7 +62,9 @@ export class ProjectsService {
           i004i_datos_adi: true,
           i003f_i013t_tareas: {
             i013f_i014t_seguimiento: true,
-          }
+          }, 
+          i003f_i007i_historia_usuario: true,
+          i003f_i016i_costo:true
         }
       });
       return data.map(project => new ResponseProjectDto(project))
@@ -98,6 +103,8 @@ export class ProjectsService {
               i014f_i015t_estado_tarea: true
             },
           },
+          i003f_i007i_historia_usuario: true,
+          i003f_i016i_costo:true
         },
       });
       if (!Project) throw new NotFoundException();
@@ -123,6 +130,9 @@ export class ProjectsService {
         i003f_i006t_estado_entrada: updateProjectDto.i003f_i006t_estado_entrada,
         i0003f_i008t_equipo_trabajo: updateProjectDto.i0003f_i008t_equipo_trabajo,
         i004i_datos_adi: updateProjectDto.i004i_datos_adi,
+        i003f_i013t_tareas : updateProjectDto.i003f_i013t_tareas,
+        i003f_i007i_historia_usuario : updateProjectDto.i003f_i007i_historia_usuario ,
+        i003f_i016i_costo : updateProjectDto.i003f_i016i_costo
       })
       return this.findOne(i003i_entrada)
     } catch (error) {
@@ -190,6 +200,8 @@ export class ProjectsService {
             i014f_i015t_estado_tarea: true
           },
         },
+        i003f_i007i_historia_usuario: true,
+        i003f_i016i_costo:true
       },
     })
     return this.reportsService.manyProjects(projects)

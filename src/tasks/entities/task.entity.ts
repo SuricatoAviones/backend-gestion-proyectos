@@ -20,10 +20,10 @@ export class Task {
   @JoinColumn()
   i013f_i003t_entrada: Project;
   @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255, nullable: true })
   tx_descripcion: string;
   @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255, nullable: true })
   description: string;
 
   @ApiProperty()
