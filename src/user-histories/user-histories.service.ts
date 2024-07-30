@@ -22,7 +22,7 @@ export class UserHistoriesService {
         tx_rol: createUserHistoryDto.tx_rol,
         tx_funcionalidad: createUserHistoryDto.tx_funcionalidad,
         tx_criterio: createUserHistoryDto.tx_criterio,
-        i003i_entrada: createUserHistoryDto.i003i_entrada
+        i013f_i003t_entrada: createUserHistoryDto.i013f_i003t_entrada
 
       })
       return new ResponseUserHistoryDto(await this.repository.save(userHistory))
@@ -36,7 +36,7 @@ export class UserHistoriesService {
     try {
       const data = await this.repository.find({
         relations: {
-          i003i_entrada: {
+          i013f_i003t_entrada: {
             i003f_i010t_area_tecnica: true,
             i003f_i011_tipo_proyecto: {
               i011f_i012t_fase_proyecto: true
@@ -50,7 +50,7 @@ export class UserHistoriesService {
               c008f_i001t_lider_funcional: true,
               c008f_i001t_lider_negocio: true,
               c008f_i001t_lider_tecnico: true,
-            }, // wtf
+            },
             i003f_i005t_fase_entrada: true,
             i004i_datos_adi: true,
           },
@@ -71,7 +71,7 @@ export class UserHistoriesService {
           i007i_historia_usuario,
         },
         relations: {
-          i003i_entrada: {
+          i013f_i003t_entrada: {
             i003f_i010t_area_tecnica: true,
             i003f_i011_tipo_proyecto: {
               i011f_i012t_fase_proyecto: true
@@ -108,7 +108,7 @@ export class UserHistoriesService {
         tx_rol: updateUserHistoryDto.tx_rol,
         tx_funcionalidad: updateUserHistoryDto.tx_funcionalidad,
         tx_criterio: updateUserHistoryDto.tx_criterio,
-        i003i_entrada: updateUserHistoryDto.i003i_entrada
+        i013f_i003t_entrada: updateUserHistoryDto.i013f_i003t_entrada
 
       })
       return this.findOne(i007i_historia_usuario)

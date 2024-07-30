@@ -29,7 +29,6 @@ export class UserHistory {
   @ApiProperty()
   @JoinColumn()
   @ManyToOne(() => Project, (project) => project.i003i_entrada)
-  i003i_entrada: Project;
-  i013f_i003t_entrada: any;
+  i013f_i003t_entrada: Project;
 
 }

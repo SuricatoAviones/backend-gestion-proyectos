@@ -25,7 +25,7 @@ export class CreateUserHistoryDto {
   @ApiProperty()
   @IsNotEmpty()
   @Type( () => Project)
-  i003i_entrada: Project;
+  i013f_i003t_entrada: Project;
 
 
 }

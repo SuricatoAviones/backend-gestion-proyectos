@@ -10,7 +10,7 @@ export class ResponseUserHistoryDto {
     tx_rol: string;
     tx_funcionalidad: string;
     tx_criterio: string;
-    i003i_entrada: Project;
+    i013f_i003t_entrada: Project;
 
 
     constructor(data: UserHistory) {
@@ -21,7 +21,7 @@ export class ResponseUserHistoryDto {
         this.tx_rol = data.tx_rol;
         this.tx_funcionalidad = data.tx_funcionalidad;
         this.tx_criterio = data.tx_criterio;
-        this.i003i_entrada = new ResponseProjectDto(data.i003i_entrada);
+        this.i013f_i003t_entrada = new ResponseProjectDto(data.i013f_i003t_entrada);
 
     }
 }
