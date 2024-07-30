@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Project } from "src/projects/entities/project.entity";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 
 
 @Entity({ name: 'i007t_historia_usuario' })
@@ -27,6 +27,7 @@ export class UserHistory {
   @Column({ length: 255 })
   tx_criterio: string;
   @ApiProperty()
+  @JoinColumn()
   @ManyToOne(() => Project, (project) => project.i003i_entrada)
   i003i_entrada: Project;
   i013f_i003t_entrada: any;
