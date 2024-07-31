@@ -35,7 +35,6 @@ export class ResponseProjectDto {
     i003f_i007i_historia_usuario: UserHistory[]
     i003f_i016i_costo: Cost[]
     constructor(data: Project) {
-        console.log(data);
         this.i003i_entrada = data.i003i_entrada;
         this.co_entrada = data.co_entrada;
         this.i003f_i011_tipo_proyecto = new ResponseTypeProjectDto(data.i003f_i011_tipo_proyecto);
