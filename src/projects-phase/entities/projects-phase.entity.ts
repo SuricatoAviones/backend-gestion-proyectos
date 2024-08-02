@@ -8,9 +8,9 @@ export class ProjectsPhase {
   @PrimaryGeneratedColumn()
   i012i_fase_proyecto: number;
   @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255 , nullable:true })
   in_nombre: string;
   @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255 , nullable:true})
   tx_descripcion: string;
 }

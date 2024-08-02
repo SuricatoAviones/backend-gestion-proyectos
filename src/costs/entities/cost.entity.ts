@@ -10,15 +10,15 @@ export class Cost {
   i016i_costo: number;
   
   @ApiProperty()
-  @ManyToOne(() => Project, (project) => project.i003i_entrada)
+  @ManyToOne(() => Project, (project) => project.i003i_entrada , { nullable:true})
   @JoinColumn()
   i016f_i003t_entrada: Project;
 
   @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255, nullable:true })
   in_titulo: string;
   
   @ApiProperty()
-  @Column({ type: "decimal", precision: 10, scale: 2 })
+  @Column({ type: "decimal", precision: 10, scale: 2, nullable:true })
   nu_monto: number;
 }

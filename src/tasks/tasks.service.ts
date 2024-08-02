@@ -20,7 +20,8 @@ export class TasksService {
         description: createTaskDto.description,
         tx_descripcion: createTaskDto.tx_descripcion,
         i013f_i001t_usuario: createTaskDto.i013f_i001t_usuario,
-        i013f_i003t_entrada: createTaskDto.i013f_i003t_entrada
+        i013f_i003t_entrada: createTaskDto.i013f_i003t_entrada,
+        i013f_i014t_seguimiento: createTaskDto.i013f_i014t_seguimiento
       })
       return new ResponseTaskDto(await this.repository.save(task))
     } catch (error) {
@@ -69,6 +70,7 @@ export class TasksService {
             i003f_i006t_estado_entrada: true,
             i003f_i004t_datos_adi: true,
           },
+          i013f_i014t_seguimiento: true
         }
       });
       if (!task) throw new NotFoundException();
@@ -87,6 +89,7 @@ export class TasksService {
         tx_descripcion: updateTaskDto.tx_descripcion,
         i013f_i001t_usuario: updateTaskDto.i013f_i001t_usuario,
         i013f_i003t_entrada: updateTaskDto.i013f_i003t_entrada,
+        i013f_i014t_seguimiento: updateTaskDto.i013f_i014t_seguimiento
       })
       return this.findOne(i013i_tarea);
     } catch (error) {

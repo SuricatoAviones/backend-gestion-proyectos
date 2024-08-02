@@ -16,18 +16,28 @@ import { PhaseInput } from "src/phase-inputs/entities/phase-input.entity";
 export class CreateProjectDto {
     @ApiProperty()
     @IsString()
+    @IsOptional()
+
     co_entrada: string;
     @ApiProperty()
     @IsString()
+    @IsOptional()
+
     in_titulo: string;
     @ApiProperty()
     @IsString()
+    @IsOptional()
+
     tx_descripcion: string;
     @ApiProperty()
     @IsString()
+    @IsOptional()
+
     tx_objetivo: string;
     @ApiProperty()
     @IsString()
+    @IsOptional()
+
     tx_alcance: string;
     @ApiProperty()
     @IsNotEmpty()

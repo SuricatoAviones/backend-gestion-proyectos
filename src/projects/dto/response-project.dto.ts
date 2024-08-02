@@ -37,8 +37,8 @@ export class ResponseProjectDto {
     constructor(data: Project) {
         this.i003i_entrada = data.i003i_entrada;
         this.co_entrada = data.co_entrada;
-        this.i003f_i011_tipo_proyecto = new ResponseTypeProjectDto(data.i003f_i011_tipo_proyecto);
-        this.i003f_i010t_area_tecnica = new ResponseTechnicalAreaDto(data.i003f_i010t_area_tecnica)
+        this.i003f_i011_tipo_proyecto = data.i003f_i011_tipo_proyecto ? new ResponseTypeProjectDto(data.i003f_i011_tipo_proyecto) : null;
+        this.i003f_i010t_area_tecnica = data.i003f_i010t_area_tecnica ? new ResponseTechnicalAreaDto(data.i003f_i010t_area_tecnica): null
         this.in_titulo = data.in_titulo
         this.tx_descripcion = data.tx_descripcion;
         this.tx_alcance = data.tx_alcance;

@@ -43,6 +43,6 @@ export class Team {
   @JoinColumn({ name: 'c008f_i001t_trabajador' })
   c008f_i001t_trabajador: User;
   @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255, nullable: true })
   in_cargo: string;
 }

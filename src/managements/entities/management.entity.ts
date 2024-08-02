@@ -8,10 +8,10 @@ export class Management {
   i009i_gerencia: number;
   
   @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255,  nullable:true })
   in_nombre: string;
 
   @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255 , nullable:true})
   tx_descripcion : string;
 }

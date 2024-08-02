@@ -9,22 +9,22 @@ export class AdditionalDatum {
     i004i_datos_adi: number;
 
     @ApiProperty()
-    @Column({ length: 255 })
+    @Column({ length: 255,  nullable:true })
     tx_interfaz: string;
 
     @ApiProperty()
-    @Column({ length: 255 })
+    @Column({ length: 255,  nullable:true })
     tx_interconexion: string;
 
     @ApiProperty()
-    @Column({ type: "bytea" })
+    @Column({ type: "bytea",  nullable:true })
     tx_datamodelo: string;
 
     @ApiProperty()
-    @Column({ length: 255 })
+    @Column({ length: 255,  nullable:true })
     tx_seguridad: string;
     
     @ApiProperty()
-    @Column({ length: 255 })
+    @Column({ length: 255,  nullable:true })
     tx_comentario: string;
 }

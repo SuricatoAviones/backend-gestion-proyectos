@@ -57,7 +57,6 @@ export class ManagementsService {
         in_nombre: updateManagementDto.in_nombre,
         tx_descripcion: updateManagementDto.tx_descripcion
       })
-      console.log(management)
       return this.findOne(i009i_gerencia)
     } catch (error) {
       console.log(error)
