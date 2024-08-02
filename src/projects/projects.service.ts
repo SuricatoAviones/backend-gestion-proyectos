@@ -27,7 +27,7 @@ export class ProjectsService {
         i003f_i011_tipo_proyecto: createProjectDto.i003f_i011_tipo_proyecto,
         i003f_i006t_estado_entrada: createProjectDto.i003f_i006t_estado_entrada,
         i0003f_i008t_equipo_trabajo: createProjectDto.i0003f_i008t_equipo_trabajo,
-        i004i_datos_adi: createProjectDto.i004i_datos_adi,
+        i003f_i004t_datos_adi: createProjectDto.i003f_i004t_datos_adi,
         i003f_i013t_tareas : createProjectDto.i003f_i013t_tareas,
         i003f_i007i_historia_usuario : createProjectDto.i003f_i007i_historia_usuario ,
         i003f_i016i_costo : createProjectDto.i003f_i016i_costo
@@ -59,7 +59,7 @@ export class ProjectsService {
             c008f_i001t_lider_tecnico: true,
           },
           i003f_i005t_fase_entrada: true,
-          i004i_datos_adi: true,
+          i003f_i004t_datos_adi: true,
           i003f_i013t_tareas: {
             i013f_i014t_seguimiento: true,
           }, 
@@ -97,7 +97,7 @@ export class ProjectsService {
             c008f_i001t_lider_tecnico: true,
           },
           i003f_i005t_fase_entrada: true,
-          i004i_datos_adi: true,
+          i003f_i004t_datos_adi: true,
           i003f_i013t_tareas:  {
             i013f_i014t_seguimiento: {
               i014f_i015t_estado_tarea: true
@@ -118,7 +118,9 @@ export class ProjectsService {
 
   async update(i003i_entrada: number, updateProjectDto: UpdateProjectDto): Promise<UpdateProjectDto> {
     try {
-      const project = await this.repository.update(i003i_entrada, {
+      await this.findOne(i003i_entrada);
+      const project = await this.repository.save({
+        i003i_entrada,
         co_entrada: updateProjectDto.co_entrada,
         in_titulo: updateProjectDto.in_titulo,
         tx_alcance: updateProjectDto.tx_alcance,
@@ -129,13 +131,15 @@ export class ProjectsService {
         i003f_i011_tipo_proyecto: updateProjectDto.i003f_i011_tipo_proyecto,
         i003f_i006t_estado_entrada: updateProjectDto.i003f_i006t_estado_entrada,
         i0003f_i008t_equipo_trabajo: updateProjectDto.i0003f_i008t_equipo_trabajo,
-        i004i_datos_adi: updateProjectDto.i004i_datos_adi,
+        i003f_i004t_datos_adi: updateProjectDto.i003f_i004t_datos_adi,
         i003f_i013t_tareas : updateProjectDto.i003f_i013t_tareas,
         i003f_i007i_historia_usuario : updateProjectDto.i003f_i007i_historia_usuario ,
         i003f_i016i_costo : updateProjectDto.i003f_i016i_costo
       })
+      console.log(project)
       return this.findOne(i003i_entrada)
     } catch (error) {
+      console.log(error);
       throw new BadRequestException(error)
 
     }
@@ -194,7 +198,7 @@ export class ProjectsService {
           c008f_i001t_lider_tecnico: true,
         },
         i003f_i005t_fase_entrada: true,
-        i004i_datos_adi: true,
+        i003f_i004t_datos_adi: true,
         i003f_i013t_tareas:  {
           i013f_i014t_seguimiento: {
             i014f_i015t_estado_tarea: true
