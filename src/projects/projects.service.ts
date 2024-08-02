@@ -136,6 +136,7 @@ export class ProjectsService {
       })
       return this.findOne(i003i_entrada)
     } catch (error) {
+      console.log(error)
       throw new BadRequestException(error)
 
     }
