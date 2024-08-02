@@ -134,6 +134,8 @@ export class ProjectsService {
         i003f_i007i_historia_usuario : updateProjectDto.i003f_i007i_historia_usuario ,
         i003f_i016i_costo : updateProjectDto.i003f_i016i_costo
       })
+      console.log( updateProjectDto.i004i_datos_adi)
+      
       return this.findOne(i003i_entrada)
     } catch (error) {
       console.log(error)
