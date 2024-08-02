@@ -68,7 +68,7 @@ export class CreateProjectDto {
     @IsNotEmpty()
     @IsOptional()
     @Type( () => AdditionalDatum)
-    i004i_datos_adi: AdditionalDatum;
+    i003f_i004t_datos_adi: AdditionalDatum;
 
     @ApiProperty()
     @IsNotEmpty()

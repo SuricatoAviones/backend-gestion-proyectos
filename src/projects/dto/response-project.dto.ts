@@ -30,7 +30,7 @@ export class ResponseProjectDto {
     i0003f_i008t_equipo_trabajo: Team;
     i003f_i005t_fase_entrada: any;
     i003f_i006t_estado_entrada: InputStatus;
-    i004i_datos_adi: AdditionalDatum
+    i003f_i004t_datos_adi: AdditionalDatum
     i003f_i013t_tareas: Task[]
     i003f_i007i_historia_usuario: UserHistory[]
     i003f_i016i_costo: Cost[]
@@ -43,10 +43,10 @@ export class ResponseProjectDto {
         this.tx_descripcion = data.tx_descripcion;
         this.tx_alcance = data.tx_alcance;
         this.tx_objetivo = data.tx_objetivo;
-        this.i0003f_i008t_equipo_trabajo = data.i0003f_i008t_equipo_trabajo ? data.i0003f_i008t_equipo_trabajo : null;
-        this.i003f_i005t_fase_entrada = data.i003f_i005t_fase_entrada ? new ResponsePhaseInputDto(data.i003f_i005t_fase_entrada) : null;
-        this.i003f_i006t_estado_entrada =data.i003f_i006t_estado_entrada ? new ResponseInputStatusDto(data.i003f_i006t_estado_entrada) : null;
-        this.i004i_datos_adi = data.i004i_datos_adi ? new ResponseAdditionalDatumDto(data.i004i_datos_adi) : null;
+        this.i0003f_i008t_equipo_trabajo = data.i0003f_i008t_equipo_trabajo ? new ResponseTeamDto(data.i0003f_i008t_equipo_trabajo): null
+        this.i003f_i005t_fase_entrada = new ResponsePhaseInputDto(data.i003f_i005t_fase_entrada);
+        this.i003f_i006t_estado_entrada = new ResponseInputStatusDto(data.i003f_i006t_estado_entrada);
+        this.i003f_i004t_datos_adi = data.i003f_i004t_datos_adi ? new ResponseAdditionalDatumDto(data.i003f_i004t_datos_adi) : null;
         this.i003f_i013t_tareas = data.i003f_i013t_tareas 
         this.i003f_i007i_historia_usuario = data.i003f_i007i_historia_usuario 
         this.i003f_i016i_costo = data.i003f_i016i_costo

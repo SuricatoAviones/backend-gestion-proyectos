@@ -45,7 +45,7 @@ export class TrackingsService {
               i003f_i005t_fase_entrada: true,
               i003f_i010t_area_tecnica: true,
               i003f_i006t_estado_entrada: true,
-              i004i_datos_adi: true
+              i003f_i004t_datos_adi: true
             }
           },
           i014f_i015t_estado_tarea: true,
@@ -74,7 +74,7 @@ export class TrackingsService {
               i003f_i005t_fase_entrada: true,
               i003f_i010t_area_tecnica: true,
               i003f_i006t_estado_entrada: true,
-              i004i_datos_adi: true
+              i003f_i004t_datos_adi: true
             }
           },
           i014f_i015t_estado_tarea: true,

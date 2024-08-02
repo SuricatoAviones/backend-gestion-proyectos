@@ -48,7 +48,7 @@ export class CostsService {
               c008f_i001t_lider_tecnico: true,
             }, // wtf
             i003f_i005t_fase_entrada: true,
-            i004i_datos_adi: true,
+            i003f_i004t_datos_adi: true,
           },
         }
       })
@@ -83,7 +83,7 @@ export class CostsService {
               c008f_i001t_lider_tecnico: true,
             }, // wtf
             i003f_i005t_fase_entrada: true,
-            i004i_datos_adi: true,
+            i003f_i004t_datos_adi: true,
           },
         }
       })
