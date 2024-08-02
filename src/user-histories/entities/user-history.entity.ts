@@ -12,23 +12,23 @@ export class UserHistory {
   @Column({ unique: true })
   co_historia: string;
   @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255, nullable:true })
   in_titulo: string;
   @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255, nullable:true })
   tx_descripcion: string;
   @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255, nullable:true })
   tx_rol: string;
   @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255, nullable:true })
   tx_funcionalidad: string;
   @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255, nullable:true })
   tx_criterio: string;
   @ApiProperty()
   @JoinColumn()
-  @ManyToOne(() => Project, (project) => project.i003i_entrada)
+  @ManyToOne(() => Project, (project) => project.i003i_entrada, { nullable:true})
   i013f_i003t_entrada: Project;
 
 }

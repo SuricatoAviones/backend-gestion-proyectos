@@ -37,15 +37,15 @@ export class ResponseProjectDto {
     constructor(data: Project) {
         this.i003i_entrada = data.i003i_entrada;
         this.co_entrada = data.co_entrada;
-        this.i003f_i011_tipo_proyecto = new ResponseTypeProjectDto(data.i003f_i011_tipo_proyecto);
-        this.i003f_i010t_area_tecnica = new ResponseTechnicalAreaDto(data.i003f_i010t_area_tecnica)
+        this.i003f_i011_tipo_proyecto = data.i003f_i011_tipo_proyecto ? new ResponseTypeProjectDto(data.i003f_i011_tipo_proyecto) : null;
+        this.i003f_i010t_area_tecnica = data.i003f_i010t_area_tecnica ? new ResponseTechnicalAreaDto(data.i003f_i010t_area_tecnica): null
         this.in_titulo = data.in_titulo
         this.tx_descripcion = data.tx_descripcion;
         this.tx_alcance = data.tx_alcance;
         this.tx_objetivo = data.tx_objetivo;
-        this.i0003f_i008t_equipo_trabajo = data.i0003f_i008t_equipo_trabajo 
-        this.i003f_i005t_fase_entrada = new ResponsePhaseInputDto(data.i003f_i005t_fase_entrada);
-        this.i003f_i006t_estado_entrada = new ResponseInputStatusDto(data.i003f_i006t_estado_entrada);
+        this.i0003f_i008t_equipo_trabajo = data.i0003f_i008t_equipo_trabajo ? data.i0003f_i008t_equipo_trabajo : null;
+        this.i003f_i005t_fase_entrada = data.i003f_i005t_fase_entrada ? new ResponsePhaseInputDto(data.i003f_i005t_fase_entrada) : null;
+        this.i003f_i006t_estado_entrada =data.i003f_i006t_estado_entrada ? new ResponseInputStatusDto(data.i003f_i006t_estado_entrada) : null;
         this.i004i_datos_adi = data.i004i_datos_adi ? new ResponseAdditionalDatumDto(data.i004i_datos_adi) : null;
         this.i003f_i013t_tareas = data.i003f_i013t_tareas 
         this.i003f_i007i_historia_usuario = data.i003f_i007i_historia_usuario 

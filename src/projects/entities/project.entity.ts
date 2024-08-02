@@ -23,28 +23,28 @@ export class Project {
   co_entrada: string;
 
   @ApiProperty()
-  @ManyToOne(() => TechnicalArea, (technicalArea) => technicalArea.i010i_area_tecnica, {cascade: true, nullable:false})
+  @ManyToOne(() => TechnicalArea, (technicalArea) => technicalArea.i010i_area_tecnica, {cascade: true, nullable:true})
   i003f_i010t_area_tecnica: TechnicalArea;
 
   @ApiProperty()
-  @ManyToOne(() => TypeProject, (typeProject) => typeProject.i011i_tipo_proyecto, {cascade: true, nullable:false} )
+  @ManyToOne(() => TypeProject, (typeProject) => typeProject.i011i_tipo_proyecto, {cascade: true, nullable:true} )
   @JoinColumn()
   i003f_i011_tipo_proyecto: TypeProject;
 
   @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255, nullable:true })
   in_titulo: string;
 
   @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255, nullable:true})
   tx_descripcion: string;
 
   @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255, nullable:true })
   tx_objetivo: string;
 
   @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255, nullable:true })
   tx_alcance: string;
 
   @ApiProperty()
@@ -53,12 +53,12 @@ export class Project {
   i0003f_i008t_equipo_trabajo: Team;
 
   @ApiProperty()
-  @ManyToOne(() => PhaseInput, (projectsPhase) => projectsPhase.i0005i_fase_entrada,{cascade: true, nullable: false})
+  @ManyToOne(() => PhaseInput, (projectsPhase) => projectsPhase.i0005i_fase_entrada,{cascade: true, nullable: true})
   @JoinColumn()
   i003f_i005t_fase_entrada: PhaseInput;
 
   @ApiProperty()
-  @ManyToOne(() => InputStatus, (inputStatus) => inputStatus.i006i_estado_entrada,{cascade: true, nullable: false})
+  @ManyToOne(() => InputStatus, (inputStatus) => inputStatus.i006i_estado_entrada,{cascade: true, nullable: true})
   @JoinColumn()
   i003f_i006t_estado_entrada: InputStatus;
 

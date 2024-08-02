@@ -8,10 +8,10 @@ export class PhaseInput {
   i0005i_fase_entrada: number;
 
   @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255, nullable:true })
   in_nombre_fase : string;
 
   @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255, nullable:true })
   tx_descripcion_fase : string;
 }

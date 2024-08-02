@@ -11,9 +11,9 @@ export class TypeProject {
   @ManyToOne(() => ProjectsPhase, (projectsPhase) => projectsPhase.i012i_fase_proyecto, {cascade: true,  nullable: true })
   i011f_i012t_fase_proyecto: ProjectsPhase;
    @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255,  nullable:true })
   in_nombre: string;
    @ApiProperty()
-  @Column({ length: 255 })
+  @Column({ length: 255,  nullable:true })
   tx_descripcion: string;
 }
