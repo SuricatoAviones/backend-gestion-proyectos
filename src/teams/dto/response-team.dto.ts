@@ -18,12 +18,12 @@ export class ResponseTeamDto {
     constructor(data: Team) {
         this.c008i_equipo_trabajo = data.c008i_equipo_trabajo;
         this.in_cargo = data.in_cargo;
-        this.c008f_i001t_lider_funcional = new ResponseUserDto(data.c008f_i001t_lider_funcional);
-        this.c008f_i001t_lider_negocio =  new ResponseUserDto(data.c008f_i001t_lider_negocio);
-        this.c008f_i001t_lider_tecnico = new ResponseUserDto(data.c008f_i001t_lider_tecnico);
-        this.c008f_i001t_trabajador = new ResponseUserDto(data.c008f_i001t_trabajador);
-        this.c008f_i009t_gerencia_funcional = new ResponseManagementDto(data.c008f_i009t_gerencia_funcional);
-        this.c008f_i009t_gerencia_galba = new ResponseManagementDto(data.c008f_i009t_gerencia_galba);
-        this.c008f_i009t_gerencia_tecnica = new ResponseManagementDto(data.c008f_i009t_gerencia_tecnica)
+        this.c008f_i001t_lider_funcional = data.c008f_i001t_lider_funcional ? new ResponseUserDto(data.c008f_i001t_lider_funcional) : null;
+        this.c008f_i001t_lider_negocio = data.c008f_i001t_lider_negocio ? new ResponseUserDto(data.c008f_i001t_lider_negocio) : null;
+        this.c008f_i001t_lider_tecnico  =data.c008f_i001t_lider_tecnico ? new ResponseUserDto(data.c008f_i001t_lider_tecnico) : null;
+        this.c008f_i001t_trabajador = data.c008f_i001t_trabajador? new ResponseUserDto(data.c008f_i001t_trabajador) : null;
+        this.c008f_i009t_gerencia_funcional = data.c008f_i009t_gerencia_funcional ? new ResponseManagementDto(data.c008f_i009t_gerencia_funcional) : null;
+        this.c008f_i009t_gerencia_galba = data.c008f_i009t_gerencia_galba ? new ResponseManagementDto(data.c008f_i009t_gerencia_galba) : null;
+        this.c008f_i009t_gerencia_tecnica = data.c008f_i009t_gerencia_tecnica  ? new ResponseManagementDto(data.c008f_i009t_gerencia_tecnica) : null
     }
 }
