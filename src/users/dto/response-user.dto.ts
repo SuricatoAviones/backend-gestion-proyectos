@@ -10,6 +10,7 @@ export class ResponseUserDto {
     password: string;
     foto: string;
     deletedAt: Date;
+    createdAt: Date;
 
     constructor (data: User) {
       this.i001i_usuario = data.i001i_usuario;
@@ -21,6 +22,7 @@ export class ResponseUserDto {
       this.password = data.password;
       this.foto = data.foto;
       this.deletedAt = data.deletedAt;
+      this.createdAt = data.createdAt;
 
     }
 }
