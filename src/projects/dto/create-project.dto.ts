@@ -64,6 +64,7 @@ export class CreateProjectDto {
     @IsOptional()
     @Type( () => Team)
     i0003f_i008t_equipo_trabajo: Team;
+    
     @ApiProperty()
     @IsNotEmpty()
     @IsOptional()
