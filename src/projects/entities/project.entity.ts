@@ -9,7 +9,7 @@ import { Team } from "src/teams/entities/team.entity";
 import { TechnicalArea } from "src/technical-areas/entities/technical-area.entity";
 import { TypeProject } from "src/type-projects/entities/type-project.entity";
 import { UserHistory } from "src/user-histories/entities/user-history.entity";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne, OneToMany, CreateDateColumn, DeleteDateColumn } from "typeorm";
 
 
 @Entity({ name: 'i003t_entrada' })
@@ -78,6 +78,12 @@ export class Project {
   @ApiProperty()
   @OneToMany(() => Cost, (cost) => cost.i016f_i003t_entrada, { cascade: true, nullable: true })
   i003f_i016i_costo: Cost[];
+
+  @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+  createdAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 
 
 }

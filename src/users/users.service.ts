@@ -29,7 +29,7 @@ export class UsersService {
         in_usuario: createUserDto.in_usuario,
         in_nombre: createUserDto.in_nombre,
         in_apellido: createUserDto.in_apellido,
-        foto: createUserDto.foto,
+        
         in_correo: createUserDto.in_correo,
         in_role: createUserDto.in_role,
         password: await bcryptjs.hash(createUserDto.password, 10),

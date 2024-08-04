@@ -40,7 +40,7 @@ export class UsersController {
   @UseInterceptors(
     FileInterceptor('foto', {
       storage: diskStorage({
-        destination: './uploads/',
+        destination:'./uploads',
         filename: function (req, file, cb) {
           cb(null, Date.now() + '_' + file.originalname);
         },

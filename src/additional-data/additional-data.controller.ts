@@ -42,7 +42,7 @@ export class AdditionalDataController {
   )
 
   create(@Body() createAdditionalDatumDto: CreateAdditionalDatumDto, @UploadedFile() tx_datamodelo?: any) {
-    createAdditionalDatumDto.tx_datamodelo = tx_datamodelo.path
+    createAdditionalDatumDto.tx_datamodelo =  tx_datamodelo.path
     return this.additionalDataService.create(createAdditionalDatumDto);
   }
 
