@@ -16,8 +16,10 @@ export const manyProjects = (data: Project[]) => {
           end_dates.push(s.fe_plan_fin)
         }
       })
-      start = start_dates.reduce(function (a, b) { return a < b ? a : b; });
-      end = end_dates.reduce(function (a, b) { return a > b ? a : b; });
+      if (start_dates.length) {
+        start = start_dates.reduce(function (a, b) { return a < b ? a : b; }, 0);
+        end = end_dates.reduce(function (a, b) { return a > b ? a : b; }, 0);
+      }
     }
       if (project != null) {
       
@@ -26,7 +28,7 @@ export const manyProjects = (data: Project[]) => {
           <td>${project.i003f_i006t_estado_entrada.in_nombre_estado}</td>
           <td>${project.i003f_i010t_area_tecnica.in_nombre}</td>
           <td>${project.i003f_i011_tipo_proyecto.i011i_tipo_proyecto}</td>
-          <td>${start}</td>
+          <td>${start || 'SIN FECHA' }</td>
         </tr>`
       }
  
@@ -84,7 +86,7 @@ export const manyProjects = (data: Project[]) => {
 </head>
 <body>
 
-  <img src="${ true } ./../../../PDVSA-logo.png">
+  <img src="${ /*Subir la imagen de pdvsa*/ true}./PDVSA-logo.png">
   <div class="info">
   <div class="logo-simulate"></div>
   <div>
@@ -121,8 +123,9 @@ export const manyProjects = (data: Project[]) => {
 export const singleProject = (data: Project) => {
 
   const tasks = data.i003f_i013t_tareas
-  const trackings = tasks.map(t => t.i013f_i014t_seguimiento).flat(1)
   let start: Date, end: Date
+  if (tasks.length) {
+    const trackings = tasks.map(t => t.i013f_i014t_seguimiento).flat(1)
   if (trackings.length) {
     const start_dates = []
     const end_dates = []
@@ -132,9 +135,10 @@ export const singleProject = (data: Project) => {
         end_dates.push(s.fe_plan_fin)
       }
     })
-    start = start_dates.reduce(function (a, b) { return a < b ? a : b; });
-    end = end_dates.reduce(function (a, b) { return a > b ? a : b; });
+    start = start_dates.reduce(function (a, b) { return a < b ? a : b; }, 0);
+    end = end_dates.reduce(function (a, b) { return a > b ? a : b; }, 0);
   }
+}
 
   let task_rows = ''
   tasks.forEach(t => {
@@ -221,8 +225,8 @@ export const singleProject = (data: Project) => {
     </div>
     <div class="make-bold">
      <p>Fechas:</p>
-    <li>Inicio: ${start}</li>
-    <li>Fin: ${end}</li>
+    <li>Inicio: ${start || 'No asignado'}</li>
+    <li>Fin: ${end || 'No asignado'}</li>
     </div>
   </div>
 

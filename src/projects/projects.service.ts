@@ -107,7 +107,7 @@ export class ProjectsService {
           i003f_i016i_costo:true
         },
       });
-      if (!Project) throw new NotFoundException();
+      if (!project) throw new NotFoundException();
       return new ResponseProjectDto(project)
     } catch (error) {
       console.log(error)
