@@ -60,7 +60,7 @@ export class Project {
   @ApiProperty()
   @ManyToOne(() => InputStatus, (inputStatus) => inputStatus.i006i_estado_entrada,{cascade: true, nullable: true})
   @JoinColumn()
-  i003f_i006t_estado_entrada: InputStatus = {i006i_estado_entrada: 49, in_nombre_estado: 'Revision', tx_descripcion_estado: 'Estado de Revision'};
+  i003f_i006t_estado_entrada: InputStatus = {i006i_estado_entrada: 1, in_nombre_estado: 'Revision', tx_descripcion_estado: 'Estado de Revision'};
 
   @ApiProperty()
   @OneToOne(() => AdditionalDatum, (additionalDatum) => additionalDatum.i004i_datos_adi, { cascade: true, nullable: true })
