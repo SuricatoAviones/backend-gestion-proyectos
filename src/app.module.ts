@@ -19,8 +19,7 @@ import { TypeProjectsModule } from './type-projects/type-projects.module';
 import { ProjectsPhaseModule } from './projects-phase/projects-phase.module';
 import { TrackingsModule } from './trackings/trackings.module';
 import { ReportsModule } from './reports/reports.module';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
+
 
 @Module({
   imports: [AuthModule, UsersModule, ProjectsModule, ManagementsModule, TasksModule,
@@ -28,9 +27,7 @@ import { join } from 'path';
       isGlobal: true,
       envFilePath: '.env',
     }),
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'files'),
-    }),
+
     TypeOrmModule.forRoot({
     type: 'postgres',
     host: process.env.DATABASE_HOST,
