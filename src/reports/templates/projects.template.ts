@@ -84,7 +84,7 @@ export const manyProjects = (data: Project[]) => {
 </head>
 <body>
 
-  <img src="${ /*Subir la imagen de pdvsa*/ true}./PDVSA-logo.png">
+  <img src="${ true } ./../../../PDVSA-logo.png">
   <div class="info">
   <div class="logo-simulate"></div>
   <div>
