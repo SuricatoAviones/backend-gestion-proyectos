@@ -56,8 +56,35 @@ export class AdditionalDataController {
     return this.additionalDataService.findOne(+id);
   }
 
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        tx_interfaz: { type: 'string' },
+        tx_interconexion: { type: 'string' },
+        tx_seguridad: { type: 'string' },
+        tx_comentario: { type: 'string' },
+        tx_datamodelo: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAdditionalDatumDto: UpdateAdditionalDatumDto) {
+  @UseInterceptors(
+    FileInterceptor('tx_datamodelo', {
+      storage: diskStorage({
+        destination: './uploads/',
+        filename: function (req, file, cb) {
+          cb(null, Date.now() + '_' + file.originalname);
+        },
+      }),
+    }),
+  )
+  update(@Param('id') id: string, @Body() updateAdditionalDatumDto: UpdateAdditionalDatumDto, @UploadedFile() tx_datamodelo?: any) {
+    updateAdditionalDatumDto.tx_datamodelo = tx_datamodelo.path
     return this.additionalDataService.update(+id, updateAdditionalDatumDto);
   }
 
