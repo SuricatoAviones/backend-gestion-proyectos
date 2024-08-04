@@ -13,7 +13,6 @@ export class RegisterDto{
 
     @ApiProperty()
     @IsOptional()
-    @Type(()=> Buffer)
     foto: string;
 
     @ApiProperty()

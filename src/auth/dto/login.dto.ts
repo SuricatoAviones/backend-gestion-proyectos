@@ -10,4 +10,7 @@ export class LoginDto{
     @IsString()
     @MinLength(4)
     password: string;
+    @ApiProperty()
+    @IsString()
+    in_usuario: string;
 }

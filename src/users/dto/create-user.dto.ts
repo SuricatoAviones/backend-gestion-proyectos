@@ -21,7 +21,6 @@ export class CreateUserDto {
 
     @ApiProperty()
     @IsOptional()
-    @Type(()=> Buffer)
     foto: string;
 
     @ApiProperty()

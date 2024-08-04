@@ -29,7 +29,7 @@ export class UsersService {
         in_usuario: createUserDto.in_usuario,
         in_nombre: createUserDto.in_nombre,
         in_apellido: createUserDto.in_apellido,
-        
+        foto: createUserDto.foto,
         in_correo: createUserDto.in_correo,
         in_role: createUserDto.in_role,
         password: await bcryptjs.hash(createUserDto.password, 10),
@@ -49,7 +49,16 @@ export class UsersService {
     try {
         return this.userReporsitory.findOneBy({in_correo})
     } catch (error) {
+      throw new BadRequestException(error)
         
+    }
+  }
+
+  async findOneByUser(in_usuario:string){
+    try {
+      return this.userReporsitory.findOneBy({in_usuario})
+    } catch (error) {
+      
     }
   }
 

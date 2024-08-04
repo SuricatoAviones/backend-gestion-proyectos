@@ -17,7 +17,6 @@ export class CreateAdditionalDatumDto {
 
     @ApiProperty()
     @IsOptional()
-    @Type(()=> Buffer)
     tx_datamodelo: string;
 
     @ApiProperty()

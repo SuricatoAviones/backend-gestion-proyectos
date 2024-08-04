@@ -28,15 +28,15 @@ export class AuthService {
     //       };
     // }
 
-    async login({ in_correo, password }: LoginDto){
-        const user = await this.usersService.findOneByEmail(in_correo);
+    async login({ in_usuario, password }: LoginDto){
+        const user = await this.usersService.findOneByUser(in_usuario);
         if (!user) {
-        throw new UnauthorizedException('Email is wrong');
+        throw new UnauthorizedException('Usuario Incorrecto');
         }
 
         const isPasswordValid = await bcryptjs.compare(password, user.password);
         if (!isPasswordValid) {
-        throw new UnauthorizedException('password is wrong');
+        throw new UnauthorizedException('Contraseña Incorrecta');
         }
 
         const payload = { email: user.in_correo, role: user.in_role, nombre: user.in_nombre, apellido: user.in_apellido, foto: user.foto, usuario: user.in_usuario };

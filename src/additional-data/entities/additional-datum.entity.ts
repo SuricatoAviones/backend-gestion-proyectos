@@ -17,7 +17,7 @@ export class AdditionalDatum {
     tx_interconexion: string;
 
     @ApiProperty()
-    @Column({ type: "bytea",  nullable:true })
+    @Column({ nullable:true })
     tx_datamodelo: string;
 
     @ApiProperty()
