@@ -79,7 +79,7 @@ export class Project {
   i003f_i007i_historia_usuario: UserHistory[];
 
   @ApiProperty()
-  @OneToMany(() => Cost, (cost) => cost.i016f_i003t_entrada, { nullable: true, onDelete: 'CASCADE',
+  @OneToMany(() => Cost, (cost) => cost.i016f_i003t_entrada, { cascade: true, nullable: true, onDelete: 'CASCADE',
     orphanedRowAction: "delete" })
   i003f_i016i_costo: Cost[];
 
