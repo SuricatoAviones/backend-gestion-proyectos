@@ -35,6 +35,7 @@ export class ResponseProjectDto {
     i003f_i007i_historia_usuario: UserHistory[];
     i003f_i016i_costo: Cost[];
     deletedAt: Date;
+    updatedAt: Date;
     createdAt: Date;
     constructor(data: Project) {
         this.i003i_entrada = data.i003i_entrada;
@@ -53,6 +54,7 @@ export class ResponseProjectDto {
         this.i003f_i007i_historia_usuario = data.i003f_i007i_historia_usuario ;
         this.i003f_i016i_costo = data.i003f_i016i_costo;
         this.deletedAt = data.deletedAt;
+        this.updatedAt = data.updatedAt;
         this.createdAt = data.createdAt;
     }
 

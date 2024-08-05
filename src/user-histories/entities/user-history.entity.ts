@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Project } from "src/projects/entities/project.entity";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
 
 
 @Entity({ name: 'i007t_historia_usuario' })
@@ -30,5 +30,11 @@ export class UserHistory {
   @JoinColumn()
   @ManyToOne(() => Project, (project) => project.i003i_entrada, { nullable:true})
   i013f_i003t_entrada: Project;
+
+  @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 
 }

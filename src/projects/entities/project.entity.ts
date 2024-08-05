@@ -9,7 +9,7 @@ import { Team } from "src/teams/entities/team.entity";
 import { TechnicalArea } from "src/technical-areas/entities/technical-area.entity";
 import { TypeProject } from "src/type-projects/entities/type-project.entity";
 import { UserHistory } from "src/user-histories/entities/user-history.entity";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne, OneToMany, CreateDateColumn, DeleteDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne, OneToMany, CreateDateColumn, DeleteDateColumn, UpdateDateColumn } from "typeorm";
 
 
 @Entity({ name: 'i003t_entrada' })
@@ -81,6 +81,9 @@ export class Project {
 
   @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
   createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 
   @DeleteDateColumn()
   deletedAt: Date;

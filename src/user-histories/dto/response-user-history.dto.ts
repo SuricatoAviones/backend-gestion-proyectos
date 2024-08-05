@@ -11,6 +11,8 @@ export class ResponseUserHistoryDto {
     tx_funcionalidad: string;
     tx_criterio: string;
     i013f_i003t_entrada: Project;
+    updatedAt: Date;
+    createdAt: Date;
 
 
     constructor(data: UserHistory) {
@@ -22,6 +24,8 @@ export class ResponseUserHistoryDto {
         this.tx_funcionalidad = data.tx_funcionalidad;
         this.tx_criterio = data.tx_criterio;
         this.i013f_i003t_entrada = new ResponseProjectDto(data.i013f_i003t_entrada);
+        this.updatedAt = data.updatedAt;
+        this.createdAt = data.createdAt;
 
     }
 }

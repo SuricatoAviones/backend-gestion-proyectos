@@ -11,6 +11,7 @@ export class ResponseUserDto {
     foto: string;
     deletedAt: Date;
     createdAt: Date;
+    updatedAt: Date;
 
     constructor (data: User) {
       this.i001i_usuario = data.i001i_usuario;
@@ -23,6 +24,7 @@ export class ResponseUserDto {
       this.foto = data.foto;
       this.deletedAt = data.deletedAt;
       this.createdAt = data.createdAt;
+      this.updatedAt = data.updatedAt;
 
     }
 }

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn ,DeleteDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn ,DeleteDateColumn, UpdateDateColumn } from "typeorm";
 import { Roles } from "../enums/roles.enum";
 import { Exclude } from "class-transformer";
 import { ApiProperty } from "@nestjs/swagger";
@@ -36,6 +36,9 @@ export class User {
 
   @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
   createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt:Date;
 
   @DeleteDateColumn()
   deletedAt: Date;
