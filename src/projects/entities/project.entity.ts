@@ -63,20 +63,24 @@ export class Project {
   i003f_i006t_estado_entrada: InputStatus = {i006i_estado_entrada: 1, in_nombre_estado: 'Revision', tx_descripcion_estado: 'Estado de Revision'};
 
   @ApiProperty()
-  @OneToOne(() => AdditionalDatum, (additionalDatum) => additionalDatum.i004i_datos_adi, { cascade: true, nullable: true })
+  @OneToOne(() => AdditionalDatum, (additionalDatum) => additionalDatum.i004i_datos_adi, { cascade: true, nullable: true, onDelete: 'CASCADE',
+    orphanedRowAction: "delete" })
   @JoinColumn()
   i003f_i004t_datos_adi: AdditionalDatum;
 
   @ApiProperty()
-  @OneToMany(() => Task, (task) => task.i013f_i003t_entrada, {  cascade: true, nullable: true })
+  @OneToMany(() => Task, (task) => task.i013f_i003t_entrada, {  cascade: true, nullable: true, onDelete: 'CASCADE',
+    orphanedRowAction: "delete" })
   i003f_i013t_tareas: Task[];
   
   @ApiProperty()
-  @OneToMany(() => UserHistory, (user_history) => user_history.i013f_i003t_entrada, {  nullable: true })
+  @OneToMany(() => UserHistory, (user_history) => user_history.i013f_i003t_entrada, { cascade: true, nullable: true, onDelete: 'CASCADE',
+    orphanedRowAction: "delete" })
   i003f_i007i_historia_usuario: UserHistory[];
 
   @ApiProperty()
-  @OneToMany(() => Cost, (cost) => cost.i016f_i003t_entrada, {  nullable: true })
+  @OneToMany(() => Cost, (cost) => cost.i016f_i003t_entrada, { nullable: true, onDelete: 'CASCADE',
+    orphanedRowAction: "delete" })
   i003f_i016i_costo: Cost[];
 
   @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
