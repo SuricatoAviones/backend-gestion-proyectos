@@ -7,7 +7,10 @@ import { Task } from "src/tasks/entities/task.entity";
 export class CreateTrackingDto {
   @ApiProperty()
   @IsNumber()
-  nu_completado: number;
+  nu_completado_real: number[];
+  @ApiProperty()
+  @IsNumber()
+  nu_completado_planificado: number[];
   @ApiProperty()
   @IsDate()
   fe_plan_inicio: Date;

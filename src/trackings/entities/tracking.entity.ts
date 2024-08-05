@@ -14,7 +14,12 @@ export class Tracking {
   i014f_i013t_tarea: Task;
   @ApiProperty()
   @Column({ type: "integer" })
-  nu_completado: number;
+  nu_completado_real: number[];
+
+  @ApiProperty()
+  @Column({ type: "integer" })
+  nu_completado_planificado: number[];
+
   @ApiProperty()
   @Column({ type: "date" })
   fe_plan_inicio: Date;

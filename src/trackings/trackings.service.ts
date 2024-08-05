@@ -16,7 +16,8 @@ export class TrackingsService {
   async create(createTrackingDto: CreateTrackingDto): Promise<CreateTrackingDto> {
     try {
       const tracking = this.repository.create({
-        nu_completado: createTrackingDto.nu_completado,
+        nu_completado_real: createTrackingDto.nu_completado_real,
+        nu_completado_planificado: createTrackingDto.nu_completado_planificado,
         fe_plan_inicio: createTrackingDto.fe_plan_inicio,
         fe_plan_fin: createTrackingDto.fe_plan_fin,
         fe_real_inicio: createTrackingDto.fe_real_inicio,
@@ -92,7 +93,8 @@ export class TrackingsService {
   async update(i014i_seguimiento: number, updateTrackingDto: UpdateTrackingDto): Promise<UpdateTrackingDto> {
     try {
       const tracking = await this.repository.update(i014i_seguimiento, {
-        nu_completado: updateTrackingDto.nu_completado,
+        nu_completado_real: updateTrackingDto.nu_completado_real,
+        nu_completado_planificado: updateTrackingDto.nu_completado_planificado,
         fe_plan_inicio: updateTrackingDto.fe_plan_inicio,
         fe_plan_fin: updateTrackingDto.fe_plan_fin,
         fe_real_inicio: updateTrackingDto.fe_real_inicio,

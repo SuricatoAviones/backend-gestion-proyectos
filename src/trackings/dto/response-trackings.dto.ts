@@ -6,7 +6,8 @@ import { ResponseStatusTaskDto } from "src/status-task/dto/response-status-task.
 
 export class ResponseTrackingDto {
     i014i_seguimiento: number;
-    nu_completado: number;
+    nu_completado_planificado: number[];
+    nu_completado_real: number[];
     fe_plan_inicio: Date;
     fe_plan_fin: Date;
     fe_real_inicio: Date;
@@ -18,7 +19,8 @@ export class ResponseTrackingDto {
 
     constructor(data: Tracking) {
         this.i014i_seguimiento = data.i014i_seguimiento;
-        this.nu_completado = data.nu_completado;
+        this.nu_completado_real = data.nu_completado_real;
+        this.nu_completado_planificado = data.nu_completado_planificado;
         this.fe_plan_inicio = data.fe_plan_inicio;
         this.fe_plan_fin = data.fe_plan_fin;
         this.fe_real_inicio = data.fe_real_inicio;

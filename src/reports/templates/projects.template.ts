@@ -142,7 +142,7 @@ export const singleProject = (data: Project) => {
   let task_rows = ''
   tasks.forEach(t => {
     if (t != null) {
-      const completed = t.i013f_i014t_seguimiento?.nu_completado
+      const completed = t.i013f_i014t_seguimiento?.nu_completado_real
       task_rows += `<tr>
         <td>${t.i013i_tarea}</td>
         <td>${t.in_nombre}</td>
