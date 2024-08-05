@@ -11,20 +11,25 @@ export class Task {
   @ApiProperty()
   @PrimaryGeneratedColumn()
   i013i_tarea: number;
+
+  @ApiProperty()
+  @Column({ length: 255, nullable: true })
+  in_nombre: string
+
   @ApiProperty()
   @ManyToOne(() => User, (user) => user.i001i_usuario)
   @JoinColumn()
   i013f_i001t_usuario: User;
+
   @ApiProperty()
   @ManyToOne(() => Project, (project) => project.i003i_entrada)
   @JoinColumn()
   i013f_i003t_entrada: Project;
+
   @ApiProperty()
   @Column({ length: 255, nullable: true })
   tx_descripcion: string;
-  @ApiProperty()
-  @Column({ length: 255, nullable: true })
-  description: string;
+
 
   @ApiProperty()
   @OneToOne(() => Tracking, (tracking) => tracking.i014f_i013t_tarea, {

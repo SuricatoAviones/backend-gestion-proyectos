@@ -145,6 +145,7 @@ export const singleProject = (data: Project) => {
       const completed = t.i013f_i014t_seguimiento?.nu_completado
       task_rows += `<tr>
         <td>${t.i013i_tarea}</td>
+        <td>${t.in_nombre}</td>
         <td>${t.i013f_i014t_seguimiento?.i014f_i015t_estado_tarea?.in_titulo || 'SIN SEGUIMIENTO'}</td>
         <td>${completed ? completed + '%' : 'SIN SEGUIMIENTO'}</td>
         <td>${t.i013f_i014t_seguimiento?.fe_plan_inicio || 'SIN SEGUIMIENTO'}</td>

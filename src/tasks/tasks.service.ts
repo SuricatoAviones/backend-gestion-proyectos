@@ -17,7 +17,7 @@ export class TasksService {
 
     try {
       const task = this.repository.create({
-        description: createTaskDto.description,
+        in_nombre: createTaskDto.in_nombre,
         tx_descripcion: createTaskDto.tx_descripcion,
         i013f_i001t_usuario: createTaskDto.i013f_i001t_usuario,
         i013f_i003t_entrada: createTaskDto.i013f_i003t_entrada,
@@ -85,7 +85,7 @@ export class TasksService {
   async update(i013i_tarea: number, updateTaskDto: UpdateTaskDto): Promise<UpdateTaskDto> {
     try {
       const task = await this.repository.update(i013i_tarea, {
-        description: updateTaskDto.description,
+        in_nombre: updateTaskDto.in_nombre,
         tx_descripcion: updateTaskDto.tx_descripcion,
         i013f_i001t_usuario: updateTaskDto.i013f_i001t_usuario,
         i013f_i003t_entrada: updateTaskDto.i013f_i003t_entrada,
