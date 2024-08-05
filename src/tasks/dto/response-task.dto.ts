@@ -20,7 +20,7 @@ export class ResponseTaskDto {
         this.tx_descripcion = data.tx_descripcion
         this.in_nombre = data.in_nombre
         this.i013f_i001t_usuario = data.i013f_i001t_usuario // TODO: Response de user
-        this.i013f_i003t_entrada = new ResponseProjectDto(data.i013f_i003t_entrada)
+        this.i013f_i003t_entrada = data.i013f_i003t_entrada
         this.i013f_i014t_seguimiento = data.i013f_i014t_seguimiento
     }
   }

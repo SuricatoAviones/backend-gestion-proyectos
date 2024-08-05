@@ -27,7 +27,7 @@ export const manyProjects = (data: Project[]) => {
           <td>${project.in_titulo}</td>
           <td>${project.i003f_i006t_estado_entrada.in_nombre_estado}</td>
           <td>${project.i003f_i010t_area_tecnica.in_nombre}</td>
-          <td>${project.i003f_i011_tipo_proyecto.i011i_tipo_proyecto}</td>
+          <td>${project.i003f_i011_tipo_proyecto.in_nombre}</td>
           <td>${start || 'SIN FECHA' }</td>
         </tr>`
       }
