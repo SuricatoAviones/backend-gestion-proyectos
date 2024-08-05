@@ -86,9 +86,8 @@ export const manyProjects = (data: Project[]) => {
 </head>
 <body>
 
-  <img src="${ /*Subir la imagen de pdvsa*/ true}./PDVSA-logo.png">
-  <div class="info">
-  <div class="logo-simulate"></div>
+<div class="info">
+<img src="http://34.225.211.222:3000/public/PDVSA-logo.png">
   <div>
   <p class="header-text">${(new Date().toLocaleDateString())}</p>
     <p class="header-text">Ubicación: Maturin, Monagas</p>
@@ -146,7 +145,7 @@ export const singleProject = (data: Project) => {
       const completed = t.i013f_i014t_seguimiento?.nu_completado
       task_rows += `<tr>
         <td>${t.i013i_tarea}</td>
-        <td>${t.i013f_i014t_seguimiento?.i014f_i015t_estado_tarea.in_titulo || 'SIN SEGUIMIENTO'}</td>
+        <td>${t.i013f_i014t_seguimiento?.i014f_i015t_estado_tarea?.in_titulo || 'SIN SEGUIMIENTO'}</td>
         <td>${completed ? completed + '%' : 'SIN SEGUIMIENTO'}</td>
         <td>${t.i013f_i014t_seguimiento?.fe_plan_inicio || 'SIN SEGUIMIENTO'}</td>
         <td>${t.i013f_i014t_seguimiento?.fe_plan_fin || 'SIN SEGUIMIENTO'}</td>
@@ -205,9 +204,9 @@ export const singleProject = (data: Project) => {
 </head>
 <body>
 
-  <img src="${ /*Subir la imagen de pdvsa*/ true}./PDVSA-logo.png">
-  <div class="info">
-  <div class="logo-simulate"></div>
+<div class="info">
+<img src="http://34.225.211.222:3000/public/PDVSA-logo.png">
+
   <div>
   <p class="header-text">${(new Date().toLocaleDateString())}</p>
     <p class="header-text">Ubicación: Maturin, Monagas</p>
