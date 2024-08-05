@@ -68,7 +68,7 @@ export class Project {
   i003f_i004t_datos_adi: AdditionalDatum;
 
   @ApiProperty()
-  @OneToMany(() => Task, (task) => task.i013f_i003t_entrada, {  nullable: true })
+  @OneToMany(() => Task, (task) => task.i013f_i003t_entrada, {  cascade: true, nullable: true })
   i003f_i013t_tareas: Task[];
   
   @ApiProperty()
