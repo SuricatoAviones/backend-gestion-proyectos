@@ -28,7 +28,7 @@ export class UserHistory {
   tx_criterio: string;
   @ApiProperty()
   @JoinColumn()
-  @ManyToOne(() => Project, (project) => project.i003i_entrada, {  nullable:true})
+  @ManyToOne(() => Project, (project) => project.i003i_entrada, {  nullable:true, onDelete: 'CASCADE'})
   i013f_i003t_entrada: Project;
 
   @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })

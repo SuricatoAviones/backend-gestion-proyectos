@@ -22,7 +22,7 @@ export class Task {
   i013f_i001t_usuario: User;
 
   @ApiProperty()
-  @ManyToOne(() => Project, (project) => project.i003i_entrada)
+  @ManyToOne(() => Project, (project) => project.i003i_entrada, {onDelete: 'CASCADE'})
   @JoinColumn()
   i013f_i003t_entrada: Project;
 
@@ -33,7 +33,7 @@ export class Task {
 
   @ApiProperty()
   @OneToOne(() => Tracking, (tracking) => tracking.i014f_i013t_tarea, {
-    cascade: true , eager: true,
+    cascade: true , eager: true, onDelete: 'CASCADE'
   })
   @JoinColumn()
   i013f_i014t_seguimiento: Tracking | null;
