@@ -10,7 +10,7 @@ export class Cost {
   i016i_costo: number;
   
   @ApiProperty()
-  @ManyToOne(() => Project, (project) => project.i003i_entrada , { nullable:true})
+  @ManyToOne(() => Project, (project) => project.i003i_entrada , {cascade: true, nullable:true})
   @JoinColumn()
   i016f_i003t_entrada: Project;
 

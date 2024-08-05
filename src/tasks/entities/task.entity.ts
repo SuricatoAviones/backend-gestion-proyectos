@@ -22,7 +22,7 @@ export class Task {
   i013f_i001t_usuario: User;
 
   @ApiProperty()
-  @ManyToOne(() => Project, (project) => project.i003i_entrada)
+  @ManyToOne(() => Project, (project) => project.i003i_entrada, {cascade: true})
   @JoinColumn()
   i013f_i003t_entrada: Project;
 
