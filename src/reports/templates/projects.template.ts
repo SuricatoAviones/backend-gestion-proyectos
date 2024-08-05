@@ -243,6 +243,7 @@ export const singleProject = (data: Project) => {
   <table>
   <thead>
   <tr>
+      <th>#</th>
       <th>Título</th>
       <th>Estado</th>
       <th>Porcentaje de Cumplimiento</th>

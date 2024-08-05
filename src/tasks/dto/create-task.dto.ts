@@ -9,6 +9,7 @@ export class CreateTaskDto {
   
   
   @ApiProperty()
+  @IsOptional()
   @IsString()
   in_nombre: string;
   
@@ -25,6 +26,7 @@ export class CreateTaskDto {
   @IsNotEmpty()
   @Type(() => User)
   i013f_i001t_usuario: User;
+
   @ApiProperty()
   @IsOptional()
   @IsNotEmpty()

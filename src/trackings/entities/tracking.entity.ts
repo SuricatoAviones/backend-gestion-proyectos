@@ -30,5 +30,5 @@ export class Tracking {
   @ApiProperty()
   @ManyToOne(() => StatusTask, (statusTask) => statusTask.i015i_estado_tarea)
   @JoinColumn()
-  i014f_i015t_estado_tarea: StatusTask;
+  i014f_i015t_estado_tarea: StatusTask = { in_titulo:'Por Iniciar',i015i_estado_tarea:1,tx_descripcion: ''};
 }
