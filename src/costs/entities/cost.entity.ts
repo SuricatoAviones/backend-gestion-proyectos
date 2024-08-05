@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Project } from "src/projects/entities/project.entity";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, CreateDateColumn, DeleteDateColumn, UpdateDateColumn } from "typeorm";
 
 
 @Entity({ name: 'i016t_costo' })
@@ -21,4 +21,13 @@ export class Cost {
   @ApiProperty()
   @Column({ type: "decimal", precision: 10, scale: 2, nullable:true })
   nu_monto: number;
+
+  @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }
