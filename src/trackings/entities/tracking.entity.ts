@@ -13,11 +13,11 @@ export class Tracking {
   @OneToOne(() => Task, (task) => task.i013f_i014t_seguimiento)
   i014f_i013t_tarea: Task;
   @ApiProperty()
-  @Column({ type: "integer" })
+  @Column({ type: "integer", array:true })
   nu_completado_real: number[];
 
   @ApiProperty()
-  @Column({ type: "integer" })
+  @Column({ type: "integer", array:true })
   nu_completado_planificado: number[];
 
   @ApiProperty()
