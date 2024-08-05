@@ -26,6 +26,7 @@ export const manyProjects = (data: Project[]) => {
         project_rows += `<tr>
           <td>${project.in_titulo}</td>
           <td>${project.i003f_i006t_estado_entrada.in_nombre_estado}</td>
+          <td>${project.i003f_i005t_fase_entrada.in_nombre_fase}</td>
           <td>${project.i003f_i010t_area_tecnica.in_nombre}</td>
           <td>${project.i003f_i011_tipo_proyecto.in_nombre}</td>
           <td>${start || 'SIN FECHA' }</td>
@@ -94,7 +95,7 @@ export const manyProjects = (data: Project[]) => {
   </div>
   </div>
   
-  <p class="header-text">SGPP - Sistema de Gestión <br> de Protafolio de Proyectos</p>
+  <p class="header-text">SGPP - Sistema de Gestión <br> de Portafolio de Proyectos</p>
 
 
   <h2 class='text-center'>Reporte General de Gestion</h2>
@@ -105,6 +106,7 @@ export const manyProjects = (data: Project[]) => {
   <tr>
       <th>Título</th>
       <th>Estado</th>
+      <th>Fase</th>
       <th>Area Técnica</th>
       <th>Tipo de Proyecto</th>
       <th>Fecha de Entrada</th>
@@ -142,7 +144,7 @@ export const singleProject = (data: Project) => {
   let task_rows = ''
   tasks.forEach(t => {
     if (t != null) {
-      const completed = t.i013f_i014t_seguimiento?.nu_completado_real
+      const completed = t.i013f_i014t_seguimiento?.nu_completado_real[t.i013f_i014t_seguimiento.nu_completado_real.length - 1];
       task_rows += `<tr>
         <td>${t.i013i_tarea}</td>
         <td>${t.in_nombre}</td>
@@ -214,7 +216,7 @@ export const singleProject = (data: Project) => {
   </div>
   </div>
   
-  <p class="header-text">SGPP - Sistema de Gestión <br> de Protafolio de Proyectos</p>
+  <p class="header-text">SGPP - Sistema de Gestión <br> de Portafolio de Proyectos</p>
 
 
   <h2 class='text-center'>Reporte: ${data.in_titulo}</h2>
