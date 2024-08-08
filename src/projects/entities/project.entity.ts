@@ -83,12 +83,12 @@ export class Project {
     orphanedRowAction: "delete" })
   i003f_i016i_costo: Cost[];
 
-  @ApiProperty()
+  /* @ApiProperty()
   @Column({ type: "integer", array:true, nullable:true })
   promedio_tareas_plan: number[];
   @ApiProperty()
   @Column({ type: "integer", array:true, nullable:true })
-  promedio_tareas_real: number[];
+  promedio_tareas_real: number[]; */
 
   @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
   createdAt: Date;

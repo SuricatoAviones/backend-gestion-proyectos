@@ -30,19 +30,19 @@ export class Team {
   @JoinColumn({ name: 'c008f_i009t_gerencia_galba' })
   c008f_i009t_gerencia_galba: Management;
   @ApiProperty()
-  @ManyToOne(() => User, (user) => user.i001i_usuario, {cascade: true , nullable: true})
+  @ManyToOne(() => User, (user) => user.i001i_usuario, {cascade: true , nullable: true, onDelete: 'CASCADE',})
   @JoinColumn({ name: 'c008f_i001t_lider_funcional' })
   c008f_i001t_lider_funcional: User;
   @ApiProperty()
-  @ManyToOne(() => User, (user) => user.i001i_usuario, {cascade: true , nullable: true})
+  @ManyToOne(() => User, (user) => user.i001i_usuario, {cascade: true , nullable: true, onDelete: 'CASCADE',})
   @JoinColumn({ name: 'c008f_i001t_lider_negocio' })
   c008f_i001t_lider_negocio: User;
   @ApiProperty()
-  @ManyToOne(() => User, (user) => user.i001i_usuario, {cascade: true , nullable: true})
+  @ManyToOne(() => User, (user) => user.i001i_usuario, {cascade: true , nullable: true, onDelete: 'CASCADE',})
   @JoinColumn({ name: 'c008f_i001t_lider_tecnico' })
   c008f_i001t_lider_tecnico: User;
   @ApiProperty()
-  @ManyToMany(() => User, (user) => user.i001i_usuario, {cascade: true , nullable: true})
+  @ManyToMany(() => User, (user) => user.i001i_usuario, {cascade: true , nullable: true,onDelete: 'CASCADE',})
   @JoinTable({ name: 'c008f_i001t_trabajador' })
   c008f_i001t_trabajador: User[];
   @ApiProperty()
