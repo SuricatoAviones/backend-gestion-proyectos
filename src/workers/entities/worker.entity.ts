@@ -9,7 +9,7 @@ export class Worker {
   @PrimaryGeneratedColumn()
   i017i_trabajador: number;
 
-   @ApiProperty()
+  @ApiProperty()
   @ManyToOne(() => Team, (team) => team.c008i_equipo_trabajo)
   @JoinColumn()
   i017f_c008t_equipo_trabajo: Team; 

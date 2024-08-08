@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn ,DeleteDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn ,DeleteDateColumn, UpdateDateColumn, JoinColumn, ManyToMany } from "typeorm";
 import { Roles } from "../enums/roles.enum";
 import { Exclude } from "class-transformer";
 import { ApiProperty } from "@nestjs/swagger";
+import { Team } from "src/teams/entities/team.entity";
 
 @Entity({name:'i001t_usuario'})
 
@@ -31,6 +32,11 @@ export class User {
  @ApiProperty()
   @Column({ nullable: true, default: Roles.Rol_Trabajador  })
   in_role: string;
+
+  /* @ApiProperty()
+  @ManyToMany(() => Team, (team) => team.c008i_equipo_trabajo, { cascade: true, nullable: true })
+  @JoinColumn()
+  i0003f_i008t_equipo_trabajo: Team; */
 
 
 

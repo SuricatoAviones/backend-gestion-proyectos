@@ -7,6 +7,9 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
+  ManyToMany,
+  OneToMany,
+  JoinTable,
 } from 'typeorm';
 
 @Entity({ name: 'c008t_equipo_trabajo' })
@@ -39,8 +42,8 @@ export class Team {
   @JoinColumn({ name: 'c008f_i001t_lider_tecnico' })
   c008f_i001t_lider_tecnico: User;
   @ApiProperty()
-  @ManyToOne(() => User, (user) => user.i001i_usuario, {cascade: true , nullable: true})
-  @JoinColumn({ name: 'c008f_i001t_trabajador' })
+  @ManyToMany(() => User, (user) => user.i001i_usuario, {cascade: true , nullable: true})
+  @JoinTable({ name: 'c008f_i001t_trabajador' })
   c008f_i001t_trabajador: User[];
   @ApiProperty()
   @Column({ length: 255, nullable: true })
