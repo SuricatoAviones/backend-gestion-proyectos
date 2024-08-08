@@ -36,5 +36,5 @@ export class CreateTeamDto {
     @ApiProperty()
     @IsNotEmpty()
     @Type( () => User)
-    c008f_i001t_trabajador: User;
+    c008f_i001t_trabajador: User[];
 }

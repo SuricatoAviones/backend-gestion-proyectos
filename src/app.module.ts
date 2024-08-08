@@ -19,6 +19,7 @@ import { TypeProjectsModule } from './type-projects/type-projects.module';
 import { ProjectsPhaseModule } from './projects-phase/projects-phase.module';
 import { TrackingsModule } from './trackings/trackings.module';
 import { ReportsModule } from './reports/reports.module';
+import { DatabaseModule } from './database/database.module';
 
 
 @Module({
@@ -40,15 +41,6 @@ import { ReportsModule } from './reports/reports.module';
      ssl:{
        rejectUnauthorized: false
      }
-    /* ssl: process.env.POSTGRES_SSL === "true",
-      extra: {
-        ssl:
-          process.env.POSTGRES_SSL === "true"
-            ? {
-                rejectUnauthorized: false,
-              }
-            : null,
-      }, */
     }),
     WorkersModule,
     TeamsModule,
@@ -62,7 +54,8 @@ import { ReportsModule } from './reports/reports.module';
     TypeProjectsModule,
     ProjectsPhaseModule,
     TrackingsModule,
-    ReportsModule],
+    ReportsModule,
+    DatabaseModule],
   controllers: [],
   providers:[],
 })

@@ -41,7 +41,7 @@ export class Team {
   @ApiProperty()
   @ManyToOne(() => User, (user) => user.i001i_usuario, {cascade: true , nullable: true})
   @JoinColumn({ name: 'c008f_i001t_trabajador' })
-  c008f_i001t_trabajador: User;
+  c008f_i001t_trabajador: User[];
   @ApiProperty()
   @Column({ length: 255, nullable: true })
   in_cargo: string;
