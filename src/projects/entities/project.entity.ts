@@ -48,7 +48,7 @@ export class Project {
   tx_alcance: string;
 
   @ApiProperty()
-  @OneToOne(() => Team, (team) => team.c008i_equipo_trabajo, { cascade: true, nullable: true })
+  @OneToOne(() => Team, (team) => team.c008i_equipo_trabajo, { cascade: true, nullable: true, onDelete: 'CASCADE' })
   @JoinColumn()
   i0003f_i008t_equipo_trabajo: Team;
 
