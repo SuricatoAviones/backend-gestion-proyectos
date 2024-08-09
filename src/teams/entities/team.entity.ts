@@ -18,15 +18,15 @@ export class Team {
   @PrimaryGeneratedColumn()
   c008i_equipo_trabajo: number;
   @ApiProperty()
-  @ManyToOne(() => Management, (management) => management.i009i_gerencia, {cascade: true , nullable: true})
+  @ManyToOne(() => Management, (management) => management.i009i_gerencia, {cascade: true , nullable: true, onDelete: 'CASCADE'})
   @JoinColumn({ name: 'c008f_i009t_gerencia_funcional' })
   c008f_i009t_gerencia_funcional: Management;
   @ApiProperty()
-  @ManyToOne(() => Management, (management) => management.i009i_gerencia, {cascade: true , nullable: true})
+  @ManyToOne(() => Management, (management) => management.i009i_gerencia, {cascade: true , nullable: true, onDelete: 'CASCADE'})
   @JoinColumn({ name: 'c008f_i009t_gerencia_tecnica' })
   c008f_i009t_gerencia_tecnica: Management;
   @ApiProperty()
-  @ManyToOne(() => Management, (management) => management.i009i_gerencia, {cascade: true , nullable: true})
+  @ManyToOne(() => Management, (management) => management.i009i_gerencia, {cascade: true , nullable: true, onDelete: 'CASCADE'})
   @JoinColumn({ name: 'c008f_i009t_gerencia_galba' })
   c008f_i009t_gerencia_galba: Management;
   @ApiProperty()
