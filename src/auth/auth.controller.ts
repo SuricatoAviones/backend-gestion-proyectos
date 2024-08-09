@@ -48,7 +48,10 @@ export class AuthController {
         createUserDto: CreateUserDto,
         @UploadedFile() foto?: any
     ){
+      if (foto) {
         createUserDto.foto = foto.path
+      }  
+      
         return this.userService.create(createUserDto)
     }
     

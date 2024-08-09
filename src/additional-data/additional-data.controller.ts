@@ -42,7 +42,10 @@ export class AdditionalDataController {
   )
 
   create(@Body() createAdditionalDatumDto: CreateAdditionalDatumDto, @UploadedFile() tx_datamodelo?: any) {
+    if(tx_datamodelo){
     createAdditionalDatumDto.tx_datamodelo =  tx_datamodelo.path
+
+    }
     return this.additionalDataService.create(createAdditionalDatumDto);
   }
 
@@ -84,7 +87,9 @@ export class AdditionalDataController {
     }),
   )
   update(@Param('id') id: string, @Body() updateAdditionalDatumDto: UpdateAdditionalDatumDto, @UploadedFile() tx_datamodelo?: any) {
-    updateAdditionalDatumDto.tx_datamodelo = tx_datamodelo.path
+    if(tx_datamodelo){
+      updateAdditionalDatumDto.tx_datamodelo = tx_datamodelo.path
+    }
     return this.additionalDataService.update(+id, updateAdditionalDatumDto);
   }
 

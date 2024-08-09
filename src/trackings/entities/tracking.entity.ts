@@ -33,7 +33,7 @@ export class Tracking {
   @Column({ type: "date" })
   fe_real_fin: Date;
   @ApiProperty()
-  @ManyToOne(() => StatusTask, (statusTask) => statusTask.i015i_estado_tarea)
+  @ManyToOne(() => StatusTask, (statusTask) => statusTask.i015i_estado_tarea, {cascade: true, nullable: true, onDelete: 'CASCADE'})
   @JoinColumn()
   i014f_i015t_estado_tarea: StatusTask = { in_titulo:'Por Iniciar',i015i_estado_tarea:1,tx_descripcion: ''};
 }

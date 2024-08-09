@@ -48,7 +48,9 @@ export class UsersController {
     }),
   )
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto, @UploadedFile() foto?: any) {
-    updateUserDto.foto = foto.path 
+    if (foto) {
+      updateUserDto.foto = foto.path; 
+    }
     return this.usersService.update(+id, updateUserDto);
   }
 

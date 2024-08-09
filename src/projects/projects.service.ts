@@ -140,7 +140,6 @@ export class ProjectsService {
         /* promedio_tareas_plan: updateProjectDto.promedio_tareas_plan,
         promedio_tareas_real: updateProjectDto.promedio_tareas_real */
       })
-      console.log(project)
       return this.findOne(i003i_entrada)
     } catch (error) {
       console.log(error);
