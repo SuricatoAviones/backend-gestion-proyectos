@@ -27,10 +27,10 @@ export class Tracking {
   @Column({ type: "date" })
   fe_plan_fin: Date;
   @ApiProperty()
-  @Column({ type: "date" })
+  @Column({ type: "date", nullable: true })
   fe_real_inicio: Date;
   @ApiProperty()
-  @Column({ type: "date" })
+  @Column({ type: "date", nullable: true })
   fe_real_fin: Date;
   @ApiProperty()
   @ManyToOne(() => StatusTask, (statusTask) => statusTask.i015i_estado_tarea, {cascade: true, nullable: true, onDelete: 'CASCADE'})
