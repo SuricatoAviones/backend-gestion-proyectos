@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Team } from "src/teams/entities/team.entity";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, ManyToMany, JoinTable } from "typeorm";
 
 
 @Entity({name:'i017t_trabajador'})
@@ -10,8 +10,8 @@ export class Worker {
   i017i_trabajador: number;
 
   @ApiProperty()
-  @ManyToOne(() => Team, (team) => team.c008i_equipo_trabajo)
-  @JoinColumn()
+  @ManyToMany(() => Team, (team) => team.c008i_equipo_trabajo)
+  @JoinTable()
   i017f_c008t_equipo_trabajo: Team; 
 
    @ApiProperty()

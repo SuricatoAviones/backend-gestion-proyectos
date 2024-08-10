@@ -10,8 +10,13 @@ import { TechnicalArea } from "src/technical-areas/entities/technical-area.entit
 import { TypeProject } from "src/type-projects/entities/type-project.entity";
 import { UserHistory } from "src/user-histories/entities/user-history.entity";
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne, OneToMany, CreateDateColumn, DeleteDateColumn, UpdateDateColumn } from "typeorm";
+class PromedioMes {
+  @ApiProperty()
+  promedio: number;
 
-
+  @ApiProperty()
+  mes: Date; // O puedes usar un tipo Date si prefieres
+}
 @Entity({ name: 'i003t_entrada' })
 export class Project {
   @ApiProperty()
@@ -53,42 +58,42 @@ export class Project {
   i0003f_i008t_equipo_trabajo: Team;
 
   @ApiProperty()
-  @ManyToOne(() => PhaseInput, (projectsPhase) => projectsPhase.i0005i_fase_entrada,{cascade: true, nullable: true, onDelete: 'CASCADE'})
+  @ManyToOne(() => PhaseInput, (projectsPhase) => projectsPhase.i0005i_fase_entrada,{cascade: true, nullable: true, onDelete: 'CASCADE', orphanedRowAction: "delete"})
   @JoinColumn()
   i003f_i005t_fase_entrada: PhaseInput = {i0005i_fase_entrada: 3 , in_nombre_fase:'Solicitud', tx_descripcion_fase:'Fase de Solicitud'};
 
   @ApiProperty()
-  @ManyToOne(() => InputStatus, (inputStatus) => inputStatus.i006i_estado_entrada,{cascade: true, nullable: true, onDelete: 'CASCADE'})
+  @ManyToOne(() => InputStatus, (inputStatus) => inputStatus.i006i_estado_entrada,{cascade: true, nullable: true, onDelete: 'CASCADE', orphanedRowAction: "delete"})
   @JoinColumn()
   i003f_i006t_estado_entrada: InputStatus = {i006i_estado_entrada: 1, in_nombre_estado: 'Revision', tx_descripcion_estado: 'Estado de Revision'};
 
   @ApiProperty()
   @OneToOne(() => AdditionalDatum, (additionalDatum) => additionalDatum.i004i_datos_adi, { cascade: true, nullable: true, onDelete: 'CASCADE',
-    orphanedRowAction: "delete" })
+    /* orphanedRowAction: "delete" */ })
   @JoinColumn()
   i003f_i004t_datos_adi: AdditionalDatum;
 
   @ApiProperty()
   @OneToMany(() => Task, (task) => task.i013f_i003t_entrada, {  cascade: true, nullable: true, onDelete: 'CASCADE',
-    orphanedRowAction: "delete" })
+    /* orphanedRowAction: "delete" */ })
   i003f_i013t_tareas: Task[];
   
   @ApiProperty()
-  @OneToMany(() => UserHistory, (user_history) => user_history.i013f_i003t_entrada, { cascade: true, nullable: true, onDelete: 'CASCADE',
-    orphanedRowAction: "delete" })
+  @OneToMany(() => UserHistory, (user_history) => user_history.i013f_i003t_entrada, { cascade: true, nullable: true, onDelete: 'CASCADE',})
   i003f_i007i_historia_usuario: UserHistory[];
 
   @ApiProperty()
   @OneToMany(() => Cost, (cost) => cost.i016f_i003t_entrada, { cascade: true, nullable: true, onDelete: 'CASCADE',
-    orphanedRowAction: "delete" })
+    /* orphanedRowAction: "delete"  */})
   i003f_i016i_costo: Cost[];
 
-  @ApiProperty()
-  @Column({ type: "integer", array:true, nullable:true })
-  promedio_tareas_plan: number[];
-  @ApiProperty()
-  @Column({ type: "integer", array:true, nullable:true })
-  promedio_tareas_real: number[];
+  @ApiProperty({ type: [PromedioMes], nullable: true })
+  @Column({ type: "json", nullable: true })
+  promedio_tareas_plan: PromedioMes[];
+
+  @ApiProperty({ type: [PromedioMes], nullable: true })
+  @Column({ type: "json", nullable: true })
+  promedio_tareas_real: PromedioMes[];
 
   @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
   createdAt: Date;

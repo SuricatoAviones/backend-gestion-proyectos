@@ -7,11 +7,19 @@ import { ProjectsPhase } from 'src/projects-phase/entities/projects-phase.entity
 import { InputStatus } from 'src/input-status/entities/input-status.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { isArray, IsArray, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { Task } from 'src/tasks/entities/task.entity';
 import { UserHistory } from 'src/user-histories/entities/user-history.entity';
 import { Cost } from 'src/costs/entities/cost.entity';
 import { PhaseInput } from 'src/phase-inputs/entities/phase-input.entity';
+
+class PromedioMesDto {
+  @ApiProperty()
+  promedio: number;
+
+  @ApiProperty()
+  mes: Date; // O puedes usar un tipo Date si prefieres
+}
 
 export class CreateProjectDto {
   @ApiProperty()
@@ -84,10 +92,13 @@ export class CreateProjectDto {
   @Type(() => Cost)
   i003f_i016i_costo: Cost[];
 
-  @ApiProperty()
-  @IsArray()
-  promedio_tareas_plan: number[];
-  @ApiProperty()
-  @IsArray()
-  promedio_tareas_real: number[];
+  @ApiProperty({ type: [PromedioMesDto], nullable: true })
+  @Type(() => PromedioMesDto)
+  @IsOptional()
+  promedio_tareas_plan?: PromedioMesDto[];
+
+  @ApiProperty({ type: [PromedioMesDto], nullable: true })
+  @Type(() => PromedioMesDto)
+  @IsOptional()
+  promedio_tareas_real?: PromedioMesDto[];
 }

@@ -18,6 +18,13 @@ import { Task } from "src/tasks/entities/task.entity";
 import { ResponseTaskDto } from "src/tasks/dto/response-task.dto";
 import { Cost } from "src/costs/entities/cost.entity";
 
+class PromedioMesDto {
+
+    promedio: number;
+  
+
+    mes: Date; // O puedes usar un tipo Date si prefieres
+  }
 export class ResponseProjectDto {
     i003i_entrada: number;
     co_entrada: string;
@@ -34,8 +41,8 @@ export class ResponseProjectDto {
     i003f_i013t_tareas: Task[];
     i003f_i007i_historia_usuario: UserHistory[];
     i003f_i016i_costo: Cost[];
-    promedio_tareas_plan: number[];
-    promedio_tareas_real: number[];
+    promedio_tareas_plan: PromedioMesDto[];
+    promedio_tareas_real: PromedioMesDto[];
     deletedAt: Date;
     updatedAt: Date;
     createdAt: Date;

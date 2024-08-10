@@ -90,7 +90,7 @@ export class UsersService {
         foto: updateUserDto.foto,
         in_correo: updateUserDto.in_correo,
         in_role: updateUserDto.in_role,
-        password: updateUserDto.password,
+        password: await bcryptjs.hash(updateUserDto.password, 10),
       });
       console.log(user);
       return this.findOne(i001i_usuario);

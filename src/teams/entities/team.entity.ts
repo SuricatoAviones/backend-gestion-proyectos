@@ -12,6 +12,11 @@ import {
   JoinTable,
 } from 'typeorm';
 
+class Trabajador{
+  usuario: User[]
+  cargo: string
+}
+
 @Entity({ name: 'c008t_equipo_trabajo' })
 export class Team {
   @ApiProperty()
