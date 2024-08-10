@@ -84,10 +84,10 @@ export class CreateProjectDto {
   @Type(() => Cost)
   i003f_i016i_costo: Cost[];
 
-  /* @ApiProperty()
+  @ApiProperty()
   @IsNumber()
   promedio_tareas_plan: number[];
   @ApiProperty()
   @IsNumber()
-  promedio_tareas_real: number[]; */
+  promedio_tareas_real: number[];
 }

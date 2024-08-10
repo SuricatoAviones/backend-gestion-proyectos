@@ -31,8 +31,8 @@ export class ProjectsService {
         i003f_i013t_tareas : createProjectDto.i003f_i013t_tareas,
         i003f_i007i_historia_usuario : createProjectDto.i003f_i007i_historia_usuario ,
         i003f_i016i_costo : createProjectDto.i003f_i016i_costo,
-       /*  promedio_tareas_plan: createProjectDto.promedio_tareas_plan,
-        promedio_tareas_real: createProjectDto.promedio_tareas_real */
+        promedio_tareas_plan: createProjectDto.promedio_tareas_plan,
+        promedio_tareas_real: createProjectDto.promedio_tareas_real
       })
       return new ResponseProjectDto(await this.repository.save(project))
     } catch (error) {
@@ -137,8 +137,8 @@ export class ProjectsService {
         i003f_i013t_tareas : updateProjectDto.i003f_i013t_tareas,
         i003f_i007i_historia_usuario : updateProjectDto.i003f_i007i_historia_usuario ,
         i003f_i016i_costo : updateProjectDto.i003f_i016i_costo,
-        /* promedio_tareas_plan: updateProjectDto.promedio_tareas_plan,
-        promedio_tareas_real: updateProjectDto.promedio_tareas_real */
+        promedio_tareas_plan: updateProjectDto.promedio_tareas_plan,
+        promedio_tareas_real: updateProjectDto.promedio_tareas_real
       })
       return this.findOne(i003i_entrada)
     } catch (error) {
