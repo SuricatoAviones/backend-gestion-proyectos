@@ -7,7 +7,7 @@ import { ProjectsPhase } from 'src/projects-phase/entities/projects-phase.entity
 import { InputStatus } from 'src/input-status/entities/input-status.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { Task } from 'src/tasks/entities/task.entity';
 import { UserHistory } from 'src/user-histories/entities/user-history.entity';
 import { Cost } from 'src/costs/entities/cost.entity';
@@ -85,9 +85,9 @@ export class CreateProjectDto {
   i003f_i016i_costo: Cost[];
 
   @ApiProperty()
-  @IsNumber()
+  @IsArray()
   promedio_tareas_plan: number[];
   @ApiProperty()
-  @IsNumber()
+  @IsArray()
   promedio_tareas_real: number[];
 }
