@@ -27,7 +27,7 @@ export class Task {
   i013f_i003t_entrada: Project;
 
   @ApiProperty()
-  @Column({ length: 255, nullable: true })
+  @Column({ length: 2000, nullable: true })
   tx_descripcion: string;
 
 

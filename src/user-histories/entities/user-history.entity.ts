@@ -12,19 +12,19 @@ export class UserHistory {
   @Column({ unique: true })
   co_historia: string;
   @ApiProperty()
-  @Column({ length: 255, nullable:true })
+  @Column({ length: 2000, nullable:true })
   in_titulo: string;
   @ApiProperty()
-  @Column({ length: 255, nullable:true })
+  @Column({ length: 2000, nullable:true })
   tx_descripcion: string;
   @ApiProperty()
-  @Column({ length: 255, nullable:true })
+  @Column({ length: 2000, nullable:true })
   tx_rol: string;
   @ApiProperty()
-  @Column({ length: 255, nullable:true })
+  @Column({ length: 2000, nullable:true })
   tx_funcionalidad: string;
   @ApiProperty()
-  @Column({ length: 255, nullable:true })
+  @Column({ length: 2000, nullable:true })
   tx_criterio: string;
   @ApiProperty()
   @JoinColumn()

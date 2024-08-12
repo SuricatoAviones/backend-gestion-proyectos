@@ -37,19 +37,19 @@ export class Project {
   i003f_i011_tipo_proyecto: TypeProject;
 
   @ApiProperty()
-  @Column({ length: 255, nullable:true })
+  @Column({ length: 2000, nullable:true })
   in_titulo: string;
 
   @ApiProperty()
-  @Column({ length: 255, nullable:true})
+  @Column({ length: 2000, nullable:true})
   tx_descripcion: string;
 
   @ApiProperty()
-  @Column({ length: 255, nullable:true })
+  @Column({ length: 2000, nullable:true })
   tx_objetivo: string;
 
   @ApiProperty()
-  @Column({ length: 255, nullable:true })
+  @Column({ length: 2000, nullable:true })
   tx_alcance: string;
 
   @ApiProperty()

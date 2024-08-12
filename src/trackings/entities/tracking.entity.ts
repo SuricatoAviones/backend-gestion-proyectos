@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { StatusTask } from "src/status-task/entities/status-task.entity";
 import { Task } from "src/tasks/entities/task.entity";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne, UpdateDateColumn } from "typeorm";
 
 @Entity({ name: 'i014t_seguimiento' })
 export class Tracking {
@@ -36,4 +36,8 @@ export class Tracking {
   @ManyToOne(() => StatusTask, (statusTask) => statusTask.i015i_estado_tarea, {cascade: true, nullable: true, onDelete: 'CASCADE'})
   @JoinColumn()
   i014f_i015t_estado_tarea: StatusTask = { in_titulo:'Por Iniciar',i015i_estado_tarea:1,tx_descripcion: ''};
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }
+
