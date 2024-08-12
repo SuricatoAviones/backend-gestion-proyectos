@@ -9,7 +9,7 @@ export class UserHistory {
   @PrimaryGeneratedColumn()
   i007i_historia_usuario: number;
   @ApiProperty()
-  @Column({ length: 2000})
+  @Column({ unique: false })
   co_historia: string;
   @ApiProperty()
   @Column({ length: 2000, nullable:true })
