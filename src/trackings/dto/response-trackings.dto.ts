@@ -26,7 +26,7 @@ export class ResponseTrackingDto {
         this.fe_plan_fin = data.fe_plan_fin;
         this.fe_real_inicio = data.fe_real_inicio;
         this.fe_real_fin = data.fe_real_fin;
-        this.i014f_i013t_tarea = new ResponseTaskDto(data.i014f_i013t_tarea);
+        this.i014f_i013t_tarea = (data.i014f_i013t_tarea);
         this.i014f_i015t_estado_tarea = new ResponseStatusTaskDto(data.i014f_i015t_estado_tarea);
         this.updatedAt = data.updatedAt;
     }
