@@ -24,7 +24,7 @@ export class Project {
   i003i_entrada: number;
 
   @ApiProperty()
-  @Column({ unique: true })
+  @Column({ length: 2000 })
   co_entrada: string;
 
   @ApiProperty()
