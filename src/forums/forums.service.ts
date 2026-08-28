@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Forum } from './entity/forum.entity';
@@ -18,66 +14,48 @@ export class ForumService {
   ) {}
 
   async create(createForumDto: CreateForumDto): Promise<ResponseForumDto> {
-    try {
-      const forum = this.repository.create({
-        i018f_i003t_entrada: createForumDto.i018f_i003t_entrada,
-      });
-      return new ResponseForumDto(await this.repository.save(forum));
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    const forum = this.repository.create({
+      i018f_i003t_entrada: createForumDto.i018f_i003t_entrada,
+    });
+    return new ResponseForumDto(await this.repository.save(forum));
   }
 
   async findAll(): Promise<Array<ResponseForumDto>> {
-    try {
-      const forums = await this.repository.find({
-        relations: {
-          i018f_i003t_entrada: true,
-        },
-      });
-      return forums.map((forum) => new ResponseForumDto(forum));
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    const forums = await this.repository.find({
+      relations: {
+        i018f_i003t_entrada: true,
+      },
+    });
+    return forums.map((forum) => new ResponseForumDto(forum));
   }
 
   async findOne(i018t_foro: number) {
-    try {
-      const forum = await this.repository.findOne({
-        where: {
-          i018t_foro,
-        },
-        relations: {
-          i018f_i003t_entrada: true,
-        },
-      });
-      if (!forum) throw new NotFoundException();
-      return new ResponseForumDto(forum);
-    } catch (error) {}
+    const forum = await this.repository.findOne({
+      where: {
+        i018t_foro,
+      },
+      relations: {
+        i018f_i003t_entrada: true,
+      },
+    });
+    if (!forum) throw new NotFoundException();
+    return new ResponseForumDto(forum);
   }
 
   async update(
     i016i_foro: number,
     updateForumDto: UpdateForumDto,
   ): Promise<UpdateForumDto> {
-    try {
-      await this.findOne(i016i_foro);
-      await this.repository.update(i016i_foro, {
-        i018f_i003t_entrada: updateForumDto.i018f_i003t_entrada,
-      });
-      return this.findOne(i016i_foro);
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    await this.findOne(i016i_foro);
+    await this.repository.update(i016i_foro, {
+      i018f_i003t_entrada: updateForumDto.i018f_i003t_entrada,
+    });
+    return this.findOne(i016i_foro);
   }
 
   async remove(i016i_foro: number): Promise<ResponseForumDto> {
-    try {
-      const forum = await this.findOne(i016i_foro);
-      await this.repository.delete(i016i_foro);
-      return new ResponseForumDto(forum);
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    const forum = await this.findOne(i016i_foro);
+    await this.repository.delete(i016i_foro);
+    return new ResponseForumDto(forum);
   }
 }

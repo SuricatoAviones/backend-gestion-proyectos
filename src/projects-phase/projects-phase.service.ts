@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateProjectsPhaseDto } from './dto/create-projects-phase.dto';
 import { UpdateProjectsPhaseDto } from './dto/update-projects-phase.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -19,66 +15,46 @@ export class ProjectsPhaseService {
   async create(
     createProjectsPhaseDto: CreateProjectsPhaseDto,
   ): Promise<CreateProjectsPhaseDto> {
-    try {
-      const projectsPhase = this.repository.create({
-        in_nombre: createProjectsPhaseDto.in_nombre,
-        tx_descripcion: createProjectsPhaseDto.tx_descripcion,
-      });
-      return new ResponseProjectsPhaseDto(
-        await this.repository.save(projectsPhase),
-      );
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    const projectsPhase = this.repository.create({
+      in_nombre: createProjectsPhaseDto.in_nombre,
+      tx_descripcion: createProjectsPhaseDto.tx_descripcion,
+    });
+    return new ResponseProjectsPhaseDto(
+      await this.repository.save(projectsPhase),
+    );
   }
 
   async findAll(): Promise<Array<ResponseProjectsPhaseDto>> {
-    try {
-      const data = await this.repository.find();
-      return data.map((projectP) => new ResponseProjectsPhaseDto(projectP));
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    const data = await this.repository.find();
+    return data.map((projectP) => new ResponseProjectsPhaseDto(projectP));
   }
 
   async findOne(
     i012i_fase_proyecto: number,
   ): Promise<ResponseProjectsPhaseDto> {
-    try {
-      const projectsPhase = await this.repository.findOne({
-        where: {
-          i012i_fase_proyecto,
-        },
-      });
-      if (!projectsPhase) throw new NotFoundException();
-      return new ResponseProjectsPhaseDto(projectsPhase);
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    const projectsPhase = await this.repository.findOne({
+      where: {
+        i012i_fase_proyecto,
+      },
+    });
+    if (!projectsPhase) throw new NotFoundException();
+    return new ResponseProjectsPhaseDto(projectsPhase);
   }
 
   async update(
     i012i_fase_proyecto: number,
     updateProjectsPhaseDto: UpdateProjectsPhaseDto,
   ): Promise<UpdateProjectsPhaseDto> {
-    try {
-      await this.repository.update(i012i_fase_proyecto, {
-        in_nombre: updateProjectsPhaseDto.in_nombre,
-        tx_descripcion: updateProjectsPhaseDto.tx_descripcion,
-      });
-      return this.findOne(i012i_fase_proyecto);
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    await this.repository.update(i012i_fase_proyecto, {
+      in_nombre: updateProjectsPhaseDto.in_nombre,
+      tx_descripcion: updateProjectsPhaseDto.tx_descripcion,
+    });
+    return this.findOne(i012i_fase_proyecto);
   }
 
   async remove(i012i_fase_proyecto: number): Promise<ResponseProjectsPhaseDto> {
-    try {
-      const projectsPhase = await this.findOne(i012i_fase_proyecto);
-      await this.repository.delete(i012i_fase_proyecto);
-      return new ResponseProjectsPhaseDto(projectsPhase);
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    const projectsPhase = await this.findOne(i012i_fase_proyecto);
+    await this.repository.delete(i012i_fase_proyecto);
+    return new ResponseProjectsPhaseDto(projectsPhase);
   }
 }

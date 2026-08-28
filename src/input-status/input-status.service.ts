@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateInputStatusDto } from './dto/create-input-status.dto';
 import { UpdateInputStatusDto } from './dto/update-input-status.dto';
 import { InputStatus } from './entities/input-status.entity';
@@ -19,65 +15,43 @@ export class InputStatusService {
   async create(
     createInputStatusDto: CreateInputStatusDto,
   ): Promise<CreateInputStatusDto> {
-    try {
-      const inputStatus = this.repository.create({
-        in_nombre_estado: createInputStatusDto.in_nombre_estado,
-        tx_descripcion_estado: createInputStatusDto.tx_descripcion_estado,
-      });
+    const inputStatus = this.repository.create({
+      in_nombre_estado: createInputStatusDto.in_nombre_estado,
+      tx_descripcion_estado: createInputStatusDto.tx_descripcion_estado,
+    });
 
-      return new ResponseInputStatusDto(
-        await this.repository.save(inputStatus),
-      );
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    return new ResponseInputStatusDto(await this.repository.save(inputStatus));
   }
 
   async findAll(): Promise<Array<ResponseInputStatusDto>> {
-    try {
-      const inputStatus = await this.repository.find();
-      return inputStatus.map((is) => new ResponseInputStatusDto(is));
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    const inputStatus = await this.repository.find();
+    return inputStatus.map((is) => new ResponseInputStatusDto(is));
   }
 
   async findOne(i006i_estado_entrada: number): Promise<ResponseInputStatusDto> {
-    try {
-      const inputStatus = await this.repository.findOne({
-        where: {
-          i006i_estado_entrada,
-        },
-      });
-      if (!inputStatus) throw new NotFoundException();
-      return new ResponseInputStatusDto(inputStatus);
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    const inputStatus = await this.repository.findOne({
+      where: {
+        i006i_estado_entrada,
+      },
+    });
+    if (!inputStatus) throw new NotFoundException();
+    return new ResponseInputStatusDto(inputStatus);
   }
 
   async update(
     i006i_estado_entrada: number,
     updateInputStatusDto: UpdateInputStatusDto,
   ) {
-    try {
-      await this.repository.update(i006i_estado_entrada, {
-        in_nombre_estado: updateInputStatusDto.in_nombre_estado,
-        tx_descripcion_estado: updateInputStatusDto.tx_descripcion_estado,
-      });
-      return this.findOne(i006i_estado_entrada);
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    await this.repository.update(i006i_estado_entrada, {
+      in_nombre_estado: updateInputStatusDto.in_nombre_estado,
+      tx_descripcion_estado: updateInputStatusDto.tx_descripcion_estado,
+    });
+    return this.findOne(i006i_estado_entrada);
   }
 
   async remove(i006i_estado_entrada: number): Promise<ResponseInputStatusDto> {
-    try {
-      const inputStatus = await this.findOne(i006i_estado_entrada);
-      await this.repository.delete(i006i_estado_entrada);
-      return inputStatus;
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    const inputStatus = await this.findOne(i006i_estado_entrada);
+    await this.repository.delete(i006i_estado_entrada);
+    return inputStatus;
   }
 }

@@ -12,6 +12,7 @@ import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { Public } from 'src/common/decorators/public.decorator';
 @ApiTags('Auth Module')
 @Controller('auth')
 export class AuthController {
@@ -38,6 +39,7 @@ export class AuthController {
       },
     },
   })
+  @Public()
   @Post('register')
   @UseInterceptors(
     FileInterceptor('foto', {
@@ -61,6 +63,7 @@ export class AuthController {
     return this.userService.create(createUserDto);
   }
 
+  @Public()
   @Post('login')
   login(
     @Body()

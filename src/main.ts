@@ -1,13 +1,15 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe, Logger } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
+import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 
 async function bootstrap() {
   /*  const app = await NestFactory.create(AppModule); */
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.useGlobalFilters(new AllExceptionsFilter());
   app.setGlobalPrefix('api/v1');
   app.useStaticAssets(join(__dirname, '..', 'files'), {
     prefix: '/files/',
@@ -40,6 +42,10 @@ async function bootstrap() {
 
   app.enableCors();
 
-  await app.listen(process.env.PORT || 3000);
+  const logger = new Logger('Bootstrap');
+  app.enableShutdownHooks();
+  const port = process.env.PORT || 3000;
+  await app.listen(port);
+  logger.log(`Application is running on: http://localhost:${port}/api/v1`);
 }
 bootstrap();

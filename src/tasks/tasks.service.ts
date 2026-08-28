@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -18,95 +14,73 @@ export class TasksService {
   ) {}
 
   async create(createTaskDto: CreateTaskDto): Promise<CreateTaskDto> {
-    try {
-      const task = this.repository.create({
-        in_nombre: createTaskDto.in_nombre,
-        tx_descripcion: createTaskDto.tx_descripcion,
-        i013f_i001t_usuario: createTaskDto.i013f_i001t_usuario,
-        i013f_i003t_entrada: createTaskDto.i013f_i003t_entrada,
-        i013f_i014t_seguimiento: createTaskDto.i013f_i014t_seguimiento,
-      });
-      return new ResponseTaskDto(await this.repository.save(task));
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    const task = this.repository.create({
+      in_nombre: createTaskDto.in_nombre,
+      tx_descripcion: createTaskDto.tx_descripcion,
+      i013f_i001t_usuario: createTaskDto.i013f_i001t_usuario,
+      i013f_i003t_entrada: createTaskDto.i013f_i003t_entrada,
+      i013f_i014t_seguimiento: createTaskDto.i013f_i014t_seguimiento,
+    });
+    return new ResponseTaskDto(await this.repository.save(task));
   }
 
   async findAll(): Promise<Array<ResponseTaskDto>> {
-    try {
-      const data = await this.repository.find({
-        relations: {
-          i013f_i003t_entrada: {
-            i003f_i011_tipo_proyecto: {
-              i011f_i012t_fase_proyecto: true,
-            },
-            i003f_i005t_fase_entrada: true,
-            i003f_i010t_area_tecnica: true,
-            i003f_i006t_estado_entrada: true,
-            i003f_i004t_datos_adi: true,
+    const data = await this.repository.find({
+      relations: {
+        i013f_i003t_entrada: {
+          i003f_i011_tipo_proyecto: {
+            i011f_i012t_fase_proyecto: true,
           },
-          i013f_i014t_seguimiento: true,
+          i003f_i005t_fase_entrada: true,
+          i003f_i010t_area_tecnica: true,
+          i003f_i006t_estado_entrada: true,
+          i003f_i004t_datos_adi: true,
         },
-      });
-      return data.map((projectP) => new ResponseTaskDto(projectP));
-    } catch (error) {
-      console.log(error);
-      throw new BadRequestException(error);
-    }
+        i013f_i014t_seguimiento: true,
+      },
+    });
+    return data.map((projectP) => new ResponseTaskDto(projectP));
   }
 
   async findOne(i013i_tarea: number): Promise<ResponseTaskDto> {
-    try {
-      const task = await this.repository.findOne({
-        where: {
-          i013i_tarea,
-        },
-        relations: {
-          i013f_i003t_entrada: {
-            i003f_i011_tipo_proyecto: {
-              i011f_i012t_fase_proyecto: true,
-            },
-            i003f_i005t_fase_entrada: true,
-            i003f_i010t_area_tecnica: true,
-            i003f_i006t_estado_entrada: true,
-            i003f_i004t_datos_adi: true,
+    const task = await this.repository.findOne({
+      where: {
+        i013i_tarea,
+      },
+      relations: {
+        i013f_i003t_entrada: {
+          i003f_i011_tipo_proyecto: {
+            i011f_i012t_fase_proyecto: true,
           },
-          i013f_i014t_seguimiento: true,
+          i003f_i005t_fase_entrada: true,
+          i003f_i010t_area_tecnica: true,
+          i003f_i006t_estado_entrada: true,
+          i003f_i004t_datos_adi: true,
         },
-      });
-      if (!task) throw new NotFoundException();
-      return new ResponseTaskDto(task);
-    } catch (error) {
-      console.log(error);
-      throw new BadRequestException(error);
-    }
+        i013f_i014t_seguimiento: true,
+      },
+    });
+    if (!task) throw new NotFoundException();
+    return new ResponseTaskDto(task);
   }
 
   async update(
     i013i_tarea: number,
     updateTaskDto: UpdateTaskDto,
   ): Promise<UpdateTaskDto> {
-    try {
-      await this.repository.update(i013i_tarea, {
-        in_nombre: updateTaskDto.in_nombre,
-        tx_descripcion: updateTaskDto.tx_descripcion,
-        i013f_i001t_usuario: updateTaskDto.i013f_i001t_usuario,
-        i013f_i003t_entrada: updateTaskDto.i013f_i003t_entrada,
-        i013f_i014t_seguimiento: updateTaskDto.i013f_i014t_seguimiento,
-      });
-      return this.findOne(i013i_tarea);
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    await this.repository.update(i013i_tarea, {
+      in_nombre: updateTaskDto.in_nombre,
+      tx_descripcion: updateTaskDto.tx_descripcion,
+      i013f_i001t_usuario: updateTaskDto.i013f_i001t_usuario,
+      i013f_i003t_entrada: updateTaskDto.i013f_i003t_entrada,
+      i013f_i014t_seguimiento: updateTaskDto.i013f_i014t_seguimiento,
+    });
+    return this.findOne(i013i_tarea);
   }
 
   async remove(i013i_tarea: number): Promise<ResponseTaskDto> {
-    try {
-      const task = await this.findOne(i013i_tarea);
-      await this.repository.delete(i013i_tarea);
-      return new ResponseTaskDto(task);
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    const task = await this.findOne(i013i_tarea);
+    await this.repository.delete(i013i_tarea);
+    return new ResponseTaskDto(task);
   }
 }

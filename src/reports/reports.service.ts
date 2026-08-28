@@ -22,7 +22,6 @@ export class ReportsService {
       .slice(0, -5)
       .replace('T', '_')
       .replace(/:/g, '-')}.pdf`;
-    console.log(filePath);
 
     const browser = await puppeteer.launch({
       headless: true,
