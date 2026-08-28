@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, DataSource, SelectQueryBuilder } from 'typeorm';
+import { Worker } from './entities/worker.entity';
 import { CreateWorkerDto } from './dto/create-worker.dto';
 import { UpdateWorkerDto } from './dto/update-worker.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Worker } from './entities/worker.entity';
 import { ResponseWorkerDto } from './dto/response-worker.dto';
 
 @Injectable()
@@ -11,51 +11,45 @@ export class WorkersService {
   constructor(
     @InjectRepository(Worker)
     private repository: Repository<Worker>,
+    private dataSource: DataSource,
   ) {}
 
-  async create(createWorkerDto: CreateWorkerDto): Promise<CreateWorkerDto> {
-    const worker = this.repository.create({
-      in_nombre: createWorkerDto.in_nombre,
-      tx_cargo: createWorkerDto.tx_cargo,
-      i017f_c008t_equipo_trabajo: createWorkerDto.i017f_c008t_equipo_trabajo,
+  private qbWorker(qb: SelectQueryBuilder<Worker>): SelectQueryBuilder<Worker> {
+    return qb
+      .leftJoinAndSelect('worker.i017f_c008t_equipo_trabajo', 'equipo')
+      .leftJoinAndSelect('equipo.c008f_i001t_lider_funcional', 'lf')
+      .leftJoinAndSelect('equipo.c008f_i001t_lider_negocio', 'ln')
+      .leftJoinAndSelect('equipo.c008f_i001t_lider_tecnico', 'lt')
+      .leftJoinAndSelect('equipo.c008f_i009t_gerencia_funcional', 'gf')
+      .leftJoinAndSelect('equipo.c008f_i009t_gerencia_galba', 'gg')
+      .leftJoinAndSelect('equipo.c008f_i009t_gerencia_tecnica', 'gt')
+      .leftJoinAndSelect('equipo.c008f_i001t_trabajador', 'tr');
+  }
+
+  async create(createWorkerDto: CreateWorkerDto): Promise<ResponseWorkerDto> {
+    return this.dataSource.transaction(async (manager) => {
+      const worker = manager.create(Worker, {
+        in_nombre: createWorkerDto.in_nombre,
+        tx_cargo: createWorkerDto.tx_cargo,
+        i017f_c008t_equipo_trabajo: createWorkerDto.i017f_c008t_equipo_trabajo,
+      });
+      return new ResponseWorkerDto(await manager.save(worker));
     });
-    return new ResponseWorkerDto(await this.repository.save(worker));
   }
 
   async findAll(): Promise<Array<ResponseWorkerDto>> {
-    const data = await this.repository.find({
-      relations: {
-        i017f_c008t_equipo_trabajo: {
-          c008f_i001t_lider_funcional: true,
-          c008f_i001t_lider_negocio: true,
-          c008f_i001t_lider_tecnico: true,
-          c008f_i009t_gerencia_funcional: true,
-          c008f_i009t_gerencia_galba: true,
-          c008f_i009t_gerencia_tecnica: true,
-          c008f_i001t_trabajador: true,
-        },
-      },
-    });
+    const data = await this.qbWorker(
+      this.repository.createQueryBuilder('worker'),
+    ).getMany();
     return data.map((worker) => new ResponseWorkerDto(worker));
   }
 
   async findOne(i017i_trabajador: number): Promise<ResponseWorkerDto> {
-    const worker = await this.repository.findOne({
-      where: {
-        i017i_trabajador,
-      },
-      relations: {
-        i017f_c008t_equipo_trabajo: {
-          c008f_i001t_lider_funcional: true,
-          c008f_i001t_lider_negocio: true,
-          c008f_i001t_lider_tecnico: true,
-          c008f_i009t_gerencia_funcional: true,
-          c008f_i009t_gerencia_galba: true,
-          c008f_i009t_gerencia_tecnica: true,
-          c008f_i001t_trabajador: true,
-        },
-      },
-    });
+    const worker = await this.qbWorker(
+      this.repository.createQueryBuilder('worker'),
+    )
+      .where('worker.i017i_trabajador = :id', { id: i017i_trabajador })
+      .getOne();
     if (!worker) throw new NotFoundException();
     return new ResponseWorkerDto(worker);
   }
@@ -64,17 +58,32 @@ export class WorkersService {
     i017i_trabajador: number,
     updateWorkerDto: UpdateWorkerDto,
   ): Promise<UpdateWorkerDto> {
-    await this.repository.update(i017i_trabajador, {
-      in_nombre: updateWorkerDto.in_nombre,
-      tx_cargo: updateWorkerDto.tx_cargo,
-      i017f_c008t_equipo_trabajo: updateWorkerDto.i017f_c008t_equipo_trabajo,
+    return this.dataSource.transaction(async (manager) => {
+      await manager.update(Worker, i017i_trabajador, {
+        in_nombre: updateWorkerDto.in_nombre,
+        tx_cargo: updateWorkerDto.tx_cargo,
+        i017f_c008t_equipo_trabajo: updateWorkerDto.i017f_c008t_equipo_trabajo,
+      });
+      const worker = await this.qbWorker(
+        manager.createQueryBuilder(Worker, 'worker'),
+      )
+        .where('worker.i017i_trabajador = :id', { id: i017i_trabajador })
+        .getOne();
+      if (!worker) throw new NotFoundException();
+      return new ResponseWorkerDto(worker);
     });
-    return this.findOne(i017i_trabajador);
   }
 
   async remove(i017i_trabajador: number): Promise<ResponseWorkerDto> {
-    const worker = await this.findOne(i017i_trabajador);
-    await this.repository.delete(i017i_trabajador);
-    return new ResponseWorkerDto(worker);
+    return this.dataSource.transaction(async (manager) => {
+      const worker = await this.qbWorker(
+        manager.createQueryBuilder(Worker, 'worker'),
+      )
+        .where('worker.i017i_trabajador = :id', { id: i017i_trabajador })
+        .getOne();
+      if (!worker) throw new NotFoundException();
+      await manager.delete(Worker, i017i_trabajador);
+      return new ResponseWorkerDto(worker);
+    });
   }
 }

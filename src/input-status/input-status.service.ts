@@ -1,26 +1,30 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, DataSource } from 'typeorm';
+import { InputStatus } from './entities/input-status.entity';
 import { CreateInputStatusDto } from './dto/create-input-status.dto';
 import { UpdateInputStatusDto } from './dto/update-input-status.dto';
-import { InputStatus } from './entities/input-status.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm/repository/Repository';
 import { ResponseInputStatusDto } from './dto/response-input-status.dto';
+
 @Injectable()
 export class InputStatusService {
   constructor(
     @InjectRepository(InputStatus)
     private repository: Repository<InputStatus>,
+    private dataSource: DataSource,
   ) {}
 
   async create(
     createInputStatusDto: CreateInputStatusDto,
   ): Promise<CreateInputStatusDto> {
-    const inputStatus = this.repository.create({
-      in_nombre_estado: createInputStatusDto.in_nombre_estado,
-      tx_descripcion_estado: createInputStatusDto.tx_descripcion_estado,
-    });
+    return this.dataSource.transaction(async (manager) => {
+      const inputStatus = manager.create(InputStatus, {
+        in_nombre_estado: createInputStatusDto.in_nombre_estado,
+        tx_descripcion_estado: createInputStatusDto.tx_descripcion_estado,
+      });
 
-    return new ResponseInputStatusDto(await this.repository.save(inputStatus));
+      return new ResponseInputStatusDto(await manager.save(inputStatus));
+    });
   }
 
   async findAll(): Promise<Array<ResponseInputStatusDto>> {
@@ -42,16 +46,27 @@ export class InputStatusService {
     i006i_estado_entrada: number,
     updateInputStatusDto: UpdateInputStatusDto,
   ) {
-    await this.repository.update(i006i_estado_entrada, {
-      in_nombre_estado: updateInputStatusDto.in_nombre_estado,
-      tx_descripcion_estado: updateInputStatusDto.tx_descripcion_estado,
+    return this.dataSource.transaction(async (manager) => {
+      await manager.update(InputStatus, i006i_estado_entrada, {
+        in_nombre_estado: updateInputStatusDto.in_nombre_estado,
+        tx_descripcion_estado: updateInputStatusDto.tx_descripcion_estado,
+      });
+      const inputStatus = await manager.findOne(InputStatus, {
+        where: { i006i_estado_entrada },
+      });
+      if (!inputStatus) throw new NotFoundException();
+      return new ResponseInputStatusDto(inputStatus);
     });
-    return this.findOne(i006i_estado_entrada);
   }
 
   async remove(i006i_estado_entrada: number): Promise<ResponseInputStatusDto> {
-    const inputStatus = await this.findOne(i006i_estado_entrada);
-    await this.repository.delete(i006i_estado_entrada);
-    return inputStatus;
+    return this.dataSource.transaction(async (manager) => {
+      const inputStatus = await manager.findOne(InputStatus, {
+        where: { i006i_estado_entrada },
+      });
+      if (!inputStatus) throw new NotFoundException();
+      await manager.delete(InputStatus, i006i_estado_entrada);
+      return new ResponseInputStatusDto(inputStatus);
+    });
   }
 }

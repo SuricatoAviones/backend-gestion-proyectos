@@ -1,31 +1,34 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, DataSource } from 'typeorm';
+import { AdditionalDatum } from './entities/additional-datum.entity';
 import { CreateAdditionalDatumDto } from './dto/create-additional-datum.dto';
 import { UpdateAdditionalDatumDto } from './dto/update-additional-datum.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { ResponseAdditionalDatumDto } from './dto/response-additional-datum.dto';
-import { AdditionalDatum } from './entities/additional-datum.entity';
 
 @Injectable()
 export class AdditionalDataService {
   constructor(
     @InjectRepository(AdditionalDatum)
     private repository: Repository<AdditionalDatum>,
+    private dataSource: DataSource,
   ) {}
 
   async create(
     createAdditionalDatumDto: CreateAdditionalDatumDto,
   ): Promise<CreateAdditionalDatumDto> {
-    const additionalDatum = this.repository.create({
-      tx_interfaz: createAdditionalDatumDto.tx_interfaz,
-      tx_interconexion: createAdditionalDatumDto.tx_interconexion,
-      tx_datamodelo: createAdditionalDatumDto.tx_datamodelo,
-      tx_seguridad: createAdditionalDatumDto.tx_seguridad,
-      tx_comentario: createAdditionalDatumDto.tx_comentario,
+    return this.dataSource.transaction(async (manager) => {
+      const additionalDatum = manager.create(AdditionalDatum, {
+        tx_interfaz: createAdditionalDatumDto.tx_interfaz,
+        tx_interconexion: createAdditionalDatumDto.tx_interconexion,
+        tx_datamodelo: createAdditionalDatumDto.tx_datamodelo,
+        tx_seguridad: createAdditionalDatumDto.tx_seguridad,
+        tx_comentario: createAdditionalDatumDto.tx_comentario,
+      });
+      return new ResponseAdditionalDatumDto(
+        await manager.save(additionalDatum),
+      );
     });
-    return new ResponseAdditionalDatumDto(
-      await this.repository.save(additionalDatum),
-    );
   }
 
   async findAll(): Promise<Array<ResponseAdditionalDatumDto>> {
@@ -47,19 +50,30 @@ export class AdditionalDataService {
     i004i_datos_adi: number,
     updateAdditionalDatumDto: UpdateAdditionalDatumDto,
   ): Promise<UpdateAdditionalDatumDto> {
-    await this.repository.update(i004i_datos_adi, {
-      tx_interfaz: updateAdditionalDatumDto.tx_interfaz,
-      tx_interconexion: updateAdditionalDatumDto.tx_interconexion,
-      tx_datamodelo: updateAdditionalDatumDto.tx_datamodelo,
-      tx_seguridad: updateAdditionalDatumDto.tx_seguridad,
-      tx_comentario: updateAdditionalDatumDto.tx_comentario,
+    return this.dataSource.transaction(async (manager) => {
+      await manager.update(AdditionalDatum, i004i_datos_adi, {
+        tx_interfaz: updateAdditionalDatumDto.tx_interfaz,
+        tx_interconexion: updateAdditionalDatumDto.tx_interconexion,
+        tx_datamodelo: updateAdditionalDatumDto.tx_datamodelo,
+        tx_seguridad: updateAdditionalDatumDto.tx_seguridad,
+        tx_comentario: updateAdditionalDatumDto.tx_comentario,
+      });
+      const additionalDatum = await manager.findOne(AdditionalDatum, {
+        where: { i004i_datos_adi },
+      });
+      if (!additionalDatum) throw new NotFoundException();
+      return new ResponseAdditionalDatumDto(additionalDatum);
     });
-    return this.findOne(i004i_datos_adi);
   }
 
   async remove(i004i_datos_adi: number): Promise<ResponseAdditionalDatumDto> {
-    const additionalDatum = await this.findOne(i004i_datos_adi);
-    await this.repository.delete(i004i_datos_adi);
-    return new ResponseAdditionalDatumDto(additionalDatum);
+    return this.dataSource.transaction(async (manager) => {
+      const additionalDatum = await manager.findOne(AdditionalDatum, {
+        where: { i004i_datos_adi },
+      });
+      if (!additionalDatum) throw new NotFoundException();
+      await manager.delete(AdditionalDatum, i004i_datos_adi);
+      return new ResponseAdditionalDatumDto(additionalDatum);
+    });
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, DataSource, SelectQueryBuilder } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Forum } from './entity/forum.entity';
 import { CreateForumDto } from './dto/create-forum.dto';
@@ -11,33 +11,35 @@ export class ForumService {
   constructor(
     @InjectRepository(Forum)
     private repository: Repository<Forum>,
+    private dataSource: DataSource,
   ) {}
 
+  private qbForum(qb: SelectQueryBuilder<Forum>): SelectQueryBuilder<Forum> {
+    return qb.leftJoinAndSelect('forum.i018f_i003t_entrada', 'entrada');
+  }
+
   async create(createForumDto: CreateForumDto): Promise<ResponseForumDto> {
-    const forum = this.repository.create({
-      i018f_i003t_entrada: createForumDto.i018f_i003t_entrada,
+    return this.dataSource.transaction(async (manager) => {
+      const forum = manager.create(Forum, {
+        i018f_i003t_entrada: createForumDto.i018f_i003t_entrada,
+      });
+      return new ResponseForumDto(await manager.save(forum));
     });
-    return new ResponseForumDto(await this.repository.save(forum));
   }
 
   async findAll(): Promise<Array<ResponseForumDto>> {
-    const forums = await this.repository.find({
-      relations: {
-        i018f_i003t_entrada: true,
-      },
-    });
+    const forums = await this.qbForum(
+      this.repository.createQueryBuilder('forum'),
+    ).getMany();
     return forums.map((forum) => new ResponseForumDto(forum));
   }
 
   async findOne(i018t_foro: number) {
-    const forum = await this.repository.findOne({
-      where: {
-        i018t_foro,
-      },
-      relations: {
-        i018f_i003t_entrada: true,
-      },
-    });
+    const forum = await this.qbForum(
+      this.repository.createQueryBuilder('forum'),
+    )
+      .where('forum.i018t_foro = :id', { id: i018t_foro })
+      .getOne();
     if (!forum) throw new NotFoundException();
     return new ResponseForumDto(forum);
   }
@@ -46,16 +48,30 @@ export class ForumService {
     i016i_foro: number,
     updateForumDto: UpdateForumDto,
   ): Promise<UpdateForumDto> {
-    await this.findOne(i016i_foro);
-    await this.repository.update(i016i_foro, {
-      i018f_i003t_entrada: updateForumDto.i018f_i003t_entrada,
+    return this.dataSource.transaction(async (manager) => {
+      await manager.update(Forum, i016i_foro, {
+        i018f_i003t_entrada: updateForumDto.i018f_i003t_entrada,
+      });
+      const forum = await this.qbForum(
+        manager.createQueryBuilder(Forum, 'forum'),
+      )
+        .where('forum.i018t_foro = :id', { id: i016i_foro })
+        .getOne();
+      if (!forum) throw new NotFoundException();
+      return new ResponseForumDto(forum);
     });
-    return this.findOne(i016i_foro);
   }
 
   async remove(i016i_foro: number): Promise<ResponseForumDto> {
-    const forum = await this.findOne(i016i_foro);
-    await this.repository.delete(i016i_foro);
-    return new ResponseForumDto(forum);
+    return this.dataSource.transaction(async (manager) => {
+      const forum = await this.qbForum(
+        manager.createQueryBuilder(Forum, 'forum'),
+      )
+        .where('forum.i018t_foro = :id', { id: i016i_foro })
+        .getOne();
+      if (!forum) throw new NotFoundException();
+      await manager.delete(Forum, i016i_foro);
+      return new ResponseForumDto(forum);
+    });
   }
 }

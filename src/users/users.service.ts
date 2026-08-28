@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, DataSource } from 'typeorm';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Roles } from './enums/roles.enum';
@@ -17,24 +17,27 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private userReporsitory: Repository<User>,
+    private dataSource: DataSource,
   ) {}
 
-  async create(createUserDto: CreateUserDto): Promise<CreateUserDto> {
-    if (!Object.values(Roles).includes(createUserDto.in_role as Roles)) {
-      throw new BadRequestException('Rol no definido');
-    }
+  async create(createUserDto: CreateUserDto): Promise<ResponseUserDto> {
+    return this.dataSource.transaction(async (manager) => {
+      if (!Object.values(Roles).includes(createUserDto.in_role as Roles)) {
+        throw new BadRequestException('Rol no definido');
+      }
 
-    const user = this.userReporsitory.create({
-      in_usuario: createUserDto.in_usuario,
-      in_nombre: createUserDto.in_nombre,
-      in_apellido: createUserDto.in_apellido,
-      foto: createUserDto.foto,
-      in_correo: createUserDto.in_correo,
-      in_role: createUserDto.in_role,
-      password: await bcryptjs.hash(createUserDto.password, 10),
+      const user = manager.create(User, {
+        in_usuario: createUserDto.in_usuario,
+        in_nombre: createUserDto.in_nombre,
+        in_apellido: createUserDto.in_apellido,
+        foto: createUserDto.foto,
+        in_correo: createUserDto.in_correo,
+        in_role: createUserDto.in_role,
+        password: await bcryptjs.hash(createUserDto.password, 10),
+      });
+
+      return new ResponseUserDto(await manager.save(user));
     });
-
-    return new ResponseUserDto(await this.userReporsitory.save(user));
   }
 
   async findOneByEmail(in_correo: string) {
@@ -64,21 +67,32 @@ export class UsersService {
     i001i_usuario: number,
     updateUserDto: UpdateUserDto,
   ): Promise<UpdateUserDto> {
-    await this.userReporsitory.update(i001i_usuario, {
-      in_usuario: updateUserDto.in_usuario,
-      in_nombre: updateUserDto.in_nombre,
-      in_apellido: updateUserDto.in_apellido,
-      foto: updateUserDto.foto,
-      in_correo: updateUserDto.in_correo,
-      in_role: updateUserDto.in_role,
-      password: await bcryptjs.hash(updateUserDto.password, 10),
+    return this.dataSource.transaction(async (manager) => {
+      await manager.update(User, i001i_usuario, {
+        in_usuario: updateUserDto.in_usuario,
+        in_nombre: updateUserDto.in_nombre,
+        in_apellido: updateUserDto.in_apellido,
+        foto: updateUserDto.foto,
+        in_correo: updateUserDto.in_correo,
+        in_role: updateUserDto.in_role,
+        password: await bcryptjs.hash(updateUserDto.password, 10),
+      });
+      const user = await manager.findOne(User, {
+        where: { i001i_usuario },
+      });
+      if (!user) throw new NotFoundException();
+      return new ResponseUserDto(user);
     });
-    return this.findOne(i001i_usuario);
   }
 
   async remove(i001i_usuario: number): Promise<ResponseUserDto> {
-    const user = this.findOne(i001i_usuario);
-    await this.userReporsitory.delete(i001i_usuario);
-    return user;
+    return this.dataSource.transaction(async (manager) => {
+      const user = await manager.findOne(User, {
+        where: { i001i_usuario },
+      });
+      if (!user) throw new NotFoundException();
+      await manager.delete(User, i001i_usuario);
+      return new ResponseUserDto(user);
+    });
   }
 }

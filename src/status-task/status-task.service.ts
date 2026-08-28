@@ -1,25 +1,29 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, DataSource } from 'typeorm';
+import { StatusTask } from './entities/status-task.entity';
 import { CreateStatusTaskDto } from './dto/create-status-task.dto';
 import { UpdateStatusTaskDto } from './dto/update-status-task.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { ResponseStatusTaskDto } from './dto/response-status-task.dto';
-import { StatusTask } from './entities/status-task.entity';
+
 @Injectable()
 export class StatusTaskService {
   constructor(
     @InjectRepository(StatusTask)
     private repository: Repository<StatusTask>,
+    private dataSource: DataSource,
   ) {}
 
   async create(
     createStatusTaskDto: CreateStatusTaskDto,
-  ): Promise<CreateStatusTaskDto> {
-    const statusTask = this.repository.create({
-      in_titulo: createStatusTaskDto.in_titulo,
-      tx_descripcion: createStatusTaskDto.tx_descripcion,
+  ): Promise<ResponseStatusTaskDto> {
+    return this.dataSource.transaction(async (manager) => {
+      const statusTask = manager.create(StatusTask, {
+        in_titulo: createStatusTaskDto.in_titulo,
+        tx_descripcion: createStatusTaskDto.tx_descripcion,
+      });
+      return new ResponseStatusTaskDto(await manager.save(statusTask));
     });
-    return new ResponseStatusTaskDto(await this.repository.save(statusTask));
   }
 
   async findAll(): Promise<Array<ResponseStatusTaskDto>> {
@@ -41,16 +45,27 @@ export class StatusTaskService {
     i012i_fase_proyecto: number,
     updateStatusTaskDto: UpdateStatusTaskDto,
   ): Promise<UpdateStatusTaskDto> {
-    await this.repository.update(i012i_fase_proyecto, {
-      in_titulo: updateStatusTaskDto.in_titulo,
-      tx_descripcion: updateStatusTaskDto.tx_descripcion,
+    return this.dataSource.transaction(async (manager) => {
+      await manager.update(StatusTask, i012i_fase_proyecto, {
+        in_titulo: updateStatusTaskDto.in_titulo,
+        tx_descripcion: updateStatusTaskDto.tx_descripcion,
+      });
+      const statusTask = await manager.findOne(StatusTask, {
+        where: { i015i_estado_tarea: i012i_fase_proyecto },
+      });
+      if (!statusTask) throw new NotFoundException();
+      return new ResponseStatusTaskDto(statusTask);
     });
-    return this.findOne(i012i_fase_proyecto);
   }
 
   async remove(i015i_estado_tarea: number): Promise<ResponseStatusTaskDto> {
-    const statusTask = await this.findOne(i015i_estado_tarea);
-    await this.repository.delete(i015i_estado_tarea);
-    return new ResponseStatusTaskDto(statusTask);
+    return this.dataSource.transaction(async (manager) => {
+      const statusTask = await manager.findOne(StatusTask, {
+        where: { i015i_estado_tarea },
+      });
+      if (!statusTask) throw new NotFoundException();
+      await manager.delete(StatusTask, i015i_estado_tarea);
+      return new ResponseStatusTaskDto(statusTask);
+    });
   }
 }

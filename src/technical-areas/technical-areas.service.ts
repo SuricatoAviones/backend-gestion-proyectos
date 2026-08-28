@@ -1,27 +1,29 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, DataSource } from 'typeorm';
+import { TechnicalArea } from './entities/technical-area.entity';
 import { CreateTechnicalAreaDto } from './dto/create-technical-area.dto';
 import { UpdateTechnicalAreaDto } from './dto/update-technical-area.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { ResponseTechnicalAreaDto } from './dto/technical-areas.dto';
-import { TechnicalArea } from './entities/technical-area.entity';
+
 @Injectable()
 export class TechnicalAreasService {
   constructor(
     @InjectRepository(TechnicalArea)
     private repository: Repository<TechnicalArea>,
+    private dataSource: DataSource,
   ) {}
 
   async create(
     createTechnicalAreaDto: CreateTechnicalAreaDto,
   ): Promise<CreateTechnicalAreaDto> {
-    const technicalArea = this.repository.create({
-      in_nombre: createTechnicalAreaDto.in_nombre,
-      tx_descripcion: createTechnicalAreaDto.tx_descripcion,
+    return this.dataSource.transaction(async (manager) => {
+      const technicalArea = manager.create(TechnicalArea, {
+        in_nombre: createTechnicalAreaDto.in_nombre,
+        tx_descripcion: createTechnicalAreaDto.tx_descripcion,
+      });
+      return new ResponseTechnicalAreaDto(await manager.save(technicalArea));
     });
-    return new ResponseTechnicalAreaDto(
-      await this.repository.save(technicalArea),
-    );
   }
 
   async findAll(): Promise<Array<ResponseTechnicalAreaDto>> {
@@ -43,16 +45,27 @@ export class TechnicalAreasService {
     i010i_area_tecnica: number,
     updateTechnicalAreaDto: UpdateTechnicalAreaDto,
   ): Promise<UpdateTechnicalAreaDto> {
-    await this.repository.update(i010i_area_tecnica, {
-      in_nombre: updateTechnicalAreaDto.in_nombre,
-      tx_descripcion: updateTechnicalAreaDto.tx_descripcion,
+    return this.dataSource.transaction(async (manager) => {
+      await manager.update(TechnicalArea, i010i_area_tecnica, {
+        in_nombre: updateTechnicalAreaDto.in_nombre,
+        tx_descripcion: updateTechnicalAreaDto.tx_descripcion,
+      });
+      const technicalArea = await manager.findOne(TechnicalArea, {
+        where: { i010i_area_tecnica },
+      });
+      if (!technicalArea) throw new NotFoundException();
+      return new ResponseTechnicalAreaDto(technicalArea);
     });
-    return this.findOne(i010i_area_tecnica);
   }
 
   async remove(i010i_area_tecnica: number): Promise<ResponseTechnicalAreaDto> {
-    const technicalArea = await this.findOne(i010i_area_tecnica);
-    await this.repository.delete(i010i_area_tecnica);
-    return new ResponseTechnicalAreaDto(technicalArea);
+    return this.dataSource.transaction(async (manager) => {
+      const technicalArea = await manager.findOne(TechnicalArea, {
+        where: { i010i_area_tecnica },
+      });
+      if (!technicalArea) throw new NotFoundException();
+      await manager.delete(TechnicalArea, i010i_area_tecnica);
+      return new ResponseTechnicalAreaDto(technicalArea);
+    });
   }
 }
