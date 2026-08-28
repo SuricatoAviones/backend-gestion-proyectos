@@ -2,8 +2,6 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
-  UploadedFile,
-  
 } from '@nestjs/common';
 import { CreateAdditionalDatumDto } from './dto/create-additional-datum.dto';
 import { UpdateAdditionalDatumDto } from './dto/update-additional-datum.dto';
@@ -19,13 +17,10 @@ export class AdditionalDataService {
     private repository: Repository<AdditionalDatum>,
   ) {}
 
-
   async create(
-    createAdditionalDatumDto: CreateAdditionalDatumDto
-    ,
+    createAdditionalDatumDto: CreateAdditionalDatumDto,
   ): Promise<CreateAdditionalDatumDto> {
     try {
-      
       const additionalDatum = this.repository.create({
         tx_interfaz: createAdditionalDatumDto.tx_interfaz,
         tx_interconexion: createAdditionalDatumDto.tx_interconexion,
@@ -71,7 +66,7 @@ export class AdditionalDataService {
     updateAdditionalDatumDto: UpdateAdditionalDatumDto,
   ): Promise<UpdateAdditionalDatumDto> {
     try {
-      const additionalDatum = await this.repository.update(i004i_datos_adi, {
+      await this.repository.update(i004i_datos_adi, {
         tx_interfaz: updateAdditionalDatumDto.tx_interfaz,
         tx_interconexion: updateAdditionalDatumDto.tx_interconexion,
         tx_datamodelo: updateAdditionalDatumDto.tx_datamodelo,

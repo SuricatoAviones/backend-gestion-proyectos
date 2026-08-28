@@ -21,26 +21,30 @@ import { TrackingsModule } from './trackings/trackings.module';
 import { ReportsModule } from './reports/reports.module';
 import { DatabaseModule } from './database/database.module';
 
-
 @Module({
-  imports: [AuthModule, UsersModule, ProjectsModule, ManagementsModule, TasksModule,
+  imports: [
+    AuthModule,
+    UsersModule,
+    ProjectsModule,
+    ManagementsModule,
+    TasksModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
     }),
 
     TypeOrmModule.forRoot({
-    type: 'postgres',
-    host: process.env.DATABASE_HOST,
-    port: 5432,
-    username: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: 'gestionador',
-    autoLoadEntities: true,
-    synchronize: true,
-     ssl:{
-       rejectUnauthorized: false
-     }
+      type: 'postgres',
+      host: process.env.DATABASE_HOST,
+      port: 5432,
+      username: process.env.DATABASE_USER,
+      password: process.env.DATABASE_PASSWORD,
+      database: 'gestionador',
+      autoLoadEntities: true,
+      synchronize: true,
+      ssl: {
+        rejectUnauthorized: false,
+      },
     }),
     WorkersModule,
     TeamsModule,
@@ -55,8 +59,9 @@ import { DatabaseModule } from './database/database.module';
     ProjectsPhaseModule,
     TrackingsModule,
     ReportsModule,
-    DatabaseModule],
+    DatabaseModule,
+  ],
   controllers: [],
-  providers:[],
+  providers: [],
 })
 export class AppModule {}

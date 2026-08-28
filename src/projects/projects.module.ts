@@ -12,7 +12,18 @@ import { AdditionalDatum } from 'src/additional-data/entities/additional-datum.e
 import { ReportsModule } from 'src/reports/reports.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Project, TechnicalArea, TypeProject, Team, ProjectsPhase, InputStatus, AdditionalDatum]), ReportsModule],
+  imports: [
+    TypeOrmModule.forFeature([
+      Project,
+      TechnicalArea,
+      TypeProject,
+      Team,
+      ProjectsPhase,
+      InputStatus,
+      AdditionalDatum,
+    ]),
+    ReportsModule,
+  ],
   controllers: [ProjectsController],
   providers: [ProjectsService],
 })

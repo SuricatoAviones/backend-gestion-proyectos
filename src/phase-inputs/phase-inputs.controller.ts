@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { PhaseInputsService } from './phase-inputs.service';
 import { CreatePhaseInputDto } from './dto/create-phase-input.dto';
 import { UpdatePhaseInputDto } from './dto/update-phase-input.dto';
@@ -25,7 +33,10 @@ export class PhaseInputsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePhaseInputDto: UpdatePhaseInputDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updatePhaseInputDto: UpdatePhaseInputDto,
+  ) {
     return this.phaseInputsService.update(+id, updatePhaseInputDto);
   }
 

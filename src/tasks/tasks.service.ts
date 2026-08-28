@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -8,25 +12,23 @@ import { Task } from './entities/task.entity';
 
 @Injectable()
 export class TasksService {
-  constructor(@InjectRepository(Task)
-  private repository: Repository<Task>) {
-
-  }
+  constructor(
+    @InjectRepository(Task)
+    private repository: Repository<Task>,
+  ) {}
 
   async create(createTaskDto: CreateTaskDto): Promise<CreateTaskDto> {
-
     try {
       const task = this.repository.create({
         in_nombre: createTaskDto.in_nombre,
         tx_descripcion: createTaskDto.tx_descripcion,
         i013f_i001t_usuario: createTaskDto.i013f_i001t_usuario,
         i013f_i003t_entrada: createTaskDto.i013f_i003t_entrada,
-        i013f_i014t_seguimiento: createTaskDto.i013f_i014t_seguimiento
-      })
-      return new ResponseTaskDto(await this.repository.save(task))
+        i013f_i014t_seguimiento: createTaskDto.i013f_i014t_seguimiento,
+      });
+      return new ResponseTaskDto(await this.repository.save(task));
     } catch (error) {
-      throw new BadRequestException(error)
-
+      throw new BadRequestException(error);
     }
   }
 
@@ -44,13 +46,12 @@ export class TasksService {
             i003f_i004t_datos_adi: true,
           },
           i013f_i014t_seguimiento: true,
-        }
+        },
       });
-      return data.map(projectP => new ResponseTaskDto(projectP))
+      return data.map((projectP) => new ResponseTaskDto(projectP));
     } catch (error) {
-      console.log(error)
-      throw new BadRequestException(error)
-
+      console.log(error);
+      throw new BadRequestException(error);
     }
   }
 
@@ -70,31 +71,32 @@ export class TasksService {
             i003f_i006t_estado_entrada: true,
             i003f_i004t_datos_adi: true,
           },
-          i013f_i014t_seguimiento: true
-        }
+          i013f_i014t_seguimiento: true,
+        },
       });
       if (!task) throw new NotFoundException();
-      return new ResponseTaskDto(task)
+      return new ResponseTaskDto(task);
     } catch (error) {
-      console.log(error)
-      throw new BadRequestException(error)
-
+      console.log(error);
+      throw new BadRequestException(error);
     }
   }
 
-  async update(i013i_tarea: number, updateTaskDto: UpdateTaskDto): Promise<UpdateTaskDto> {
+  async update(
+    i013i_tarea: number,
+    updateTaskDto: UpdateTaskDto,
+  ): Promise<UpdateTaskDto> {
     try {
-      const task = await this.repository.update(i013i_tarea, {
+      await this.repository.update(i013i_tarea, {
         in_nombre: updateTaskDto.in_nombre,
         tx_descripcion: updateTaskDto.tx_descripcion,
         i013f_i001t_usuario: updateTaskDto.i013f_i001t_usuario,
         i013f_i003t_entrada: updateTaskDto.i013f_i003t_entrada,
-        i013f_i014t_seguimiento: updateTaskDto.i013f_i014t_seguimiento
-      })
+        i013f_i014t_seguimiento: updateTaskDto.i013f_i014t_seguimiento,
+      });
       return this.findOne(i013i_tarea);
     } catch (error) {
-      throw new BadRequestException(error)
-
+      throw new BadRequestException(error);
     }
   }
 
@@ -102,10 +104,9 @@ export class TasksService {
     try {
       const task = await this.findOne(i013i_tarea);
       await this.repository.delete(i013i_tarea);
-      return new ResponseTaskDto(task)
+      return new ResponseTaskDto(task);
     } catch (error) {
-      throw new BadRequestException(error)
-
+      throw new BadRequestException(error);
     }
   }
 }

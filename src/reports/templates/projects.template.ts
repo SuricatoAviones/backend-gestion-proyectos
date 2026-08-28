@@ -1,40 +1,38 @@
-import { Project } from "src/projects/entities/project.entity"
+import { Project } from 'src/projects/entities/project.entity';
 
 export const manyProjects = (data: Project[]) => {
-
-  let project_rows = ''
-  data.forEach(project => {
-    const tasks = project.i003f_i013t_tareas
-    const trackings = tasks.map(t => t.i013f_i014t_seguimiento).flat(1)
-    let start: Date, end: Date
+  let project_rows = '';
+  data.forEach((project) => {
+    const tasks = project.i003f_i013t_tareas;
+    const trackings = tasks.map((t) => t.i013f_i014t_seguimiento).flat(1);
+    let start: Date;
     if (trackings) {
-      const start_dates = []
-      const end_dates = []
-      trackings.forEach(s => {
+      const start_dates = [];
+      const end_dates = [];
+      trackings.forEach((s) => {
         if (s != null) {
-          start_dates.push(s.fe_plan_inicio)
-          end_dates.push(s.fe_plan_fin)
+          start_dates.push(s.fe_plan_inicio);
+          end_dates.push(s.fe_plan_fin);
         }
-      })
+      });
       if (start_dates.length) {
-        start = start_dates.reduce(function (a, b) { return a < b ? a : b; }, 0);
-        end = end_dates.reduce(function (a, b) { return a > b ? a : b; }, 0);
+        start = start_dates.reduce(function (a, b) {
+          return a < b ? a : b;
+        }, 0);
       }
     }
-      if (project != null) {
-      
-        project_rows += `<tr>
+    if (project != null) {
+      project_rows += `<tr>
           <td>${project.in_titulo}</td>
           <td>${project.i003f_i006t_estado_entrada.in_nombre_estado}</td>
           <td>${project.i003f_i005t_fase_entrada.in_nombre_fase}</td>
           <td>${project.i003f_i010t_area_tecnica.in_nombre}</td>
           <td>${project.i003f_i011_tipo_proyecto.in_nombre}</td>
-          <td>${start || 'SIN FECHA' }</td>
-        </tr>`
-      }
- 
-  })
-  
+          <td>${start || 'SIN FECHA'}</td>
+        </tr>`;
+    }
+  });
+
   return `<!DOCTYPE html>
 <html>
 <head>
@@ -90,7 +88,7 @@ export const manyProjects = (data: Project[]) => {
 <div class="info">
 <img src="http://34.225.211.222:3000/public/PDVSA-logo.png">
   <div>
-  <p class="header-text">${(new Date().toLocaleDateString())}</p>
+  <p class="header-text">${new Date().toLocaleDateString()}</p>
     <p class="header-text">Ubicación: Maturin, Monagas</p>
   </div>
   </div>
@@ -118,33 +116,39 @@ export const manyProjects = (data: Project[]) => {
     </table>
 </body>
 </html>
-`
-}
+`;
+};
 
 export const singleProject = (data: Project) => {
-
-  const tasks = data.i003f_i013t_tareas
-  let start: Date, end: Date
+  const tasks = data.i003f_i013t_tareas;
+  let start: Date, end: Date;
   if (tasks.length) {
-    const trackings = tasks.map(t => t.i013f_i014t_seguimiento).flat(1)
-  if (trackings.length) {
-    const start_dates = []
-    const end_dates = []
-    trackings.forEach(s => {
-      if (s != null) {
-        start_dates.push(s.fe_plan_inicio)
-        end_dates.push(s.fe_plan_fin)
-      }
-    })
-    start = start_dates.reduce(function (a, b) { return a < b ? a : b; }, 0);
-    end = end_dates.reduce(function (a, b) { return a > b ? a : b; }, 0);
+    const trackings = tasks.map((t) => t.i013f_i014t_seguimiento).flat(1);
+    if (trackings.length) {
+      const start_dates = [];
+      const end_dates = [];
+      trackings.forEach((s) => {
+        if (s != null) {
+          start_dates.push(s.fe_plan_inicio);
+          end_dates.push(s.fe_plan_fin);
+        }
+      });
+      start = start_dates.reduce(function (a, b) {
+        return a < b ? a : b;
+      }, 0);
+      end = end_dates.reduce(function (a, b) {
+        return a > b ? a : b;
+      }, 0);
+    }
   }
-}
 
-  let task_rows = ''
-  tasks.forEach(t => {
+  let task_rows = '';
+  tasks.forEach((t) => {
     if (t != null) {
-      const completed = t.i013f_i014t_seguimiento?.nu_completado_real[t.i013f_i014t_seguimiento.nu_completado_real.length - 1];
+      const completed =
+        t.i013f_i014t_seguimiento?.nu_completado_real[
+          t.i013f_i014t_seguimiento.nu_completado_real.length - 1
+        ];
       task_rows += `<tr>
         <td>${t.i013i_tarea}</td>
         <td>${t.in_nombre}</td>
@@ -152,9 +156,9 @@ export const singleProject = (data: Project) => {
         <td>${completed ? completed + '%' : 'SIN SEGUIMIENTO'}</td>
         <td>${t.i013f_i014t_seguimiento?.fe_plan_inicio || 'SIN SEGUIMIENTO'}</td>
         <td>${t.i013f_i014t_seguimiento?.fe_plan_fin || 'SIN SEGUIMIENTO'}</td>
-      </tr>`
+      </tr>`;
     }
-  })
+  });
   return `<!DOCTYPE html>
 <html>
 <head>
@@ -211,7 +215,7 @@ export const singleProject = (data: Project) => {
 <img src="http://34.225.211.222:3000/public/PDVSA-logo.png">
 
   <div>
-  <p class="header-text">${(new Date().toLocaleDateString())}</p>
+  <p class="header-text">${new Date().toLocaleDateString()}</p>
     <p class="header-text">Ubicación: Maturin, Monagas</p>
   </div>
   </div>
@@ -259,5 +263,5 @@ export const singleProject = (data: Project) => {
     </table>
 </body>
 </html>
-`
-}
+`;
+};

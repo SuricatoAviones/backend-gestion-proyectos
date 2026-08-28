@@ -17,9 +17,9 @@ export class DatabaseService {
       port: 5432,
       autoLoadEntities: true,
       synchronize: true,
-      ssl:{
-       rejectUnauthorized: false
-     }
+      ssl: {
+        rejectUnauthorized: false,
+      },
     });
     this.client.connect();
   }
@@ -33,8 +33,8 @@ export class DatabaseService {
         WHERE table_schema='public' AND table_type='BASE TABLE';
       `;
       const tablesResult = await this.client.query(tableQuery);
-      const tables = tablesResult.rows.map(row => row.table_name);
-      let allData = [];
+      const tables = tablesResult.rows.map((row) => row.table_name);
+      const allData = [];
 
       // Iterar sobre cada tabla y extraer los datos
       for (const table of tables) {
@@ -59,7 +59,7 @@ export class DatabaseService {
       return filePath; // Retorna la ruta del archivo CSV
     } catch (err) {
       console.error('Error al exportar datos:', err);
-      throw new BadRequestException(err)
+      throw new BadRequestException(err);
     }
   }
 }

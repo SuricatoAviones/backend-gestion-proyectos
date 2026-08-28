@@ -1,10 +1,15 @@
-
-import { ApiProperty } from "@nestjs/swagger";
-import { Project } from "src/projects/entities/project.entity";
-import { Tracking } from "src/trackings/entities/tracking.entity";
-import { User } from "src/users/entities/user.entity";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany, OneToOne } from "typeorm";
-
+import { ApiProperty } from '@nestjs/swagger';
+import { Project } from 'src/projects/entities/project.entity';
+import { Tracking } from 'src/trackings/entities/tracking.entity';
+import { User } from 'src/users/entities/user.entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+  OneToOne,
+} from 'typeorm';
 
 @Entity({ name: 'i013t_tarea' })
 export class Task {
@@ -14,7 +19,7 @@ export class Task {
 
   @ApiProperty()
   @Column({ length: 255, nullable: true })
-  in_nombre: string
+  in_nombre: string;
 
   @ApiProperty()
   @ManyToOne(() => User, (user) => user.i001i_usuario)
@@ -22,7 +27,9 @@ export class Task {
   i013f_i001t_usuario: User;
 
   @ApiProperty()
-  @ManyToOne(() => Project, (project) => project.i003i_entrada, {onDelete: 'CASCADE'})
+  @ManyToOne(() => Project, (project) => project.i003i_entrada, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   i013f_i003t_entrada: Project;
 
@@ -30,10 +37,11 @@ export class Task {
   @Column({ length: 2000, nullable: true })
   tx_descripcion: string;
 
-
   @ApiProperty()
   @OneToOne(() => Tracking, (tracking) => tracking.i014f_i013t_tarea, {
-    cascade: true , eager: true, onDelete: 'CASCADE'
+    cascade: true,
+    eager: true,
+    onDelete: 'CASCADE',
   })
   @JoinColumn()
   i013f_i014t_seguimiento: Tracking | null;

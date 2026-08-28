@@ -1,13 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, StreamableFile, Res, Header } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Header,
+} from '@nestjs/common';
 import { ProjectsService } from './projects.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
-import { ApiBearerAuth, ApiProduces, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 @ApiTags('Proyectos')
 @ApiBearerAuth()
 @Controller('projects')
 export class ProjectsController {
-  constructor(private readonly projectsService: ProjectsService) { }
+  constructor(private readonly projectsService: ProjectsService) {}
 
   @Post()
   create(@Body() createProjectDto: CreateProjectDto) {
@@ -29,16 +38,12 @@ export class ProjectsController {
   @Get('reports/:id')
   async printSingle(@Param('id') id: string) {
     return this.projectsService.printOne(+id);
-
   }
-
 
   @Get('reports/many/:id')
   async printMany(@Param('id') id: string) {
     return this.projectsService.printMany(+id);
- 
   }
-
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto) {

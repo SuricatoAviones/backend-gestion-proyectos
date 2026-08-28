@@ -2,12 +2,10 @@ import { AdditionalDatum } from 'src/additional-data/entities/additional-datum.e
 import { Team } from 'src/teams/entities/team.entity';
 import { TechnicalArea } from 'src/technical-areas/entities/technical-area.entity';
 import { TypeProject } from 'src/type-projects/entities/type-project.entity';
-import { Project } from '../entities/project.entity';
-import { ProjectsPhase } from 'src/projects-phase/entities/projects-phase.entity';
 import { InputStatus } from 'src/input-status/entities/input-status.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { isArray, IsArray, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { Task } from 'src/tasks/entities/task.entity';
 import { UserHistory } from 'src/user-histories/entities/user-history.entity';
 import { Cost } from 'src/costs/entities/cost.entity';

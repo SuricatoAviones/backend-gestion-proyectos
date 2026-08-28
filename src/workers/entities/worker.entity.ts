@@ -1,9 +1,14 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Team } from "src/teams/entities/team.entity";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, ManyToMany, JoinTable } from "typeorm";
+import { ApiProperty } from '@nestjs/swagger';
+import { Team } from 'src/teams/entities/team.entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 
-
-@Entity({name:'i017t_trabajador'})
+@Entity({ name: 'i017t_trabajador' })
 export class Worker {
   @ApiProperty()
   @PrimaryGeneratedColumn()
@@ -12,13 +17,13 @@ export class Worker {
   @ApiProperty()
   @ManyToMany(() => Team, (team) => team.c008i_equipo_trabajo)
   @JoinTable()
-  i017f_c008t_equipo_trabajo: Team; 
+  i017f_c008t_equipo_trabajo: Team;
 
-   @ApiProperty()
+  @ApiProperty()
   @Column({ length: 255 })
   in_nombre: string;
 
-   @ApiProperty()
+  @ApiProperty()
   @Column({ length: 255 })
   tx_cargo: string;
 }

@@ -6,11 +6,9 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 
 async function bootstrap() {
- /*  const app = await NestFactory.create(AppModule); */
-  const app = await NestFactory.create<NestExpressApplication>(
-    AppModule,
-  );
-  app.setGlobalPrefix("api/v1")
+  /*  const app = await NestFactory.create(AppModule); */
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.setGlobalPrefix('api/v1');
   app.useStaticAssets(join(__dirname, '..', 'files'), {
     prefix: '/files/',
   });
@@ -27,10 +25,10 @@ async function bootstrap() {
       transform: true,
       transformOptions: {
         enableImplicitConversion: true, // <- This line here
-      }
-    })
+      },
+    }),
   );
-  
+
   const config = new DocumentBuilder()
     .setTitle('Sistema de gestión de portafolio de proyectos PDVSA')
     .setDescription('Descripcion de la API')
@@ -39,8 +37,8 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-  
-  app.enableCors()
+
+  app.enableCors();
 
   await app.listen(process.env.PORT || 3000);
 }

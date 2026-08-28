@@ -22,7 +22,7 @@ export class DatabaseController {
       });
     } catch (error) {
       console.error('Error al exportar datos:', error);
-      throw new BadRequestException(error)
+      throw new BadRequestException(error);
     }
   }
 }

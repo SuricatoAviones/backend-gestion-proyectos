@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseInterceptors,
+  UploadedFile,
+} from '@nestjs/common';
 import { AdditionalDataService } from './additional-data.service';
 import { CreateAdditionalDatumDto } from './dto/create-additional-datum.dto';
 import { UpdateAdditionalDatumDto } from './dto/update-additional-datum.dto';
@@ -9,10 +19,8 @@ import { diskStorage } from 'multer';
 @ApiBearerAuth()
 @Controller('additional-data')
 export class AdditionalDataController {
-  constructor(private readonly additionalDataService: AdditionalDataService) { }
+  constructor(private readonly additionalDataService: AdditionalDataService) {}
 
-
-  
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {
@@ -40,11 +48,12 @@ export class AdditionalDataController {
       }),
     }),
   )
-
-  create(@Body() createAdditionalDatumDto: CreateAdditionalDatumDto, @UploadedFile() tx_datamodelo?: any) {
-    if(tx_datamodelo){
-    createAdditionalDatumDto.tx_datamodelo =  tx_datamodelo.path
-
+  create(
+    @Body() createAdditionalDatumDto: CreateAdditionalDatumDto,
+    @UploadedFile() tx_datamodelo?: any,
+  ) {
+    if (tx_datamodelo) {
+      createAdditionalDatumDto.tx_datamodelo = tx_datamodelo.path;
     }
     return this.additionalDataService.create(createAdditionalDatumDto);
   }
@@ -86,9 +95,13 @@ export class AdditionalDataController {
       }),
     }),
   )
-  update(@Param('id') id: string, @Body() updateAdditionalDatumDto: UpdateAdditionalDatumDto, @UploadedFile() tx_datamodelo?: any) {
-    if(tx_datamodelo){
-      updateAdditionalDatumDto.tx_datamodelo = tx_datamodelo.path
+  update(
+    @Param('id') id: string,
+    @Body() updateAdditionalDatumDto: UpdateAdditionalDatumDto,
+    @UploadedFile() tx_datamodelo?: any,
+  ) {
+    if (tx_datamodelo) {
+      updateAdditionalDatumDto.tx_datamodelo = tx_datamodelo.path;
     }
     return this.additionalDataService.update(+id, updateAdditionalDatumDto);
   }

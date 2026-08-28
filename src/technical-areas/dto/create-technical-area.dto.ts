@@ -1,5 +1,5 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateTechnicalAreaDto {
   @ApiProperty()
@@ -11,5 +11,4 @@ export class CreateTechnicalAreaDto {
   @IsOptional()
   @IsString()
   tx_descripcion: string;
-
 }

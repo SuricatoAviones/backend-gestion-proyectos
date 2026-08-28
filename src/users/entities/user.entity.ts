@@ -1,46 +1,51 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn ,DeleteDateColumn, UpdateDateColumn, JoinColumn, ManyToMany } from "typeorm";
-import { Roles } from "../enums/roles.enum";
-import { Exclude } from "class-transformer";
-import { ApiProperty } from "@nestjs/swagger";
-import { Team } from "src/teams/entities/team.entity";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Roles } from '../enums/roles.enum';
+import { Exclude } from 'class-transformer';
+import { ApiProperty } from '@nestjs/swagger';
 
-@Entity({name:'i001t_usuario'})
-
+@Entity({ name: 'i001t_usuario' })
 export class User {
   @ApiProperty()
   @PrimaryGeneratedColumn()
   i001i_usuario: number;
- @ApiProperty()
+  @ApiProperty()
   @Column({ unique: true })
   in_usuario: string;
- @ApiProperty()
+  @ApiProperty()
   @Column({ nullable: true })
   in_nombre: string;
- @ApiProperty()
+  @ApiProperty()
   @Column({ nullable: true })
   in_apellido: string;
- @ApiProperty()
-  @Column({ nullable: true})
+  @ApiProperty()
+  @Column({ nullable: true })
   foto: string;
- @ApiProperty()
+  @ApiProperty()
   @Column({ unique: true, nullable: false })
   in_correo: string;
- @ApiProperty()
+  @ApiProperty()
   @Exclude()
-  @Column({  nullable: false })
+  @Column({ nullable: false })
   password: string;
- @ApiProperty()
-  @Column({ nullable: true, default: Roles.Rol_Trabajador  })
+  @ApiProperty()
+  @Column({ nullable: true, default: Roles.Rol_Trabajador })
   in_role: string;
 
-
-
-
-  @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
   createdAt: Date;
 
   @UpdateDateColumn()
-  updatedAt:Date;
+  updatedAt: Date;
 
   @DeleteDateColumn()
   deletedAt: Date;

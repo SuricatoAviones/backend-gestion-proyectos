@@ -1,7 +1,7 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Type } from "class-transformer";
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
-import { Team } from "src/teams/entities/team.entity";
+import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
+import { IsNotEmpty, IsString } from 'class-validator';
+import { Team } from 'src/teams/entities/team.entity';
 
 export class CreateWorkerDto {
   @ApiProperty()
@@ -12,6 +12,6 @@ export class CreateWorkerDto {
   tx_cargo: string;
   @ApiProperty()
   @IsNotEmpty()
-  @Type( () => Team)
-  i017f_c008t_equipo_trabajo: Team; 
+  @Type(() => Team)
+  i017f_c008t_equipo_trabajo: Team;
 }
