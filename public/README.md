@@ -8,7 +8,7 @@
 
 Backend de gestión de portafolio de proyectos desarrollado con **NestJS 10** (TypeScript) y **PostgreSQL** (TypeORM).
 
-> El logo `public/PDVSA-logo.png` se sirve en tiempo de ejecución en `/public/PDVSA-logo.png` y también se muestra en este README (la carpeta `public/` no está en `.gitignore`).
+> **Nota:** el logo `public/PDVSA-logo.png` se sirve en tiempo de ejecución en `/public/PDVSA-logo.png`, pero la carpeta `public/` está en `.gitignore`, por lo que la imagen no se muestra en GitHub. Para verla en el README del repositorio, quita `public/` del `.gitignore` o usa una URL absoluta.
 
 ## Características
 
