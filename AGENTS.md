@@ -4,12 +4,19 @@ NestJS 10 (TypeScript) backend for the PDVSA project-portfolio management system
 
 ## Commands
 
-- `npm run start:dev` — watch mode dev server (entrypoint: `src/main.ts`).
-- `npm run build` — `nest build`; also the typecheck step (no separate `tsc`).
-- `npm run start:prod` — runs the compiled output at `node dist/main` (note: `dist/main.js`, not `dist/main.js` plus a subpath).
-- `npm run lint` — `eslint "{src,apps,libs,test}/**/*.ts" --fix`. Lint also **enforces Prettier formatting** (`prettier/prettier` is an error), so it fails on formatting issues that `--fix` cannot auto-correct. Run this before `build`.
-- `npm run test` — Jest unit tests. `rootDir` is `src`, so specs are `*.spec.ts` colocated with code.
-- `npm run test:e2e` — Jest e2e using `test/jest-e2e.json` (`*.e2e-spec.ts` in `test/`).
+This repo uses **pnpm** (not npm). There is no `package-lock.json`; the lockfile is `pnpm-lock.yaml`.
+
+- `pnpm install` — install dependencies.
+- `pnpm start:dev` — watch mode dev server (entrypoint: `src/main.ts`).
+- `pnpm build` — `nest build`; also the typecheck step (no separate `tsc`).
+- `pnpm start:prod` — runs the compiled output at `node dist/main` (note: `dist/main.js`, not `dist/main.js` plus a subpath).
+- `pnpm lint` — `eslint "{src,apps,libs,test}/**/*.ts" --fix`. Lint also **enforces Prettier formatting** (`prettier/prettier` is an error), so it fails on formatting issues that `--fix` cannot auto-correct. Run this before `build`.
+- `pnpm test` — Jest unit tests. `rootDir` is `src`, so specs are `*.spec.ts` colocated with code.
+- `pnpm test:e2e` — Jest e2e using `test/jest-e2e.json` (`*.e2e-spec.ts` in `test/`).
+
+### pnpm build-script approval
+
+pnpm blocks postinstall scripts by default. `pnpm-workspace.yaml` sets `allowBuilds` for `@nestjs/core` and `puppeteer` so `pnpm install` can run them. Puppeteer's script downloads Chromium; if your network blocks it, set `PUPPETEER_SKIP_DOWNLOAD=true` before installing (the `reports` PDF endpoints then need a Chromium provided via cache or `PUPPETEER_EXECUTABLE_PATH`).
 
 ## Architecture / conventions
 

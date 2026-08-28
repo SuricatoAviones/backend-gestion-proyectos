@@ -8,7 +8,6 @@
 
 Backend de gestión de portafolio de proyectos desarrollado con **NestJS 10** (TypeScript) y **PostgreSQL** (TypeORM).
 
-> El logo `public/PDVSA-logo.png` se sirve en tiempo de ejecución en `/public/PDVSA-logo.png` y también se muestra en este README (la carpeta `public/` no está en `.gitignore`).
 
 ## Características
 
@@ -40,19 +39,26 @@ La base de datos se llama `gestionador` y el esquema se genera automáticamente 
 
 ## Instalación
 
+Este proyecto usa **pnpm** (no npm). El lockfile es `pnpm-lock.yaml`.
+
 ```bash
-npm install
+pnpm install
 ```
+
+> El script de `puppeteer` descarga Chromium. Si tu red lo bloquea, ejecuta
+> `pnpm install` con `PUPPETEER_SKIP_DOWNLOAD=true`; los endpoints de PDF del
+> módulo `reports` entonces requieren un Chromium disponible vía caché o
+> `PUPPETEER_EXECUTABLE_PATH`.
 
 ## Ejecución
 
 ```bash
 # desarrollo (modo watch)
-npm run start:dev
+pnpm start:dev
 
 # producción (compila y corre dist/main.js)
-npm run build
-npm run start:prod
+pnpm build
+pnpm start:prod
 ```
 
 El servidor queda en `http://localhost:3000` y la documentación en `http://localhost:3000/api`.
@@ -61,13 +67,13 @@ El servidor queda en `http://localhost:3000` y la documentación en `http://loca
 
 ```bash
 # unitarias (jest, specs colocados junto al código en src/)
-npm run test
+pnpm test
 
 # extremo a extremo (jest con test/jest-e2e.json)
-npm run test:e2e
+pnpm test:e2e
 
 # cobertura
-npm run test:cov
+pnpm test:cov
 ```
 
 Las pruebas e2e levantan la aplicación completa, por lo que requieren una base de datos PostgreSQL activa.
@@ -76,10 +82,10 @@ Las pruebas e2e levantan la aplicación completa, por lo que requieren una base 
 
 ```bash
 # lint + formato Prettier (el lint falla si el formato no cumple)
-npm run lint
+pnpm lint
 
 # formato directo con Prettier
-npm run format
+pnpm format
 ```
 
 ## Estructura
